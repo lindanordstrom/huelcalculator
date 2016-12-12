@@ -19,15 +19,30 @@ class MealPlanPresenterTest: XCTestCase {
         testUrlHandler = TestUrlHandler()
         testObject = MealPlanPresenter(urlHandler: testUrlHandler!)
     }
-    
-    /**
-     *
+
+    override func tearDown() {
+        testUrlHandler = nil
+        testObject = nil
+        super.tearDown()
+    }
+
+    /** Given: "Get Huel" button is pressed
+     *  When:  -
+     *  Then:  The "open" function gets called with the expected URL
      */
-    func testGetHuel() {
-        let expectedUrl = "http://www.huel.com"
+    func test_didPressGetHuel() {
+        let expectedUrl = "https://huel.com/products/huel"
         testObject!.didPressGetHuel()
         
-        XCTAssert(testUrlHandler?.urlStringVisited == "abc", "Expected link was not used!")
+        XCTAssert(testUrlHandler?.urlStringVisited == expectedUrl, "Expected link was not used!")
+    }
+    
+    /** Given:
+     *  When:
+     *  Then:
+     */
+    func test_() {
+        
     }
 }
 

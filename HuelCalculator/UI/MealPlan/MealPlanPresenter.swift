@@ -21,6 +21,8 @@ protocol MealPlanPresentable: class {
 
 class MealPlanPresenter {
  
+    private let huelUrl = "https://huel.com/products/huel"
+    
     private weak var view: MealPlanPresentable?
     
     private let urlHandler: UrlHandler
@@ -34,7 +36,7 @@ class MealPlanPresenter {
     }
     
     func didPressGetHuel() {
-        guard let url = URL(string: "http://www.huel.com") else {
+        guard let url = URL(string: huelUrl) else {
             return
         }
         urlHandler.open(url, options: [:], completionHandler: nil)

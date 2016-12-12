@@ -8,19 +8,13 @@
 
 import UIKit
 
-class MealPlanViewController: UIViewController {
+class MealPlanViewController: UIViewController, MealPlanPresentable {
 
     private let presenter = MealPlanPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        presenter.set(view: self)
     }
     
     @IBAction func getHuelPressed() {

@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF2096B71DFF58EF006EF21E /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */; };
+		BF2096BA1DFF5A96006EF21E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B91DFF5A96006EF21E /* User.swift */; };
+		BF2096BC1DFF653F006EF21E /* PersonalDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */; };
+		BF2096BE1DFF65B4006EF21E /* CalorieDistributorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096BD1DFF65B4006EF21E /* CalorieDistributorPresenter.swift */; };
+		BF2096C01DFF663D006EF21E /* PersonalDetailsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096BF1DFF663D006EF21E /* PersonalDetailsPresenterTests.swift */; };
+		BF2096C21DFF66A3006EF21E /* CalorieDistributionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096C11DFF66A3006EF21E /* CalorieDistributionPresenterTests.swift */; };
 		BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD971DFB80C9004A2C26 /* CalorieDistributionViewController.swift */; };
 		BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */; };
 		BF23FD9E1DFB80C9004A2C26 /* PersonalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */; };
 		BF23FDA01DFB80EF004A2C26 /* MealPlanPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */; };
-		BF23FDA21DFB8432004A2C26 /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FDA11DFB8432004A2C26 /* MealPlanPresenterTest.swift */; };
-		BFC3CFDC1DFB8D97001E2F6F /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC3CFDB1DFB8D97001E2F6F /* MealPlanPresenterTest.swift */; };
 		BFE4646E1DFB3CDA00687A16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */; };
 		BFE464731DFB3CDA00687A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE464711DFB3CDA00687A16 /* Main.storyboard */; };
 		BFE464751DFB3CDA00687A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFE464741DFB3CDA00687A16 /* Assets.xcassets */; };
@@ -37,14 +41,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
+		BF2096B91DFF5A96006EF21E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsPresenter.swift; sourceTree = "<group>"; };
+		BF2096BD1DFF65B4006EF21E /* CalorieDistributorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieDistributorPresenter.swift; sourceTree = "<group>"; };
+		BF2096BF1DFF663D006EF21E /* PersonalDetailsPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsPresenterTests.swift; sourceTree = "<group>"; };
+		BF2096C11DFF66A3006EF21E /* CalorieDistributionPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieDistributionPresenterTests.swift; sourceTree = "<group>"; };
 		BF23FD971DFB80C9004A2C26 /* CalorieDistributionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieDistributionViewController.swift; sourceTree = "<group>"; };
 		BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanViewController.swift; sourceTree = "<group>"; };
 		BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsViewController.swift; sourceTree = "<group>"; };
 		BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenter.swift; sourceTree = "<group>"; };
-		BF23FDA11DFB8432004A2C26 /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
 		BFC3CFD11DFB8D5C001E2F6F /* HuelCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuelCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC3CFD51DFB8D5C001E2F6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BFC3CFDB1DFB8D97001E2F6F /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
 		BFE4646A1DFB3CDA00687A16 /* HuelCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuelCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFE464721DFB3CDA00687A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,7 +60,6 @@
 		BFE464771DFB3CDA00687A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFE464791DFB3CDA00687A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFE4647E1DFB3CDA00687A16 /* HuelCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuelCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFE464841DFB3CDA00687A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +87,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF2096B21DFF58EF006EF21E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BF2096B61DFF58EF006EF21E /* PersonalDetails */,
+				BF2096B31DFF58EF006EF21E /* CalorieDistribution */,
+				BF2096B41DFF58EF006EF21E /* MealPlan */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BF2096B31DFF58EF006EF21E /* CalorieDistribution */ = {
+			isa = PBXGroup;
+			children = (
+				BF2096C11DFF66A3006EF21E /* CalorieDistributionPresenterTests.swift */,
+			);
+			path = CalorieDistribution;
+			sourceTree = "<group>";
+		};
+		BF2096B41DFF58EF006EF21E /* MealPlan */ = {
+			isa = PBXGroup;
+			children = (
+				BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */,
+			);
+			path = MealPlan;
+			sourceTree = "<group>";
+		};
+		BF2096B61DFF58EF006EF21E /* PersonalDetails */ = {
+			isa = PBXGroup;
+			children = (
+				BF2096BF1DFF663D006EF21E /* PersonalDetailsPresenterTests.swift */,
+			);
+			path = PersonalDetails;
+			sourceTree = "<group>";
+		};
+		BF2096B81DFF5A7C006EF21E /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				BF2096B91DFF5A96006EF21E /* User.swift */,
+			);
+			path = DataObjects;
+			sourceTree = "<group>";
+		};
 		BF23FD8D1DFB75D0004A2C26 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				BF23FD971DFB80C9004A2C26 /* CalorieDistributionViewController.swift */,
+				BF2096BD1DFF65B4006EF21E /* CalorieDistributorPresenter.swift */,
 			);
 			path = CalorieDistribution;
 			sourceTree = "<group>";
@@ -111,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */,
+				BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */,
 			);
 			path = PersonalDetail;
 			sourceTree = "<group>";
@@ -118,8 +169,8 @@
 		BFC3CFD21DFB8D5C001E2F6F /* HuelCalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				BF2096B21DFF58EF006EF21E /* UI */,
 				BFC3CFD51DFB8D5C001E2F6F /* Info.plist */,
-				BFC3CFDB1DFB8D97001E2F6F /* MealPlanPresenterTest.swift */,
 			);
 			path = HuelCalculatorTests;
 			sourceTree = "<group>";
@@ -129,7 +180,6 @@
 			children = (
 				BFE4646C1DFB3CDA00687A16 /* HuelCalculator */,
 				BFC3CFD21DFB8D5C001E2F6F /* HuelCalculatorTests */,
-				BFE464811DFB3CDA00687A16 /* HuelCalculatorUITests */,
 				BFE4646B1DFB3CDA00687A16 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				BF23FD8D1DFB75D0004A2C26 /* UI */,
+				BF2096B81DFF5A7C006EF21E /* DataObjects */,
 				BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */,
 				BFE464711DFB3CDA00687A16 /* Main.storyboard */,
 				BFE464741DFB3CDA00687A16 /* Assets.xcassets */,
@@ -155,15 +206,6 @@
 				BFE464791DFB3CDA00687A16 /* Info.plist */,
 			);
 			path = HuelCalculator;
-			sourceTree = "<group>";
-		};
-		BFE464811DFB3CDA00687A16 /* HuelCalculatorUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BFE464841DFB3CDA00687A16 /* Info.plist */,
-				BF23FDA11DFB8432004A2C26 /* MealPlanPresenterTest.swift */,
-			);
-			path = HuelCalculatorUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,7 +346,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFC3CFDC1DFB8D97001E2F6F /* MealPlanPresenterTest.swift in Sources */,
+				BF2096C21DFF66A3006EF21E /* CalorieDistributionPresenterTests.swift in Sources */,
+				BF2096B71DFF58EF006EF21E /* MealPlanPresenterTest.swift in Sources */,
+				BF2096C01DFF663D006EF21E /* PersonalDetailsPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +358,9 @@
 			files = (
 				BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */,
 				BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */,
+				BF2096BE1DFF65B4006EF21E /* CalorieDistributorPresenter.swift in Sources */,
+				BF2096BC1DFF653F006EF21E /* PersonalDetailsPresenter.swift in Sources */,
+				BF2096BA1DFF5A96006EF21E /* User.swift in Sources */,
 				BFE4646E1DFB3CDA00687A16 /* AppDelegate.swift in Sources */,
 				BF23FDA01DFB80EF004A2C26 /* MealPlanPresenter.swift in Sources */,
 				BF23FD9E1DFB80C9004A2C26 /* PersonalDetailsViewController.swift in Sources */,
@@ -324,7 +371,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF23FDA21DFB8432004A2C26 /* MealPlanPresenterTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +597,7 @@
 				BFC3CFDA1DFB8D5C001E2F6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFE464651DFB3CD900687A16 /* Build configuration list for PBXProject "HuelCalculator" */ = {
 			isa = XCConfigurationList;
