@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD971DFB80C9004A2C26 /* CalorieDistributionViewController.swift */; };
+		BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */; };
+		BF23FD9E1DFB80C9004A2C26 /* PersonalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */; };
+		BF23FDA01DFB80EF004A2C26 /* MealPlanPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */; };
+		BF23FDA21DFB8432004A2C26 /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FDA11DFB8432004A2C26 /* MealPlanPresenterTest.swift */; };
+		BFC3CFDC1DFB8D97001E2F6F /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC3CFDB1DFB8D97001E2F6F /* MealPlanPresenterTest.swift */; };
 		BFE4646E1DFB3CDA00687A16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */; };
-		BFE464701DFB3CDA00687A16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE4646F1DFB3CDA00687A16 /* ViewController.swift */; };
 		BFE464731DFB3CDA00687A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE464711DFB3CDA00687A16 /* Main.storyboard */; };
 		BFE464751DFB3CDA00687A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFE464741DFB3CDA00687A16 /* Assets.xcassets */; };
 		BFE464781DFB3CDA00687A16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE464761DFB3CDA00687A16 /* LaunchScreen.storyboard */; };
-		BFE464831DFB3CDA00687A16 /* HuelCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE464821DFB3CDA00687A16 /* HuelCalculatorUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BFC3CFD61DFB8D5C001E2F6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFE464621DFB3CD900687A16 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFE464691DFB3CD900687A16;
+			remoteInfo = HuelCalculator;
+		};
 		BFE4647F1DFB3CDA00687A16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFE464621DFB3CD900687A16 /* Project object */;
@@ -26,19 +37,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF23FD971DFB80C9004A2C26 /* CalorieDistributionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieDistributionViewController.swift; sourceTree = "<group>"; };
+		BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanViewController.swift; sourceTree = "<group>"; };
+		BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsViewController.swift; sourceTree = "<group>"; };
+		BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenter.swift; sourceTree = "<group>"; };
+		BF23FDA11DFB8432004A2C26 /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
+		BFC3CFD11DFB8D5C001E2F6F /* HuelCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuelCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFC3CFD51DFB8D5C001E2F6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFC3CFDB1DFB8D97001E2F6F /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
 		BFE4646A1DFB3CDA00687A16 /* HuelCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuelCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BFE4646F1DFB3CDA00687A16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BFE464721DFB3CDA00687A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BFE464741DFB3CDA00687A16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFE464771DFB3CDA00687A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFE464791DFB3CDA00687A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFE4647E1DFB3CDA00687A16 /* HuelCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuelCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFE464821DFB3CDA00687A16 /* HuelCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuelCalculatorUITests.swift; sourceTree = "<group>"; };
 		BFE464841DFB3CDA00687A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BFC3CFCE1DFB8D5C001E2F6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFE464671DFB3CD900687A16 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,10 +80,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF23FD8D1DFB75D0004A2C26 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BF23FD9A1DFB80C9004A2C26 /* PersonalDetail */,
+				BF23FD961DFB80C9004A2C26 /* CalorieDistribution */,
+				BF23FD981DFB80C9004A2C26 /* MealPlan */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BF23FD961DFB80C9004A2C26 /* CalorieDistribution */ = {
+			isa = PBXGroup;
+			children = (
+				BF23FD971DFB80C9004A2C26 /* CalorieDistributionViewController.swift */,
+			);
+			path = CalorieDistribution;
+			sourceTree = "<group>";
+		};
+		BF23FD981DFB80C9004A2C26 /* MealPlan */ = {
+			isa = PBXGroup;
+			children = (
+				BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */,
+				BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */,
+			);
+			path = MealPlan;
+			sourceTree = "<group>";
+		};
+		BF23FD9A1DFB80C9004A2C26 /* PersonalDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */,
+			);
+			path = PersonalDetail;
+			sourceTree = "<group>";
+		};
+		BFC3CFD21DFB8D5C001E2F6F /* HuelCalculatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFC3CFD51DFB8D5C001E2F6F /* Info.plist */,
+				BFC3CFDB1DFB8D97001E2F6F /* MealPlanPresenterTest.swift */,
+			);
+			path = HuelCalculatorTests;
+			sourceTree = "<group>";
+		};
 		BFE464611DFB3CD900687A16 = {
 			isa = PBXGroup;
 			children = (
 				BFE4646C1DFB3CDA00687A16 /* HuelCalculator */,
+				BFC3CFD21DFB8D5C001E2F6F /* HuelCalculatorTests */,
 				BFE464811DFB3CDA00687A16 /* HuelCalculatorUITests */,
 				BFE4646B1DFB3CDA00687A16 /* Products */,
 			);
@@ -70,6 +139,7 @@
 			children = (
 				BFE4646A1DFB3CDA00687A16 /* HuelCalculator.app */,
 				BFE4647E1DFB3CDA00687A16 /* HuelCalculatorUITests.xctest */,
+				BFC3CFD11DFB8D5C001E2F6F /* HuelCalculatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,8 +147,8 @@
 		BFE4646C1DFB3CDA00687A16 /* HuelCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				BF23FD8D1DFB75D0004A2C26 /* UI */,
 				BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */,
-				BFE4646F1DFB3CDA00687A16 /* ViewController.swift */,
 				BFE464711DFB3CDA00687A16 /* Main.storyboard */,
 				BFE464741DFB3CDA00687A16 /* Assets.xcassets */,
 				BFE464761DFB3CDA00687A16 /* LaunchScreen.storyboard */,
@@ -90,8 +160,8 @@
 		BFE464811DFB3CDA00687A16 /* HuelCalculatorUITests */ = {
 			isa = PBXGroup;
 			children = (
-				BFE464821DFB3CDA00687A16 /* HuelCalculatorUITests.swift */,
 				BFE464841DFB3CDA00687A16 /* Info.plist */,
+				BF23FDA11DFB8432004A2C26 /* MealPlanPresenterTest.swift */,
 			);
 			path = HuelCalculatorUITests;
 			sourceTree = "<group>";
@@ -99,6 +169,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BFC3CFD01DFB8D5C001E2F6F /* HuelCalculatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFC3CFD81DFB8D5C001E2F6F /* Build configuration list for PBXNativeTarget "HuelCalculatorTests" */;
+			buildPhases = (
+				BFC3CFCD1DFB8D5C001E2F6F /* Sources */,
+				BFC3CFCE1DFB8D5C001E2F6F /* Frameworks */,
+				BFC3CFCF1DFB8D5C001E2F6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFC3CFD71DFB8D5C001E2F6F /* PBXTargetDependency */,
+			);
+			name = HuelCalculatorTests;
+			productName = HuelCalculatorTests;
+			productReference = BFC3CFD11DFB8D5C001E2F6F /* HuelCalculatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BFE464691DFB3CD900687A16 /* HuelCalculator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFE464871DFB3CDA00687A16 /* Build configuration list for PBXNativeTarget "HuelCalculator" */;
@@ -144,6 +232,13 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Linda CC Nordstrom";
 				TargetAttributes = {
+					BFC3CFD01DFB8D5C001E2F6F = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = Y97Q299W29;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BFE464691DFB3CD900687A16;
+					};
 					BFE464691DFB3CD900687A16 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = Y97Q299W29;
@@ -172,11 +267,19 @@
 			targets = (
 				BFE464691DFB3CD900687A16 /* HuelCalculator */,
 				BFE4647D1DFB3CDA00687A16 /* HuelCalculatorUITests */,
+				BFC3CFD01DFB8D5C001E2F6F /* HuelCalculatorTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BFC3CFCF1DFB8D5C001E2F6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFE464681DFB3CD900687A16 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,12 +300,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BFC3CFCD1DFB8D5C001E2F6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC3CFDC1DFB8D97001E2F6F /* MealPlanPresenterTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFE464661DFB3CD900687A16 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFE464701DFB3CDA00687A16 /* ViewController.swift in Sources */,
+				BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */,
+				BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */,
 				BFE4646E1DFB3CDA00687A16 /* AppDelegate.swift in Sources */,
+				BF23FDA01DFB80EF004A2C26 /* MealPlanPresenter.swift in Sources */,
+				BF23FD9E1DFB80C9004A2C26 /* PersonalDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,13 +324,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFE464831DFB3CDA00687A16 /* HuelCalculatorUITests.swift in Sources */,
+				BF23FDA21DFB8432004A2C26 /* MealPlanPresenterTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BFC3CFD71DFB8D5C001E2F6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFE464691DFB3CD900687A16 /* HuelCalculator */;
+			targetProxy = BFC3CFD61DFB8D5C001E2F6F /* PBXContainerItemProxy */;
+		};
 		BFE464801DFB3CDA00687A16 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BFE464691DFB3CD900687A16 /* HuelCalculator */;
@@ -244,6 +363,37 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BFC3CFD91DFB8D5C001E2F6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Y97Q299W29;
+				INFOPLIST_FILE = HuelCalculatorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lindaccnordstrom.HuelCalculatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuelCalculator.app/HuelCalculator";
+			};
+			name = Debug;
+		};
+		BFC3CFDA1DFB8D5C001E2F6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Y97Q299W29;
+				INFOPLIST_FILE = HuelCalculatorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lindaccnordstrom.HuelCalculatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuelCalculator.app/HuelCalculator";
+			};
+			name = Release;
+		};
 		BFE464851DFB3CDA00687A16 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -394,6 +544,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BFC3CFD81DFB8D5C001E2F6F /* Build configuration list for PBXNativeTarget "HuelCalculatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC3CFD91DFB8D5C001E2F6F /* Debug */,
+				BFC3CFDA1DFB8D5C001E2F6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BFE464651DFB3CD900687A16 /* Build configuration list for PBXProject "HuelCalculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -410,6 +568,7 @@
 				BFE464891DFB3CDA00687A16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFE4648A1DFB3CDA00687A16 /* Build configuration list for PBXNativeTarget "HuelCalculatorUITests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +577,7 @@
 				BFE4648C1DFB3CDA00687A16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

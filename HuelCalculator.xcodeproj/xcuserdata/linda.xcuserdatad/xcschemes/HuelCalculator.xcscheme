@@ -38,6 +38,16 @@
                ReferencedContainer = "container:HuelCalculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BFC3CFD01DFB8D5C001E2F6F"
+               BuildableName = "HuelCalculatorTests.xctest"
+               BlueprintName = "HuelCalculatorTests"
+               ReferencedContainer = "container:HuelCalculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
