@@ -115,6 +115,9 @@
                                 <rect key="frame" x="87" y="414" width="200" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="DlB-1A-obZ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEs-47-YES">
                                 <rect key="frame" x="16" y="333" width="58" height="21"/>
@@ -186,6 +189,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Huel Calculator" id="DYm-Mb-jfE"/>
+                    <connections>
+                        <outlet property="activityInputField" destination="Zxu-a9-k70" id="SY8-wv-xry"/>
+                        <outlet property="ageInputField" destination="RQH-jG-qEM" id="VcG-0u-4yh"/>
+                        <outlet property="calculateButton" destination="Rvh-iY-SHL" id="a1p-hc-6RH"/>
+                        <outlet property="genderSelector" destination="76i-lk-61A" id="rPb-in-cmr"/>
+                        <outlet property="goalInputField" destination="7OZ-2T-RDM" id="Pox-Id-TM4"/>
+                        <outlet property="heightInputField" destination="MSG-2N-u4k" id="fwg-9S-CNf"/>
+                        <outlet property="heightUnitLabel" destination="zpd-Uk-Ee2" id="mRG-7a-Q9F"/>
+                        <outlet property="measurementSystemSelector" destination="Uy0-sk-GeJ" id="dzB-uh-Nym"/>
+                        <outlet property="weightInputField" destination="rkk-7r-eGa" id="3aC-fS-HAs"/>
+                        <outlet property="weightUnitLabel" destination="n55-s9-5WI" id="AuT-DY-U2f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,6 +369,14 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Huel Calculator" id="yMu-rk-BAU"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="breakfastCaloriesInputField" destination="z1I-oF-aqg" id="5YH-aX-1Sh"/>
+                        <outlet property="dinnerCaloriesInputField" destination="teJ-61-WVj" id="hYR-CD-ZH6"/>
+                        <outlet property="lunchCaloriesInputField" destination="f8h-oB-FCz" id="95O-YU-OBz"/>
+                        <outlet property="nextPageButton" destination="rLG-v4-e2G" id="fPV-0l-sml"/>
+                        <outlet property="remainingCaloriesLabel" destination="8tS-0k-Tkt" id="nMD-uB-x0L"/>
+                        <outlet property="snackCaloriesInputField" destination="nOl-5F-rPl" id="uEd-zO-LTx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dla-Z4-2bj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -476,6 +499,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Huel Calculator" id="anv-Uv-FgD"/>
+                    <connections>
+                        <outlet property="breakfastAmountLabel" destination="GNb-A1-QVP" id="79o-eH-eBv"/>
+                        <outlet property="dinnerAmountLabel" destination="Fk1-Qy-WE5" id="r1f-hY-1QL"/>
+                        <outlet property="lunchAmountLabel" destination="lns-hQ-UV7" id="NwK-cd-MR7"/>
+                        <outlet property="snackAmountLabel" destination="JGE-zg-tff" id="jwH-ch-RrE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q81-fw-b84" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

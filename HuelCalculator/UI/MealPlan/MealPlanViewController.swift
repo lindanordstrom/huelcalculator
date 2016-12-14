@@ -11,6 +11,10 @@ import UIKit
 class MealPlanViewController: UIViewController, MealPlanPresentable {
 
     private let presenter = MealPlanPresenter()
+    @IBOutlet var breakfastAmountLabel: UILabel!
+    @IBOutlet var lunchAmountLabel: UILabel!
+    @IBOutlet var dinnerAmountLabel: UILabel!
+    @IBOutlet var snackAmountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

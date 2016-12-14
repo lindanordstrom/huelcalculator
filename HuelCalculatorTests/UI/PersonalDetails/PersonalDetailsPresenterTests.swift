@@ -12,14 +12,18 @@ import XCTest
 class PersonalDetailsPresenterTest: XCTestCase {
     
     private var testObject: PersonalDetailsPresenter?
+    private var mockedView: PersonalDetailsMock?
     
     override func setUp() {
         super.setUp()
         testObject = PersonalDetailsPresenter()
+        mockedView = PersonalDetailsMock()
+        testObject?.set(view: mockedView!)
     }
     
     override func tearDown() {
         testObject = nil
+        mockedView = nil
         super.tearDown()
     }
     
@@ -27,7 +31,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  When:  -
      *  Then:  height and weight is shown in kg/cm
      */
-    func test_() {
+    func test_1() {
         
     }
     
@@ -35,33 +39,49 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  When:  -
      *  Then:  height and weight is shown in lb/feet
      */
-    func test_() {
+    func test_2() {
         
     }
     
-    /** Given: User enters all fields
+    /** Given: User enters text in all fields
      *  When:  Pressing "Calculate"
      *  Then:  The next view is displayed with correct remaining daily calories
      */
-    func test_() {
+    func test_3() {
         
     }
     
-    /** Given: User enters all but one field
+    /** Given: User enters text in all but one field
      *  When:  Pressing "Calculate"
      *  Then:  An Error message is displayed
      */
-    func test_() {
+    func test_4() {
         
     }
     
-    /** Given: User enters no fields
+    /** Given: User enters text in no fields
      *  When:  Pressing "Calculate"
      *  Then:  An Error message is displayed
      */
-    func test_() {
+    func test_5() {
         
     }
     
-    // RESET BUTTON
+    /** Given: User enters text in all fields
+     *  When:  Pressing "Reset"
+     *  Then:  All fields should become empty
+     */
+    func test_didPressResetButton() {
+        testObject?.didPressResetButton()
+        
+        XCTAssertTrue(mockedView!.resetAllFieldsCalled, "resetAllFields was never called")
+    }
+}
+
+private class PersonalDetailsMock: PersonalDetailsPresentable {
+    var resetAllFieldsCalled = false
+    
+    func resetAllFields() {
+        resetAllFieldsCalled = true
+    }
 }

@@ -11,11 +11,11 @@ import XCTest
 
 class CalorieDistributionPresenterTests: XCTestCase {
     
-    private var testObject: CalorieDistributorPresenter?
+    private var testObject: CalorieDistributionPresenter?
     
     override func setUp() {
         super.setUp()
-        testObject = CalorieDistributorPresenter()
+        testObject = CalorieDistributionPresenter()
     }
     
     override func tearDown() {

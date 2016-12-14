@@ -10,7 +10,13 @@ import UIKit
 
 class CalorieDistributionViewController: UIViewController {
     
-  //  private let presenter = CalorieDistributionPresenter()
+    private let presenter = CalorieDistributionPresenter()
+    @IBOutlet var remainingCaloriesLabel: UILabel!
+    @IBOutlet var breakfastCaloriesInputField: UITextField!
+    @IBOutlet var lunchCaloriesInputField: UITextField!
+    @IBOutlet var dinnerCaloriesInputField: UITextField!
+    @IBOutlet var snackCaloriesInputField: UITextField!
+    @IBOutlet var nextPageButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

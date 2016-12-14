@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PersonalDetailsPresentable: class {
-    
+    func resetAllFields()
 }
 
 class PersonalDetailsPresenter {
@@ -18,5 +18,9 @@ class PersonalDetailsPresenter {
     
     func set(view: PersonalDetailsPresentable) {
         self.view = view
+    }
+    
+    func didPressResetButton() {
+        view?.resetAllFields()
     }
 }
