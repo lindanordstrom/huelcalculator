@@ -23,11 +23,43 @@ class CalorieDistributionPresenterTests: XCTestCase {
         super.tearDown()
     }
     
-    /** Given:
-     *  When:
-     *  Then:
+    /** Given: User enters a number in any field
+     *  When:  The focus leaves the input field
+     *  Then:  The remaining calories decreases with the same amount
      */
     func test_() {
+        
+    }
+    
+    /** Given: User enters a number larger than the remaining calories in any field
+     *  When:  The focus leaves the input field
+     *  Then:  The remaining calories decreases with the same amount and the negative amount will be displayed in red
+     */
+    func test_1() {
+        
+    }
+    
+    /** Given: User presses the "split equally" button
+     *  When:  -
+     *  Then:  The remaining calories will be split equally into the fields with the "remainder" calories added to Dinner
+     */
+    func test_2() {
+        
+    }
+    
+    /** Given: User presses the "next" button
+     *  When:  Remaining calories is 0
+     *  Then:  The next view is displayed
+     */
+    func test_4() {
+        
+    }
+    
+    /** Given: User presses the "next" button
+     *  When:  Remaining calories is more or less than 0
+     *  Then:  The a warning popup is displayed
+     */
+    func test_5() {
         
     }
 }

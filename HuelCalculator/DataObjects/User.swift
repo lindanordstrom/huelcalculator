@@ -9,15 +9,14 @@
 import Foundation
 
 struct User {
-    enum Gender {
+    enum Gender: Int {
         case male
         case female
-        case other
     }
     
-    enum Goal {
-        case maintain
+    enum Goal: Int {
         case lose
+        case maintain
         case gain
     }
     
@@ -29,9 +28,14 @@ struct User {
         case extra
     }
     
-    enum UnitOfMeasurement {
+    enum UnitOfMeasurement: Int {
         case metric
         case imperial
+    }
+    
+    enum Flavour: Int {
+        case vanilla
+        case unflavoured
     }
     
     struct CalorieDistribution {
@@ -42,16 +46,18 @@ struct User {
         lazy var total: Int = self.breakfast + self.lunch + self.dinner + self.snacks
     }
     
-    var preferredUnitOfMeasurement: UnitOfMeasurement
-    var age: Int
-    var gender: Gender
-    var height: Double
-    var weight: Double
-    var goal: Goal
-    var activityLevel: ActivityLevel
+    var preferredUnitOfMeasurement: UnitOfMeasurement?
+    var age: Int?
+    var gender: Gender?
+    var height: Float?
+    var weight: Float?
+    var goal: Goal?
+    var activityLevel: ActivityLevel?
+    var flavour: Flavour?
+    var dailyCalorieConsumption: Int?
     var calorieDistribution = CalorieDistribution()
     
-    init(preferredUnitOfMeasurement: UnitOfMeasurement, age: Int, gender: Gender, height: Double, weight: Double, goal: Goal, activityLevel: ActivityLevel) {
+    init(preferredUnitOfMeasurement: UnitOfMeasurement?, age: Int?, gender: Gender?, height: Float?, weight: Float?, goal: Goal?, activityLevel: ActivityLevel?, flavour: Flavour?) {
         self.preferredUnitOfMeasurement = preferredUnitOfMeasurement
         self.age = age
         self.gender = gender
@@ -59,6 +65,7 @@ struct User {
         self.weight = weight
         self.goal = goal
         self.activityLevel = activityLevel
+        self.flavour = flavour
     }
 }
 

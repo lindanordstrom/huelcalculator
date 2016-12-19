@@ -25,6 +25,22 @@ class MealPlanPresenterTest: XCTestCase {
         testObject = nil
         super.tearDown()
     }
+    
+    /** Given: User has distributed calories
+     *  When:  Page is loaded
+     *  Then:  The calories will be calculated to scoops/grams of HUEL
+     */
+    func test_() {
+        
+    }
+    
+    /** Given: User has remaining undistributed calories
+     *  When:  Page is loaded
+     *  Then:  A label will be displayed with the amount of remaining calories
+     */
+    func test_1() {
+        
+    }
 
     /** Given: "Get Huel" button is pressed
      *  When:  -
@@ -35,14 +51,6 @@ class MealPlanPresenterTest: XCTestCase {
         testObject!.didPressGetHuel()
         
         XCTAssert(testUrlHandler?.urlStringVisited == expectedUrl, "Expected link was not used!")
-    }
-    
-    /** Given:
-     *  When:
-     *  Then:
-     */
-    func test_() {
-        
     }
 }
 
