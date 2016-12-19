@@ -24,11 +24,9 @@ protocol MealPlanPresentable: class {
 
 class MealPlanPresenter {
  
-    private let huelUrl = "https://huel.com/products/huel"
-    
-    private weak var view: MealPlanPresentable?
-    
     private let urlHandler: UrlHandler
+    private let huelUrl = "https://huel.com/products/huel"
+    private weak var view: MealPlanPresentable?
     
     init(urlHandler: UrlHandler = UIApplication.shared) {
         self.urlHandler = urlHandler
@@ -73,6 +71,6 @@ class MealPlanPresenter {
         guard let flavour = flavour else { return nil }
         let scoops = caloriesToScoops(calories: calories, flavour: flavour)
         let gram = scoopsToGram(scoops: scoops)
-        return "\(gram) g / \(scoops) scoops"
+        return String(format: "%.0f g / %.1f scoops", gram, scoops)
     }
 }

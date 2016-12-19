@@ -328,7 +328,7 @@
                                 <rect key="frame" x="97" y="143.5" width="148" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="inputFieldUpdated:" destination="dAz-R5-g1D" eventType="editingChanged" id="meS-2L-XYd"/>
                                 </connections>
@@ -337,7 +337,7 @@
                                 <rect key="frame" x="97" y="181.5" width="148" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="inputFieldUpdated:" destination="dAz-R5-g1D" eventType="editingChanged" id="pSt-A0-Ndp"/>
                                 </connections>
@@ -346,7 +346,7 @@
                                 <rect key="frame" x="97" y="219.5" width="148" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="inputFieldUpdated:" destination="dAz-R5-g1D" eventType="valueChanged" id="Xvp-63-hFd"/>
                                     <action selector="inputFieldUpdated:" destination="dAz-R5-g1D" eventType="editingChanged" id="mVH-mR-2Xu"/>
@@ -356,7 +356,7 @@
                                 <rect key="frame" x="97" y="257.5" width="148" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="inputFieldUpdated:" destination="dAz-R5-g1D" eventType="valueChanged" id="2u1-yP-EAn"/>
                                     <action selector="inputFieldUpdated:" destination="dAz-R5-g1D" eventType="editingChanged" id="Fsa-z7-vCP"/>
@@ -374,7 +374,7 @@
                                 <color key="textColor" red="0.0" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distribute calories per meal by entering calories in the fields manually, split it equally with the button below" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6G2-9m-H0n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distribute calories per meal by entering kcal manually in the fields or split them equally with the button below" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6G2-9m-H0n">
                                 <rect key="frame" x="16" y="69" width="288" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
