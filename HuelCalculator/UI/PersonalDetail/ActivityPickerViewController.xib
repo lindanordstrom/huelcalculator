@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivityPickerViewController" customModule="HuelCalculator" customModuleProvider="target">
+            <connections>
+                <outlet property="background" destination="RfK-s4-LRO" id="H1B-qT-VD8"/>
+                <outlet property="inVisibleConstraint" destination="PgB-vt-axA" id="N87-BV-Bdr"/>
+                <outlet property="picker" destination="UNc-Nr-22R" id="fFI-gn-LuA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="visibleConstraint" destination="Eal-WA-Jzn" id="qdt-WO-CHl"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfK-s4-LRO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.46703767123287671" colorSpace="calibratedRGB"/>
+                </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNc-Nr-22R">
+                    <rect key="frame" x="5" y="446" width="365" height="216"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </pickerView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5j-35-hOd">
+                    <rect key="frame" x="5" y="422" width="365" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="829-m0-fCz">
+                            <rect key="frame" x="265" y="0.0" width="100" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="vDo-iN-26m"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="doneButtonPressed" destination="-1" eventType="touchUpInside" id="jha-Xb-SWg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0L-IC-Xte">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="CUO-De-gdy"/>
+                            </constraints>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="cancelButtonPressed" destination="-1" eventType="touchUpInside" id="4VC-QQ-Oya"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="O0L-IC-Xte" secondAttribute="bottom" id="1Ob-Bu-AVB"/>
+                        <constraint firstAttribute="trailing" secondItem="829-m0-fCz" secondAttribute="trailing" id="Dra-o4-rDK"/>
+                        <constraint firstAttribute="height" constant="44" id="FgI-zt-A3E"/>
+                        <constraint firstAttribute="bottom" secondItem="829-m0-fCz" secondAttribute="bottom" id="Fy3-og-dqO"/>
+                        <constraint firstItem="829-m0-fCz" firstAttribute="top" secondItem="c5j-35-hOd" secondAttribute="top" id="Rrr-Ju-KcZ"/>
+                        <constraint firstItem="O0L-IC-Xte" firstAttribute="leading" secondItem="c5j-35-hOd" secondAttribute="leading" id="T2G-5g-CiT"/>
+                        <constraint firstItem="O0L-IC-Xte" firstAttribute="top" secondItem="c5j-35-hOd" secondAttribute="top" id="odr-B3-l9m"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="RfK-s4-LRO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="59i-ai-0QJ"/>
+                <constraint firstAttribute="bottom" secondItem="UNc-Nr-22R" secondAttribute="bottom" constant="5" id="Eal-WA-Jzn"/>
+                <constraint firstItem="c5j-35-hOd" firstAttribute="trailing" secondItem="UNc-Nr-22R" secondAttribute="trailing" id="GWH-Iy-G9a"/>
+                <constraint firstAttribute="bottom" secondItem="RfK-s4-LRO" secondAttribute="bottom" id="Kpr-d6-5oZ"/>
+                <constraint firstAttribute="trailing" secondItem="UNc-Nr-22R" secondAttribute="trailing" constant="5" id="Pdb-Pd-4nF"/>
+                <constraint firstAttribute="bottom" secondItem="UNc-Nr-22R" secondAttribute="bottom" constant="-260" id="PgB-vt-axA"/>
+                <constraint firstAttribute="trailing" secondItem="RfK-s4-LRO" secondAttribute="trailing" id="S03-3g-beS"/>
+                <constraint firstItem="RfK-s4-LRO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UQL-vH-Ez2"/>
+                <constraint firstItem="UNc-Nr-22R" firstAttribute="top" secondItem="c5j-35-hOd" secondAttribute="bottom" constant="-20" id="VKc-cr-ASg"/>
+                <constraint firstItem="c5j-35-hOd" firstAttribute="leading" secondItem="UNc-Nr-22R" secondAttribute="leading" id="XPq-Aq-dcT"/>
+                <constraint firstItem="UNc-Nr-22R" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="dOb-GL-WK8"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="PgB-vt-axA"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

@@ -28,6 +28,8 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributorPre
         setLunchCaloriesInputField(calories: user?.calorieDistribution.lunch ?? 0)
         setDinnerCaloriesInputField(calories: user?.calorieDistribution.dinner ?? 0)
         setSnackCaloriesInputField(calories: user?.calorieDistribution.snacks ?? 0)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CalorieDistributionViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func nextButtonPressed() {
@@ -96,5 +98,9 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributorPre
         }
         vc.user = user
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

@@ -90,6 +90,8 @@ class PersonalDetailsPresenter {
             return 1.725
         case .extra:
             return 1.9
+        default:
+            return 0
         }
     }
     
