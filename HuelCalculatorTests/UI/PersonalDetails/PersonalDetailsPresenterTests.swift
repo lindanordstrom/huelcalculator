@@ -52,10 +52,11 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  Then:  The next view is displayed with correct remaining daily calories
      */
     func test_didPressCalculateButton() {
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: 30, gender: User.Gender.male, height: 177, weight: 60, goal: User.Goal.lose, activityLevel: User.ActivityLevel.moderately)
+        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.metric, age: 30, gender: User.Gender.male, height: 177, weight: 60, goal: User.Goal.lose, activityLevel: User.ActivityLevel.moderately, flavour: User.Flavour.vanilla)
         testObject?.didPressCalculateButton(user: user)
         
         XCTAssertTrue(mockedView!.navigateToCalorieDistributionViewControllerCalled, "navigateToCalorieDistributionViewController was not called")
+        XCTAssert(mockedView!.dailyCalorieConsumption == 1919)
     }
     
     /** Given: User enters text in all but one field
@@ -63,7 +64,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  Then:  An Error message is displayed
      */
     func test_didPressCalculateButton_missingInputData() {
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: 30, gender: User.Gender.male, height: 177, weight: 60, goal: User.Goal.lose, activityLevel: nil)
+        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: 30, gender: User.Gender.male, height: 177, weight: 60, goal: User.Goal.lose, activityLevel: nil, flavour: User.Flavour.vanilla)
         testObject?.didPressCalculateButton(user: user)
         
         XCTAssertTrue(mockedView!.showErrorMessageCalled, "showErrorMessage was not called")
@@ -74,7 +75,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  Then:  An Error message is displayed
      */
     func test_didPressCalculateButton_noInputData() {
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: nil, gender: User.Gender.male, height: nil, weight: nil, goal: User.Goal.lose, activityLevel: nil)
+        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: nil, gender: User.Gender.male, height: nil, weight: nil, goal: User.Goal.lose, activityLevel: nil, flavour: User.Flavour.vanilla)
         testObject?.didPressCalculateButton(user: user)
         
         XCTAssertTrue(mockedView!.showErrorMessageCalled, "showErrorMessage was not called")
@@ -97,6 +98,7 @@ private class PersonalDetailsMock: PersonalDetailsPresentable {
     var navigateToCalorieDistributionViewControllerCalled = false
     var updateUIToMetricSystemCalled = false
     var updateUIToImperialSystemCalled = false
+    var dailyCalorieConsumption: Int?
     
     func resetAllFields() {
         resetAllFieldsCalled = true
@@ -107,6 +109,7 @@ private class PersonalDetailsMock: PersonalDetailsPresentable {
     }
     
     func navigateToCalorieDistributionViewController(user: User) {
+        dailyCalorieConsumption = user.dailyCalorieConsumption
         navigateToCalorieDistributionViewControllerCalled = true
     }
     

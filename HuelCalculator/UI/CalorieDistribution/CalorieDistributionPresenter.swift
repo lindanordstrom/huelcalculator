@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CalorieDistributorPresentable: class {
+protocol CalorieDistributionPresentable: class {
     func navigateToMealPlanViewController()
     func setRemainingCaloriesLabel(calories: Int)
     func setBreakfastCaloriesInputField(calories: Int)
@@ -22,9 +22,9 @@ protocol CalorieDistributorPresentable: class {
 
 class CalorieDistributionPresenter {
     
-    private weak var view: CalorieDistributorPresentable?
+    private weak var view: CalorieDistributionPresentable?
     
-    func set(view: CalorieDistributorPresentable) {
+    func set(view: CalorieDistributionPresentable) {
         self.view = view
     }
     

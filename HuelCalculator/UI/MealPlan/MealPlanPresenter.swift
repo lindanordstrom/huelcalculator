@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UrlHandler {
-    func open(_: URL, options: [String : Any], completionHandler: ((Bool) -> Void)?)
+    func openURL(_ url: URL) -> Bool
 }
 
 extension UIApplication: UrlHandler {}
@@ -40,7 +40,7 @@ class MealPlanPresenter {
         guard let url = URL(string: huelUrl) else {
             return
         }
-        urlHandler.open(url, options: [:], completionHandler: nil)
+        _ = urlHandler.openURL(url)
     }
     
     func didLoadView(user: User?) {

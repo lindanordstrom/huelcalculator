@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalorieDistributionViewController: UIViewController, CalorieDistributorPresentable {
+class CalorieDistributionViewController: UIViewController, CalorieDistributionPresentable {
     
     @IBOutlet var remainingCaloriesLabel: UILabel!
     @IBOutlet var breakfastCaloriesInputField: UITextField!
