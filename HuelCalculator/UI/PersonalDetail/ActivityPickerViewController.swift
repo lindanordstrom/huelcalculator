@@ -25,7 +25,7 @@ class ActivityPickerViewController: UIViewController {
     
     init(index: Int) {
         selectedIndex = index
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "ActivityPickerViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
