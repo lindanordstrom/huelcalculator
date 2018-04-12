@@ -25,7 +25,7 @@ class MealPlanPresenterTest: XCTestCase {
         user?.calorieDistribution.breakfast = 100
         user?.calorieDistribution.lunch = 200
         user?.calorieDistribution.dinner = 300
-        user?.calorieDistribution.snacks = 400
+        user?.calorieDistribution.snack = 400
         testObject?.set(view: mockedView!)
     }
 

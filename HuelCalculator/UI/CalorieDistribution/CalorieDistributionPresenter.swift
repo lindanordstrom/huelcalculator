@@ -54,15 +54,12 @@ class CalorieDistributionPresenter {
         view?.setRemainingCaloriesLabelBlack()
     }
     
-    func didUpdateInputField(dailyConsumtion: Int?, breakfast: String, lunch: String, dinner: String, snack: String) {
-        guard let dailyConsumtion = dailyConsumtion else {
+    func didUpdateInputField(user: User, breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
+        guard let dailyConsumtion = user.calorieDistribution.dailyCalorieConsumption else {
             return
         }
-        
-        let breakfast = Int(breakfast) ?? 0
-        let lunch = Int(lunch) ?? 0
-        let dinner = Int(dinner) ?? 0
-        let snack = Int(snack) ?? 0
+
+        HuelUserManager.shared.distributeCalories(user: user, breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
         
         let usedCalories = breakfast + lunch + dinner + snack
         if dailyConsumtion < usedCalories {

@@ -45,32 +45,17 @@ class MealPlanPresenter {
     
     func didLoadView(user: User?) {
         guard let user = user else { return }
-        view?.setBreakfastAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.breakfast, flavour: user.flavour))
-        view?.setLunchAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.lunch, flavour: user.flavour))
-        view?.setDinnerAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.dinner, flavour: user.flavour))
-        view?.setSnackAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.snacks, flavour: user.flavour))
+        // TODO: Break out hardcoded shake type
+        view?.setBreakfastAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.breakfast, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
+        view?.setLunchAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.lunch, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
+        view?.setDinnerAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.dinner, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
+        view?.setSnackAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.snack, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
     }
     
-    private func caloriesToScoops(calories: Int, flavour: User.Flavour) -> Float {
-        var kcalPerScoop: Int
-        switch flavour {
-        case .vanilla:
-            kcalPerScoop = 152
-        case .unflavoured:
-            kcalPerScoop = 157
-        }
-        
-        return Float(calories) / Float(kcalPerScoop)
-    }
-    
-    private func scoopsToGram(scoops: Float) -> Float {
-        return scoops * 38
-    }
-    
-    private func scoopsAndGramsString(calories: Int, flavour: User.Flavour?) -> String? {
-        guard let flavour = flavour else { return nil }
-        let scoops = caloriesToScoops(calories: calories, flavour: flavour)
-        let gram = scoopsToGram(scoops: scoops)
+    private func scoopsAndGramsString(calories: Int?, shake: Shake) -> String? {
+        guard let calories = calories else { return nil }
+        let scoops = MealCalculator.numberOfScoops(calories: calories, shake: shake)
+        let gram = MealCalculator.gramsOfPowder(calories: calories, shake: shake)
         return String(format: "%.0f g / %.1f scoops", gram, scoops)
     }
 }

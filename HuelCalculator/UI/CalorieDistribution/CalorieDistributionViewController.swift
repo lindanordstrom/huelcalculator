@@ -23,35 +23,32 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionPr
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.set(view: self)
-        setRemainingCaloriesLabel(calories: user?.dailyCalorieConsumption ?? 0)
+        setRemainingCaloriesLabel(calories: user?.calorieDistribution.dailyCalorieConsumption ?? 0)
         setBreakfastCaloriesInputField(calories: user?.calorieDistribution.breakfast ?? 0)
         setLunchCaloriesInputField(calories: user?.calorieDistribution.lunch ?? 0)
         setDinnerCaloriesInputField(calories: user?.calorieDistribution.dinner ?? 0)
-        setSnackCaloriesInputField(calories: user?.calorieDistribution.snacks ?? 0)
+        setSnackCaloriesInputField(calories: user?.calorieDistribution.snack ?? 0)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CalorieDistributionViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
     @IBAction func nextButtonPressed() {
-        user?.calorieDistribution.breakfast = Int(breakfastCaloriesInputField.text ?? "") ?? 0
-        user?.calorieDistribution.lunch = Int(lunchCaloriesInputField.text ?? "") ?? 0
-        user?.calorieDistribution.dinner = Int(dinnerCaloriesInputField.text ?? "") ?? 0
-        user?.calorieDistribution.snacks = Int(snackCaloriesInputField.text ?? "") ?? 0
         presenter.didPressNextButton(remainingCalories: remainingCaloriesLabel.text)
     }
     
     @IBAction func splitEquallyButtonPressed() {
-        presenter.didPressSplitEquallyButton(calories: user?.dailyCalorieConsumption)
+        presenter.didPressSplitEquallyButton(calories: user?.calorieDistribution.dailyCalorieConsumption)
     }
 
     @IBAction func inputFieldUpdated(_ sender: UITextField) {
-        guard let breakfast = breakfastCaloriesInputField.text,
-            let lunch = lunchCaloriesInputField.text,
-            let dinner = dinnerCaloriesInputField.text,
-            let snack = snackCaloriesInputField.text else {
+        guard let user = user,
+            let breakfast = Int(breakfastCaloriesInputField.text ?? "0"),
+            let lunch = Int(lunchCaloriesInputField.text ?? "0"),
+            let dinner = Int(dinnerCaloriesInputField.text ?? "0"),
+            let snack = Int(snackCaloriesInputField.text ?? "0") else {
                 return
         }
-        presenter.didUpdateInputField(dailyConsumtion: user?.dailyCalorieConsumption, breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
+        presenter.didUpdateInputField(user: user, breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
     }
     
     func setRemainingCaloriesLabel(calories: Int) {
@@ -100,7 +97,7 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionPr
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }

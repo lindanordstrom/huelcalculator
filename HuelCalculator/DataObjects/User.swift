@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User {
+class User {
     enum Gender: Int {
         case male
         case female
@@ -51,19 +51,6 @@ struct User {
         case imperial
     }
     
-    enum Flavour: Int {
-        case vanilla
-        case unflavoured
-    }
-    
-    struct CalorieDistribution {
-        var breakfast = 0
-        var lunch = 0
-        var dinner = 0
-        var snacks = 0
-        lazy var total: Int = self.breakfast + self.lunch + self.dinner + self.snacks
-    }
-    
     var preferredUnitOfMeasurement: UnitOfMeasurement?
     var age: Int?
     var gender: Gender?
@@ -71,11 +58,9 @@ struct User {
     var weight: Float?
     var goal: Goal?
     var activityLevel: ActivityLevel?
-    var flavour: Flavour?
-    var dailyCalorieConsumption: Int?
     var calorieDistribution = CalorieDistribution()
     
-    init(preferredUnitOfMeasurement: UnitOfMeasurement?, age: Int?, gender: Gender?, height: Float?, weight: Float?, goal: Goal?, activityLevel: ActivityLevel?, flavour: Flavour?) {
+    init(preferredUnitOfMeasurement: UnitOfMeasurement?, age: Int?, gender: Gender?, height: Float?, weight: Float?, goal: Goal?, activityLevel: ActivityLevel?) {
         self.preferredUnitOfMeasurement = preferredUnitOfMeasurement
         self.age = age
         self.gender = gender
@@ -83,7 +68,6 @@ struct User {
         self.weight = weight
         self.goal = goal
         self.activityLevel = activityLevel
-        self.flavour = flavour
     }
 }
 

@@ -20,7 +20,6 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
     @IBOutlet var weightUnitLabel: UILabel!
     @IBOutlet var activityButton: UIButton!
     @IBOutlet var goalSelector: UISegmentedControl!
-    @IBOutlet var flavourSelector: UISegmentedControl!
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var heightInputFieldShowFeetConstraint: NSLayoutConstraint!
     @IBOutlet var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
@@ -39,7 +38,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
         view.addGestureRecognizer(tap)
     }
     
-    @IBAction func calculateButtonPressed() {
+    @IBAction func doneButtonPressed() {
         dismissKeyboard()
         errorMessageLabel.isHidden = true
         
@@ -52,9 +51,8 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
                         height: height > 0 ? height : nil,
                         weight: Float(weightInputField.text ?? ""),
                         goal: User.Goal(rawValue: goalSelector.selectedSegmentIndex),
-                        activityLevel: selectedActivity,
-                        flavour: User.Flavour(rawValue: flavourSelector.selectedSegmentIndex))
-        presenter.didPressCalculateButton(user: user)
+                        activityLevel: selectedActivity)
+        presenter.didPressDoneButton(user: user)
     }
     
     @IBAction func resetButtonPressed() {
@@ -97,7 +95,6 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
         weightInputField.text = nil
         goalSelector.selectedSegmentIndex = 0
         setActivity(activity: User.ActivityLevel.moderately, index: 2)
-        flavourSelector.selectedSegmentIndex = 0
         updateUIToMetricSystem()
     }
     
@@ -128,7 +125,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
         inchesInputField.text = nil
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
