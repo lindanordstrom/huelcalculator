@@ -11,6 +11,9 @@
 		439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27C207BBB0B00E7F50D /* MealReplacementProduct.swift */; };
 		439BB280207BC29B00E7F50D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27F207BC29B00E7F50D /* UserManager.swift */; };
 		439BB284207BC2C400E7F50D /* MealCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB283207BC2C400E7F50D /* MealCalculator.swift */; };
+		43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */; };
+		43C8AFCA2084A89200772D3F /* LandingPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */; };
+		43C8AFCC2084C32F00772D3F /* LandingPageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */; };
 		43D51928207FAD2000EDF397 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D51927207FAD2000EDF397 /* DataStore.swift */; };
 		BF2096B71DFF58EF006EF21E /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */; };
 		BF2096BA1DFF5A96006EF21E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B91DFF5A96006EF21E /* User.swift */; };
@@ -45,6 +48,9 @@
 		439BB27C207BBB0B00E7F50D /* MealReplacementProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealReplacementProduct.swift; sourceTree = "<group>"; };
 		439BB27F207BC29B00E7F50D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		439BB283207BC2C400E7F50D /* MealCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCalculator.swift; sourceTree = "<group>"; };
+		43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageCollectionViewController.swift; sourceTree = "<group>"; };
+		43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPagePresenter.swift; sourceTree = "<group>"; };
+		43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageItemCell.swift; sourceTree = "<group>"; };
 		43D51927207FAD2000EDF397 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
 		BF2096B91DFF5A96006EF21E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -93,6 +99,16 @@
 				439BB283207BC2C400E7F50D /* MealCalculator.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		43C8AFC62084A85200772D3F /* LandingPage */ = {
+			isa = PBXGroup;
+			children = (
+				43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */,
+				43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */,
+				43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */,
+			);
+			path = LandingPage;
 			sourceTree = "<group>";
 		};
 		43D51926207FAD1300EDF397 /* Protocols */ = {
@@ -151,6 +167,7 @@
 		BF23FD8D1DFB75D0004A2C26 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				43C8AFC62084A85200772D3F /* LandingPage */,
 				BF23FD9A1DFB80C9004A2C26 /* PersonalDetail */,
 				BF23FD961DFB80C9004A2C26 /* CalorieDistribution */,
 				BF23FD981DFB80C9004A2C26 /* MealPlan */,
@@ -347,12 +364,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43C8AFCC2084C32F00772D3F /* LandingPageItemCell.swift in Sources */,
 				439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */,
+				43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */,
 				BF4517BF1E093B4C00D682D5 /* ActivityPickerViewController.swift in Sources */,
 				BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */,
 				BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */,
 				BF2096BE1DFF65B4006EF21E /* CalorieDistributionPresenter.swift in Sources */,
 				BF2096BC1DFF653F006EF21E /* PersonalDetailsPresenter.swift in Sources */,
+				43C8AFCA2084A89200772D3F /* LandingPagePresenter.swift in Sources */,
 				439BB280207BC29B00E7F50D /* UserManager.swift in Sources */,
 				439BB27B207BBA5C00E7F50D /* CalorieDistribution.swift in Sources */,
 				BF2096BA1DFF5A96006EF21E /* User.swift in Sources */,

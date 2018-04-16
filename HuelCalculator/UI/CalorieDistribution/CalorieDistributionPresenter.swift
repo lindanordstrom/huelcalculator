@@ -16,16 +16,17 @@ class CalorieDistributionPresenter {
         self.view = view
     }
     
-    func didPressNextButton(remainingCalories: String?) {
+    func shouldShowMealPlanPage(remainingCalories: String?) -> Bool {
         guard let remainingCaloriesString = remainingCalories,
             let remainingCalories = Int(remainingCaloriesString) else {
-                return
+                return false
         }
         guard remainingCalories == 0 else {
             view?.showPopupWarning(remainingCalories: remainingCalories)
-            return
+            return false
         }
-        view?.navigateToMealPlanViewController()
+
+        return true
     }
     
     func didPressSplitEquallyButton() {

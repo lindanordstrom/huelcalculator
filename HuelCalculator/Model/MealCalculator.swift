@@ -9,28 +9,24 @@
 import Foundation
 
 protocol MealCalculator {
-    static func numberOfScoops(calories: Int, shake: Shake) -> Float
-    static func numberOfBars(calories: Int, bar: Bar) -> Float
-    static func gramsOfPowder(calories: Int, shake: Shake) -> Float
-    static func gramsOfBar(calories: Int, shake: Bar) -> Float
+    static func numberOfScoops(calories: Int, product: MealReplacementProduct) -> Float
+    static func numberOfBars(calories: Int, product: MealReplacementProduct) -> Float
+    static func gramsToReach(calories: Int, product: MealReplacementProduct) -> Float
 }
 
 class HuelMealCalculator: MealCalculator {
-    static func numberOfScoops(calories: Int, shake: Shake) -> Float {
-        return Float(calories) / Float(shake.kcalPerScoop)
+    private static let gramsPerScoop: Float = 38
+    private static let gramsPerBar: Float = 65
+
+    static func numberOfScoops(calories: Int, product: MealReplacementProduct) -> Float {
+        return gramsToReach(calories: calories, product: product) / gramsPerScoop
     }
 
-    static func numberOfBars(calories: Int, bar: Bar) -> Float {
-        return 0
-        // TODO
+    static func numberOfBars(calories: Int, product: MealReplacementProduct) -> Float {
+        return gramsToReach(calories: calories, product: product) / gramsPerBar
     }
 
-    static func gramsOfPowder(calories: Int, shake: Shake) -> Float {
-        return numberOfScoops(calories: calories, shake: shake) * 38
-    }
-
-    static func gramsOfBar(calories: Int, shake: Bar) -> Float {
-        return 0
-        // TODO
+    static func gramsToReach(calories: Int, product: MealReplacementProduct) -> Float {
+        return (Float(calories) / Float(product.kcalPer100gram)) * 100
     }
 }

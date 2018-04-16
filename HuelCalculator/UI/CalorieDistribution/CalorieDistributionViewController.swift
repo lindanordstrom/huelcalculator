@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CalorieDistributionUI: class {
-    func navigateToMealPlanViewController()
     func setRemainingCaloriesLabel(calories: Int)
     func setBreakfastCaloriesInputField(calories: Int)
     func setLunchCaloriesInputField(calories: Int)
@@ -30,6 +29,8 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
         
     private var presenter: CalorieDistributionPresenter?
 
+    var product: MealReplacementProduct?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = CalorieDistributionPresenter(view: self)
@@ -40,10 +41,6 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         presenter?.updateInputFields()
-    }
-    
-    @IBAction func nextButtonPressed() {
-        presenter?.didPressNextButton(remainingCalories: remainingCaloriesLabel.text)
     }
     
     @IBAction func splitEquallyButtonPressed() {
@@ -91,21 +88,26 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     func showPopupWarning(remainingCalories: Int) {
         let alert = UIAlertController(title: "Warning", message: "Your remaining calories are \(remainingCalories), are you sure you want to continue?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: { action in
-            self.navigateToMealPlanViewController()
+            self.performSegue(withIdentifier: "showMealPlanPage", sender: nil)
         }))
         alert.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
-    func navigateToMealPlanViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "MealPlanViewController") as? MealPlanViewController else {
-            return
-        }
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard identifier == "showMealPlanPage" else {
+            return true
+        }
+        return presenter?.shouldShowMealPlanPage(remainingCalories: remainingCaloriesLabel.text) ?? false
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? MealPlanViewController {
+            vc.product = product
+        }
     }
 }

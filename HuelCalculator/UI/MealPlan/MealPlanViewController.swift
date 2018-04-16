@@ -23,15 +23,12 @@ class MealPlanViewController: UIViewController, MealPlanUI {
     @IBOutlet var snackAmountLabel: UILabel!
     
     private var presenter: MealPlanPresenter?
+    var product: MealReplacementProduct?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = MealPlanPresenter(view: self)
-        presenter?.didLoadView()
-    }
-    
-    @IBAction func getHuelPressed() {
-        presenter?.didPressGetHuel()
+        presenter?.didLoadView(with: product)
     }
     
     func setBreakfastAmount(amountLabel: String?) {

@@ -6,45 +6,35 @@
 //  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
 
-import UIKit
-
-protocol UrlHandler {
-    func openURL(_ url: URL) -> Bool
-}
-
-extension UIApplication: UrlHandler {}
+import Foundation
 
 class MealPlanPresenter {
- 
-    private let urlHandler: UrlHandler
-    private let huelUrl = "https://huel.com/products/huel"
     private weak var view: MealPlanUI?
     
-    init(view: MealPlanUI, urlHandler: UrlHandler = UIApplication.shared) {
+    init(view: MealPlanUI) {
         self.view = view
-        self.urlHandler = urlHandler
     }
     
-    func didPressGetHuel() {
-        guard let url = URL(string: huelUrl) else {
-            return
-        }
-        _ = urlHandler.openURL(url)
+    func didLoadView(with product: MealReplacementProduct?) {
+        guard let user = HuelUserManager.shared.getSignedInUser(),
+         let product = product else { return }
+
+        view?.setBreakfastAmount(amountLabel: amountString(calories: user.calorieDistribution.breakfast, product: product))
+        view?.setLunchAmount(amountLabel: amountString(calories: user.calorieDistribution.lunch, product: product))
+        view?.setDinnerAmount(amountLabel: amountString(calories: user.calorieDistribution.dinner, product: product))
+        view?.setSnackAmount(amountLabel: amountString(calories: user.calorieDistribution.snack, product: product))
     }
     
-    func didLoadView() {
-        guard let user = HuelUserManager.shared.getSignedInUser() else { return }
-        // TODO: Break out hardcoded shake type
-        view?.setBreakfastAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.breakfast, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
-        view?.setLunchAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.lunch, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
-        view?.setDinnerAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.dinner, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
-        view?.setSnackAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.snack, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
-    }
-    
-    private func scoopsAndGramsString(calories: Int?, shake: Shake) -> String? {
+    private func amountString(calories: Int?, product: MealReplacementProduct) -> String? {
         guard let calories = calories else { return nil }
-        let scoops = HuelMealCalculator.numberOfScoops(calories: calories, shake: shake)
-        let gram = HuelMealCalculator.gramsOfPowder(calories: calories, shake: shake)
-        return String(format: "%.0f g / %.1f scoops", gram, scoops)
+        let gram = HuelMealCalculator.gramsToReach(calories: calories, product: product)
+
+        if product is HuelBar {
+            let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
+            return String(format: "%.1f bars (%.0f g)", bars, gram)
+        } else {
+            let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
+            return String(format: "%.0f g / %.1f scoops", gram, scoops)
+        }
     }
 }
