@@ -8,19 +8,19 @@
 
 import Foundation
 
-class User {
-    enum Gender: Int {
+class User: Codable {
+    enum Gender: Int, Codable {
         case male
         case female
     }
     
-    enum Goal: Int {
+    enum Goal: Int, Codable {
         case lose
         case maintain
         case gain
     }
     
-    enum ActivityLevel: Int {
+    enum ActivityLevel: Int, Codable {
         case sedentary
         case lightly
         case moderately
@@ -46,7 +46,7 @@ class User {
         }
     }
     
-    enum UnitOfMeasurement: Int {
+    enum UnitOfMeasurement: Int, Codable {
         case metric
         case imperial
     }

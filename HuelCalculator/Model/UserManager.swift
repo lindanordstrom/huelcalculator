@@ -12,7 +12,10 @@ protocol UserManager {
     func signedInUserExists() -> Bool
     func removeUser()
     func getSignedInUser() -> User?
-    func saveUserToDataStore(user: User)
+    func saveUserToDataStore(user: User?)
+    func saveOldCalorieDistributionsIfNeeded(user: inout User?)
+    func distributeCalories(breakfast: Int, lunch: Int, dinner: Int, snack: Int)
+    func setUsersDailyCalorieConsumption()
 }
 
 class HuelUserManager: UserManager {
@@ -33,23 +36,46 @@ class HuelUserManager: UserManager {
     }
 
     func getSignedInUser() -> User? {
-        guard let userAsData = dataStore.object(forKey: "user") as? Data else { return nil }
-        return NSKeyedUnarchiver.unarchiveObject(with: userAsData) as? User
+        guard let userData = dataStore.object(forKey: "user") as? Data else { return nil }
+        return try? JSONDecoder().decode(User.self, from: userData)
     }
 
-    func saveUserToDataStore(user: User) {
-        let userAsData = NSKeyedArchiver.archivedData(withRootObject: user)
-        self.dataStore.set(userAsData, forKey: "user")
+    func saveUserToDataStore(user: User?) {
+        guard let user = user,
+            let encodedUser = try? JSONEncoder().encode(user) else { return }
+        dataStore.set(encodedUser, forKey: "user")
     }
 
-    func setUsersDailyCalorieConsumption(user: User) {
-        guard let measurementUnit = user.preferredUnitOfMeasurement,
-            let gender = user.gender,
-            let age = user.age,
-            let weight = user.weight,
-            let height = user.height,
-            let activity = user.activityLevel,
-            let goal = user.goal else {
+    func saveOldCalorieDistributionsIfNeeded(user: inout User?) {
+        guard let oldUser = getSignedInUser() else {
+            return
+        }
+        user?.calorieDistribution.breakfast = oldUser.calorieDistribution.breakfast
+        user?.calorieDistribution.lunch = oldUser.calorieDistribution.lunch
+        user?.calorieDistribution.dinner = oldUser.calorieDistribution.dinner
+        user?.calorieDistribution.snack = oldUser.calorieDistribution.snack
+    }
+
+
+    func distributeCalories(breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
+        let user = getSignedInUser()
+        user?.calorieDistribution.breakfast = breakfast
+        user?.calorieDistribution.lunch = lunch
+        user?.calorieDistribution.dinner = dinner
+        user?.calorieDistribution.snack = snack
+        saveUserToDataStore(user: user)
+    }
+
+    func setUsersDailyCalorieConsumption() {
+        let user = getSignedInUser()
+
+        guard let measurementUnit = user?.preferredUnitOfMeasurement,
+            let gender = user?.gender,
+            let age = user?.age,
+            let weight = user?.weight,
+            let height = user?.height,
+            let activity = user?.activityLevel,
+            let goal = user?.goal else {
                 return
         }
         let genderMultiplier = getGenderMultiplier(gender: gender)
@@ -62,15 +88,9 @@ class HuelUserManager: UserManager {
 
         let dailyCalorieConsumtion = Int(bmr * activityMultiplier + goalConstant)
 
-        user.calorieDistribution.dailyCalorieConsumption = dailyCalorieConsumtion
-    }
+        user?.calorieDistribution.dailyCalorieConsumption = dailyCalorieConsumtion
 
-
-    func distributeCalories(user: User, breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
-        user.calorieDistribution.breakfast = breakfast
-        user.calorieDistribution.lunch = lunch
-        user.calorieDistribution.dinner = dinner
-        user.calorieDistribution.snack = snack
+        saveUserToDataStore(user: user)
     }
 
     private func getGenderMultiplier(gender: User.Gender) -> Float {

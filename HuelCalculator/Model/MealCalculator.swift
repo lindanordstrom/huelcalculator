@@ -8,7 +8,14 @@
 
 import Foundation
 
-class MealCalculator {
+protocol MealCalculator {
+    static func numberOfScoops(calories: Int, shake: Shake) -> Float
+    static func numberOfBars(calories: Int, bar: Bar) -> Float
+    static func gramsOfPowder(calories: Int, shake: Shake) -> Float
+    static func gramsOfBar(calories: Int, shake: Bar) -> Float
+}
+
+class HuelMealCalculator: MealCalculator {
     static func numberOfScoops(calories: Int, shake: Shake) -> Float {
         return Float(calories) / Float(shake.kcalPerScoop)
     }

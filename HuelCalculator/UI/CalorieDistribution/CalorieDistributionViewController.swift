@@ -8,49 +8,58 @@
 
 import UIKit
 
-class CalorieDistributionViewController: UIViewController, CalorieDistributionPresentable {
+protocol CalorieDistributionUI: class {
+    func navigateToMealPlanViewController()
+    func setRemainingCaloriesLabel(calories: Int)
+    func setBreakfastCaloriesInputField(calories: Int)
+    func setLunchCaloriesInputField(calories: Int)
+    func setDinnerCaloriesInputField(calories: Int)
+    func setSnackCaloriesInputField(calories: Int)
+    func setRemainingCaloriesLabelRed()
+    func setRemainingCaloriesLabelBlack()
+    func showPopupWarning(remainingCalories: Int)
+}
+
+class CalorieDistributionViewController: UIViewController, CalorieDistributionUI {
     
     @IBOutlet var remainingCaloriesLabel: UILabel!
     @IBOutlet var breakfastCaloriesInputField: UITextField!
     @IBOutlet var lunchCaloriesInputField: UITextField!
     @IBOutlet var dinnerCaloriesInputField: UITextField!
     @IBOutlet var snackCaloriesInputField: UITextField!
-    
-    var user: User?
-    
-    private let presenter = CalorieDistributionPresenter()
+        
+    private var presenter: CalorieDistributionPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.set(view: self)
-        setRemainingCaloriesLabel(calories: user?.calorieDistribution.dailyCalorieConsumption ?? 0)
-        setBreakfastCaloriesInputField(calories: user?.calorieDistribution.breakfast ?? 0)
-        setLunchCaloriesInputField(calories: user?.calorieDistribution.lunch ?? 0)
-        setDinnerCaloriesInputField(calories: user?.calorieDistribution.dinner ?? 0)
-        setSnackCaloriesInputField(calories: user?.calorieDistribution.snack ?? 0)
+        presenter = CalorieDistributionPresenter(view: self)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CalorieDistributionViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        presenter?.updateInputFields()
+    }
     
     @IBAction func nextButtonPressed() {
-        presenter.didPressNextButton(remainingCalories: remainingCaloriesLabel.text)
+        presenter?.didPressNextButton(remainingCalories: remainingCaloriesLabel.text)
     }
     
     @IBAction func splitEquallyButtonPressed() {
-        presenter.didPressSplitEquallyButton(calories: user?.calorieDistribution.dailyCalorieConsumption)
+        presenter?.didPressSplitEquallyButton()
     }
 
     @IBAction func inputFieldUpdated(_ sender: UITextField) {
-        guard let user = user,
-            let breakfast = Int(breakfastCaloriesInputField.text ?? "0"),
-            let lunch = Int(lunchCaloriesInputField.text ?? "0"),
-            let dinner = Int(dinnerCaloriesInputField.text ?? "0"),
-            let snack = Int(snackCaloriesInputField.text ?? "0") else {
-                return
-        }
-        presenter.didUpdateInputField(user: user, breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
+        let breakfast = Int(breakfastCaloriesInputField.text ?? "0") ?? 0
+        let lunch = Int(lunchCaloriesInputField.text ?? "0") ?? 0
+        let dinner = Int(dinnerCaloriesInputField.text ?? "0") ?? 0
+        let snack = Int(snackCaloriesInputField.text ?? "0") ?? 0
+
+        presenter?.updateUserConsumption(breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
+        presenter?.updateInputFields()
     }
-    
+
     func setRemainingCaloriesLabel(calories: Int) {
         remainingCaloriesLabel.text = "\(calories)"
     }
@@ -93,11 +102,10 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionPr
         guard let vc = storyboard.instantiateViewController(withIdentifier: "MealPlanViewController") as? MealPlanViewController else {
             return
         }
-        vc.user = user
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
 }

@@ -8,24 +8,30 @@
 
 import UIKit
 
-class MealPlanViewController: UIViewController, MealPlanPresentable {
+protocol MealPlanUI: class {
+    func setBreakfastAmount(amountLabel: String?)
+    func setLunchAmount(amountLabel: String?)
+    func setDinnerAmount(amountLabel: String?)
+    func setSnackAmount(amountLabel: String?)
+}
+
+class MealPlanViewController: UIViewController, MealPlanUI {
 
     @IBOutlet var breakfastAmountLabel: UILabel!
     @IBOutlet var lunchAmountLabel: UILabel!
     @IBOutlet var dinnerAmountLabel: UILabel!
     @IBOutlet var snackAmountLabel: UILabel!
     
-    private let presenter = MealPlanPresenter()
-    var user: User?
-    
+    private var presenter: MealPlanPresenter?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.set(view: self)
-        presenter.didLoadView(user: user)
+        presenter = MealPlanPresenter(view: self)
+        presenter?.didLoadView()
     }
     
     @IBAction func getHuelPressed() {
-        presenter.didPressGetHuel()
+        presenter?.didPressGetHuel()
     }
     
     func setBreakfastAmount(amountLabel: String?) {

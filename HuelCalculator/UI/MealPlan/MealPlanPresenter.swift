@@ -14,26 +14,15 @@ protocol UrlHandler {
 
 extension UIApplication: UrlHandler {}
 
-
-protocol MealPlanPresentable: class {
-    func setBreakfastAmount(amountLabel: String?)
-    func setLunchAmount(amountLabel: String?)
-    func setDinnerAmount(amountLabel: String?)
-    func setSnackAmount(amountLabel: String?)
-}
-
 class MealPlanPresenter {
  
     private let urlHandler: UrlHandler
     private let huelUrl = "https://huel.com/products/huel"
-    private weak var view: MealPlanPresentable?
+    private weak var view: MealPlanUI?
     
-    init(urlHandler: UrlHandler = UIApplication.shared) {
-        self.urlHandler = urlHandler
-    }
-    
-    func set(view: MealPlanPresentable) {
+    init(view: MealPlanUI, urlHandler: UrlHandler = UIApplication.shared) {
         self.view = view
+        self.urlHandler = urlHandler
     }
     
     func didPressGetHuel() {
@@ -43,8 +32,8 @@ class MealPlanPresenter {
         _ = urlHandler.openURL(url)
     }
     
-    func didLoadView(user: User?) {
-        guard let user = user else { return }
+    func didLoadView() {
+        guard let user = HuelUserManager.shared.getSignedInUser() else { return }
         // TODO: Break out hardcoded shake type
         view?.setBreakfastAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.breakfast, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
         view?.setLunchAmount(amountLabel: scoopsAndGramsString(calories: user.calorieDistribution.lunch, shake: HuelMealReplacementProduct.HuelShake.Vanilla()))
@@ -54,8 +43,8 @@ class MealPlanPresenter {
     
     private func scoopsAndGramsString(calories: Int?, shake: Shake) -> String? {
         guard let calories = calories else { return nil }
-        let scoops = MealCalculator.numberOfScoops(calories: calories, shake: shake)
-        let gram = MealCalculator.gramsOfPowder(calories: calories, shake: shake)
+        let scoops = HuelMealCalculator.numberOfScoops(calories: calories, shake: shake)
+        let gram = HuelMealCalculator.gramsOfPowder(calories: calories, shake: shake)
         return String(format: "%.0f g / %.1f scoops", gram, scoops)
     }
 }

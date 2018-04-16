@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CalorieDistribution {
+class CalorieDistribution: Codable {
     var dailyCalorieConsumption: Int?
     var breakfast: Int?
     var lunch: Int?

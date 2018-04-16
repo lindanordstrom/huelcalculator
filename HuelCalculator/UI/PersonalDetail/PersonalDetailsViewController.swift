@@ -8,7 +8,16 @@
 
 import UIKit
 
-class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentable {
+protocol PersonalDetailsUI: class {
+    func resetAllFields()
+    func populateFieldsWith(user: User)
+    func showErrorMessage(_ flag: Bool)
+    func dismissViewController()
+    func updateUIToImperialSystem()
+    func updateUIToMetricSystem()
+}
+
+class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     
     @IBOutlet var measurementSystemSelector: UISegmentedControl!
     @IBOutlet var ageInputField: UITextField!
@@ -24,26 +33,29 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
     @IBOutlet var heightInputFieldShowFeetConstraint: NSLayoutConstraint!
     @IBOutlet var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
     
-    var selectedActivity: User.ActivityLevel?
-    var selectedActivityIndex: Int?
-    var activityPicker: UIPickerView?
-    
-    private let presenter = PersonalDetailsPresenter()
+    private var selectedActivity: User.ActivityLevel?
+    private var selectedActivityIndex: Int?
+
+    private var presenter: PersonalDetailsPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.set(view: self)
-        resetAllFields()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PersonalDetailsViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        addListenerToDismissKeyboardOnTap()
+        presenter = PersonalDetailsPresenter(view: self)
+        presenter?.didLoadView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.didLoadView()
     }
     
     @IBAction func doneButtonPressed() {
         dismissKeyboard()
-        errorMessageLabel.isHidden = true
-        
-        let inches = Float(inchesInputField.text ?? "")
-        let height = (Float(heightInputField.text ?? "") ?? 0) + (inches ?? 0) * 0.0833333333
+
+        // TODO: sort this out - always save height and weight in metric instead?
+        let inches = Float(inchesInputField.text ?? "") ?? 0
+        let height = (Float(heightInputField.text ?? "") ?? 0) + inches * 0.0833333333
         
         let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex),
                         age: Int(ageInputField.text ?? ""),
@@ -52,13 +64,13 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
                         weight: Float(weightInputField.text ?? ""),
                         goal: User.Goal(rawValue: goalSelector.selectedSegmentIndex),
                         activityLevel: selectedActivity)
-        presenter.didPressDoneButton(user: user)
+
+        presenter?.didPressDoneButton(user: user)
     }
     
     @IBAction func resetButtonPressed() {
         dismissKeyboard()
-        errorMessageLabel.isHidden = true
-        presenter.didPressResetButton()
+        presenter?.didPressResetButton()
     }
     
     @IBAction func activitySelectorPressed() {
@@ -72,19 +84,9 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
     }
     
     @IBAction func measurementSelectorValueChanged() {
-        presenter.didChangeMeasurementValue(value: User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex))
-    }
-    
-    private func setActivity(activity: User.ActivityLevel?, index: Int?) {
-        guard let activity = activity else {
-            selectedActivity = nil
-            selectedActivityIndex = nil
-            return
-        }
-        let activityString = User.ActivityLevel.getActivityString(activity: activity)
-        activityButton.setTitle(activityString, for: .normal)
-        selectedActivity = activity
-        selectedActivityIndex = index
+        let index = measurementSystemSelector.selectedSegmentIndex
+        let selectedUnitOfMeasurement = User.UnitOfMeasurement(rawValue: index)
+        presenter?.didChangeMeasurementValue(value: selectedUnitOfMeasurement)
     }
     
     func resetAllFields() {
@@ -96,10 +98,46 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
         goalSelector.selectedSegmentIndex = 0
         setActivity(activity: User.ActivityLevel.moderately, index: 2)
         updateUIToMetricSystem()
+        showErrorMessage(false)
+    }
+
+    func populateFieldsWith(user: User) {
+        guard let preferredUnitOfMeasurementIndex = user.preferredUnitOfMeasurement?.rawValue,
+            let age = user.age,
+            let genderIndex = user.gender?.rawValue,
+            let height = user.height,
+            let weight = user.weight,
+            let goalIndex = user.goal?.rawValue,
+            let activity = user.activityLevel,
+            let activityIndex = user.activityLevel?.rawValue else {
+                resetAllFields()
+                return
+        }
+
+        measurementSystemSelector.selectedSegmentIndex = preferredUnitOfMeasurementIndex
+        ageInputField.text = "\(age)"
+        genderSelector.selectedSegmentIndex = genderIndex
+        if user.preferredUnitOfMeasurement == User.UnitOfMeasurement.imperial {
+            let feetAndInches = feetToFeetWithInches(feetWithRemainder: height)
+            heightInputField.text = "\(feetAndInches.0)"
+            inchesInputField.text = "\(feetAndInches.1)"
+        } else {
+            heightInputField.text = "\(Int(height))"
+        }
+        weightInputField.text = "\(weight)"
+        goalSelector.selectedSegmentIndex = goalIndex
+        setActivity(activity: activity, index: activityIndex)
     }
     
-    func showErrorMessage() {
-        errorMessageLabel.isHidden = false
+    func showErrorMessage(_ flag: Bool) {
+        errorMessageLabel.isHidden = !flag
+    }
+
+    private func feetToFeetWithInches(feetWithRemainder: Float) -> (Int, Int) {
+        let remainder = feetWithRemainder.truncatingRemainder(dividingBy: 1)
+        let feet = Int(feetWithRemainder)
+        let inches = Int(round(remainder / 0.0833333333))
+        return (feet, inches)
     }
     
     func updateUIToImperialSystem() {
@@ -125,16 +163,29 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsPresentabl
         inchesInputField.text = nil
     }
     
-    @objc func dismissKeyboard() {
+    func dismissViewController() {
+        dismiss(animated: true, completion: nil)
+    }
+
+    private func addListenerToDismissKeyboardOnTap() {
+        let action = #selector(dismissKeyboard)
+        let tap = UITapGestureRecognizer(target: self, action: action)
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    func navigateToCalorieDistributionViewController(user: User) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "CalorieDistributionViewController") as? CalorieDistributionViewController else {
+
+    private func setActivity(activity: User.ActivityLevel?, index: Int?) {
+        guard let activity = activity else {
+            selectedActivity = nil
+            selectedActivityIndex = nil
             return
         }
-        vc.user = user
-        navigationController?.pushViewController(vc, animated: true)
+        let activityString = User.ActivityLevel.getActivityString(activity: activity)
+        activityButton.setTitle(activityString, for: .normal)
+        selectedActivity = activity
+        selectedActivityIndex = index
     }
 }

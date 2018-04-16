@@ -8,23 +8,11 @@
 
 import Foundation
 
-protocol CalorieDistributionPresentable: class {
-    func navigateToMealPlanViewController()
-    func setRemainingCaloriesLabel(calories: Int)
-    func setBreakfastCaloriesInputField(calories: Int)
-    func setLunchCaloriesInputField(calories: Int)
-    func setDinnerCaloriesInputField(calories: Int)
-    func setSnackCaloriesInputField(calories: Int)
-    func setRemainingCaloriesLabelRed()
-    func setRemainingCaloriesLabelBlack()
-    func showPopupWarning(remainingCalories: Int)
-}
-
 class CalorieDistributionPresenter {
     
-    private weak var view: CalorieDistributionPresentable?
+    private weak var view: CalorieDistributionUI?
     
-    func set(view: CalorieDistributionPresentable) {
+    init(view: CalorieDistributionUI) {
         self.view = view
     }
     
@@ -40,33 +28,42 @@ class CalorieDistributionPresenter {
         view?.navigateToMealPlanViewController()
     }
     
-    func didPressSplitEquallyButton(calories: Int?) {
-        guard let calories = calories else {
+    func didPressSplitEquallyButton() {
+        let user = HuelUserManager.shared.getSignedInUser()
+        guard let calories = user?.calorieDistribution.dailyCalorieConsumption else {
             return
         }
         let quarter = calories / 4
         let dinner = calories - quarter * 3
-        view?.setBreakfastCaloriesInputField(calories: quarter)
-        view?.setLunchCaloriesInputField(calories: quarter)
-        view?.setDinnerCaloriesInputField(calories: dinner)
-        view?.setSnackCaloriesInputField(calories: quarter)
-        view?.setRemainingCaloriesLabel(calories: 0)
-        view?.setRemainingCaloriesLabelBlack()
+
+        updateUserConsumption(breakfast: quarter, lunch: quarter, dinner: dinner, snack: quarter)
+        updateInputFields()
     }
     
-    func didUpdateInputField(user: User, breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
-        guard let dailyConsumtion = user.calorieDistribution.dailyCalorieConsumption else {
-            return
-        }
+    func updateUserConsumption(breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
+        HuelUserManager.shared.distributeCalories(breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
+    }
 
-        HuelUserManager.shared.distributeCalories(user: user, breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
-        
+    func updateInputFields() {
+        let user = HuelUserManager.shared.getSignedInUser()
+        let dailyConsumption = user?.calorieDistribution.dailyCalorieConsumption ?? 0
+        let breakfast = user?.calorieDistribution.breakfast ?? 0
+        let lunch = user?.calorieDistribution.lunch ?? 0
+        let dinner = user?.calorieDistribution.dinner ?? 0
+        let snack = user?.calorieDistribution.snack ?? 0
+
         let usedCalories = breakfast + lunch + dinner + snack
-        if dailyConsumtion < usedCalories {
+
+        if dailyConsumption < usedCalories {
             view?.setRemainingCaloriesLabelRed()
         } else {
             view?.setRemainingCaloriesLabelBlack()
         }
-        view?.setRemainingCaloriesLabel(calories: dailyConsumtion - usedCalories)
+
+        view?.setBreakfastCaloriesInputField(calories: breakfast)
+        view?.setLunchCaloriesInputField(calories: lunch)
+        view?.setDinnerCaloriesInputField(calories: dinner)
+        view?.setSnackCaloriesInputField(calories: snack)
+        view?.setRemainingCaloriesLabel(calories: dailyConsumption - usedCalories)
     }
 }

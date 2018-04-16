@@ -8,33 +8,46 @@
 
 import Foundation
 
-protocol PersonalDetailsPresentable: class {
-    func resetAllFields()
-    func showErrorMessage()
-    func navigateToCalorieDistributionViewController(user: User)
-    func updateUIToImperialSystem()
-    func updateUIToMetricSystem()
-}
-
 class PersonalDetailsPresenter {
     
-    private weak var view: PersonalDetailsPresentable?
-    
-    func set(view: PersonalDetailsPresentable) {
+    private weak var view: PersonalDetailsUI?
+
+    init(view: PersonalDetailsUI) {
         self.view = view
+    }
+
+    func didLoadView() {
+        guard let user = HuelUserManager.shared.getSignedInUser() else {
+            view?.resetAllFields()
+            return
+        }
+
+        let metricIsSelected = user.preferredUnitOfMeasurement == User.UnitOfMeasurement.metric
+
+        if metricIsSelected {
+            view?.updateUIToMetricSystem()
+        } else {
+            view?.updateUIToImperialSystem()
+        }
+
+        view?.populateFieldsWith(user: user)
     }
     
     func didPressResetButton() {
         view?.resetAllFields()
     }
     
-    func didPressDoneButton(user: User) {
-        HuelUserManager.shared.setUsersDailyCalorieConsumption(user: user)
-        guard user.calorieDistribution.dailyCalorieConsumption != nil else {
-            view?.showErrorMessage()
+    func didPressDoneButton(user: User?) {
+        var user = user
+        HuelUserManager.shared.saveOldCalorieDistributionsIfNeeded(user: &user)
+        HuelUserManager.shared.saveUserToDataStore(user: user)
+        HuelUserManager.shared.setUsersDailyCalorieConsumption()
+        guard HuelUserManager.shared.getSignedInUser()?.calorieDistribution.dailyCalorieConsumption != nil else {
+            view?.showErrorMessage(true)
             return
         }
-        view?.navigateToCalorieDistributionViewController(user: user)
+        view?.showErrorMessage(false)
+        view?.dismissViewController()
     }
     
     func didChangeMeasurementValue(value: User.UnitOfMeasurement?) {
