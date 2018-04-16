@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 protocol LandingPageUI: class {
     func showCalculationPage(with product: MealReplacementProduct)
     func showAppFeedback()
+    func showErrorAndPersonalDetailsPage()
 }
 
 class LandingPageCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, LandingPageUI {
@@ -24,6 +25,7 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
     }
 
     func showCalculationPage(with product: MealReplacementProduct) {
+        presenter?.showPersonalDetailsPageIfNeeded()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CalorieDistributionViewController") as? CalorieDistributionViewController else {
             return
@@ -34,6 +36,14 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
     
     func showAppFeedback() {
         // TODO
+    }
+
+    func showErrorAndPersonalDetailsPage() {
+        let alert = UIAlertController(title: "No profile added", message: "You need to enter your personal details to be able to calculate your daily needs", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
+            self.performSegue(withIdentifier: "showPersonalDetailsPage", sender: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: UICollectionViewDataSource

@@ -39,13 +39,13 @@ class PersonalDetailsPresenter {
     
     func didPressDoneButton(user: User?) {
         var user = user
-        HuelUserManager.shared.saveOldCalorieDistributionsIfNeeded(user: &user)
-        HuelUserManager.shared.saveUserToDataStore(user: user)
-        HuelUserManager.shared.setUsersDailyCalorieConsumption()
-        guard HuelUserManager.shared.getSignedInUser()?.calorieDistribution.dailyCalorieConsumption != nil else {
+        guard user?.age != nil, user?.weight != nil, user?.height != nil else {
             view?.showErrorMessage(true)
             return
         }
+        HuelUserManager.shared.saveOldCalorieDistributionsIfNeeded(user: &user)
+        HuelUserManager.shared.saveUserToDataStore(user: user)
+        HuelUserManager.shared.setUsersDailyCalorieConsumption()
         view?.showErrorMessage(false)
         view?.dismissViewController()
     }

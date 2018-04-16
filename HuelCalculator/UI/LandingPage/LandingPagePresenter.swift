@@ -21,8 +21,8 @@ class LandingPagePresenter {
     private weak var view: LandingPageUI?
 
     private enum menuItem: String {
-        case vanillaShake = "Vanilla shake"
-        case unflavouredShake = "Unflavoured shake"
+        case vanillaShake = "Vanilla"
+        case unflavouredShake = "Unflavoured"
         case bar = "Bar"
         case shop = "Buy Huel"
         case appFeedback = "App Feedback"
@@ -74,6 +74,14 @@ class LandingPagePresenter {
         case .appFeedback:
             view?.showAppFeedback()
         }
+    }
+
+    func showPersonalDetailsPageIfNeeded() {
+        guard !HuelUserManager.shared.signedInUserExists() else {
+            return
+        }
+
+        view?.showErrorAndPersonalDetailsPage()
     }
 
     private func didPressGetHuel() {

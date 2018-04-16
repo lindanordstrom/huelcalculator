@@ -32,7 +32,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var heightInputFieldShowFeetConstraint: NSLayoutConstraint!
     @IBOutlet var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
-    
+
     private var selectedActivity: User.ActivityLevel?
     private var selectedActivityIndex: Int?
 
@@ -71,6 +71,10 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     @IBAction func resetButtonPressed() {
         dismissKeyboard()
         presenter?.didPressResetButton()
+    }
+
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        dismissViewController()
     }
     
     @IBAction func activitySelectorPressed() {
