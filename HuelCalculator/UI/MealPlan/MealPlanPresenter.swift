@@ -10,13 +10,15 @@ import Foundation
 
 class MealPlanPresenter {
     private weak var view: MealPlanUI?
+    private var userManager: UserManager
     
-    init(view: MealPlanUI) {
+    init(view: MealPlanUI, userManager: UserManager = HuelUserManager.shared) {
         self.view = view
+        self.userManager = userManager
     }
     
     func didLoadView(with product: MealReplacementProduct?) {
-        guard let user = HuelUserManager.shared.getSignedInUser(),
+        guard let user = userManager.getSignedInUser(),
          let product = product else { return }
 
         view?.setBreakfastAmount(amountLabel: amountString(calories: user.calorieDistribution.breakfast, product: product))

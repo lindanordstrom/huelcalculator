@@ -10,11 +10,15 @@ import UIKit
 
 class LandingPagePresenter {
     private weak var view: LandingPageUI?
+    private var urlManager: UrlManager
+    private var userManager: UserManager
 
     private let menuItems: [menuItem] = [.unflavouredShake, .vanillaShake, .bar, .shop, .appFeedback]
 
-    init(view: LandingPageUI) {
+    init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared) {
         self.view = view
+        self.urlManager = urlManager
+        self.userManager = userManager
     }
 
     func numberOfItemsOnLandingPage() -> Int {
@@ -59,7 +63,7 @@ class LandingPagePresenter {
     }
 
     func showPersonalDetailsPageIfNeeded() {
-        guard !HuelUserManager.shared.signedInUserExists() else {
+        guard !userManager.signedInUserExists() else {
             return
         }
 
@@ -67,6 +71,6 @@ class LandingPagePresenter {
     }
 
     private func didPressGetHuel() {
-        UrlManager.shared.open(Constants.LandingPage.getHuelUrl)
+        urlManager.open(Constants.LandingPage.getHuelUrl)
     }
 }

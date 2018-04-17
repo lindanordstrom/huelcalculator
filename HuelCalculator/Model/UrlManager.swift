@@ -1,5 +1,5 @@
 //
-//  UrlHandler.swift
+//  UrlManager.swift
 //  HuelCalculator
 //
 //  Created by Linda on 2018-04-17.
@@ -7,14 +7,6 @@
 //
 
 import UIKit
-
-protocol UrlHandler {
-    func openURL(_ url: URL) -> Bool
-    @available(iOS 10.0, *)
-    func open(_ url: URL, options: [String : Any], completionHandler completion: ((Bool) -> Swift.Void)?)
-}
-
-extension UIApplication: UrlHandler {}
 
 class UrlManager {
     private let urlHandler: UrlHandler
@@ -36,3 +28,4 @@ class UrlManager {
         }
     }
 }
+

@@ -11,13 +11,15 @@ import Foundation
 class PersonalDetailsPresenter {
     
     private weak var view: PersonalDetailsUI?
+    private var userManager: UserManager
 
-    init(view: PersonalDetailsUI) {
+    init(view: PersonalDetailsUI, userManager: UserManager = HuelUserManager.shared) {
         self.view = view
+        self.userManager = userManager
     }
 
     func didLoadView() {
-        guard let user = HuelUserManager.shared.getSignedInUser() else {
+        guard let user = userManager.getSignedInUser() else {
             view?.resetAllFields()
             return
         }
@@ -32,7 +34,7 @@ class PersonalDetailsPresenter {
 
         view?.populateFieldsWith(user: user)
     }
-    
+
     func didPressResetButton() {
         view?.resetAllFields()
     }
@@ -43,15 +45,14 @@ class PersonalDetailsPresenter {
             view?.showErrorMessage(true)
             return
         }
-        HuelUserManager.shared.saveOldCalorieDistributionsIfNeeded(user: &user)
-        HuelUserManager.shared.saveUserToDataStore(user: user)
-        HuelUserManager.shared.setUsersDailyCalorieConsumption()
+        userManager.saveOldCalorieDistributionsIfNeeded(user: &user)
+        userManager.saveUserToDataStore(user: user)
+        userManager.setUsersDailyCalorieConsumption()
         view?.showErrorMessage(false)
         view?.dismissViewController()
     }
     
-    func didChangeMeasurementValue(value: User.UnitOfMeasurement?) {
-        guard let value = value else { return }
+    func didChangeMeasurementValue(value: User.UnitOfMeasurement) {
         switch value {
         case .imperial:
             view?.updateUIToImperialSystem()

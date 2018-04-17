@@ -53,7 +53,6 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     @IBAction func doneButtonPressed() {
         dismissKeyboard()
 
-        // TODO: sort this out - always save height and weight in metric instead?
         let inches = Float(inchesInputField.text ?? Constants.General.emptyString) ?? 0
         let height = (Float(heightInputField.text ?? Constants.General.emptyString) ?? 0) + inches * 0.0833333333
         
@@ -89,7 +88,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     
     @IBAction func measurementSelectorValueChanged() {
         let index = measurementSystemSelector.selectedSegmentIndex
-        let selectedUnitOfMeasurement = User.UnitOfMeasurement(rawValue: index)
+        guard let selectedUnitOfMeasurement = User.UnitOfMeasurement(rawValue: index) else { return }
         presenter?.didChangeMeasurementValue(value: selectedUnitOfMeasurement)
     }
     

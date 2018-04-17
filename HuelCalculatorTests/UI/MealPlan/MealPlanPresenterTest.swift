@@ -10,98 +10,93 @@ import XCTest
 @testable import HuelCalculator
 
 class MealPlanPresenterTest: XCTestCase {
-    
-    private var testUrlHandler: TestUrlHandler?
-    private var testObject: MealPlanPresenter?
-    private var mockedView: MealPlanMock?
-    private var user: User?
-    
+
+    private var testObject: MealPlanPresenter!
+    private var ui: MockedMealPlanUI!
+    private var userManager: MockedUserManager!
+
     override func setUp() {
         super.setUp()
-        testUrlHandler = TestUrlHandler()
-        testObject = MealPlanPresenter(urlHandler: testUrlHandler!)
-        mockedView = MealPlanMock()
-        user = User(preferredUnitOfMeasurement: nil, age: nil, gender: nil, height: nil, weight: nil, goal: nil, activityLevel: nil, flavour: nil)
-        user?.calorieDistribution.breakfast = 100
-        user?.calorieDistribution.lunch = 200
-        user?.calorieDistribution.dinner = 300
-        user?.calorieDistribution.snack = 400
-        testObject?.set(view: mockedView!)
+        ui = MockedMealPlanUI()
+        userManager = MockedUserManager()
+        testObject = MealPlanPresenter(view: ui, userManager: userManager)
+
+        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 2000, breakfast: 100, lunch: 200, dinner: 300, snack: 400)
     }
 
     override func tearDown() {
-        testUrlHandler = nil
+        ui = nil
+        userManager = nil
         testObject = nil
-        user = nil
         super.tearDown()
     }
-    
+
     /** Given: User has distributed calories
      *  When:  Page is loaded and flavour system is "unflavoured"
      *  Then:  The calories will be calculated to scoops/grams of unflavoured HUEL
      */
     func test_didLoadView_unflavoured() {
-        user?.flavour = .unflavoured
-        XCTAssert(mockedView?.breakfastAmount == "24 g / 0.6 scoops")
-        XCTAssert(mockedView?.lunchAmount == "48 g / 1.3 scoops")
-        XCTAssert(mockedView?.dinnerAmount == "73 g / 1.9 scoops")
-        XCTAssert(mockedView?.snackAmount == "97 g / 2.5 scoops")
+        testObject.didLoadView(with: HuelUnflavouredShake())
+
+        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.6 scoops")
+        XCTAssertEqual(ui?.lunchAmount, "49 g / 1.3 scoops")
+        XCTAssertEqual(ui?.dinnerAmount, "74 g / 1.9 scoops")
+        XCTAssertEqual(ui?.snackAmount, "98 g / 2.6 scoops")
     }
-    
+
     /** Given: User has distributed calories
      *  When:  Page is loaded and flavour system is "vanilla"
      *  Then:  The calories will be calculated to scoops/grams of vanilla HUEL
      */
     func test_didLoadView_vanilla() {
-        user?.flavour = .vanilla
-        testObject?.didLoadView(user: user)
-        XCTAssert(mockedView?.breakfastAmount == "25 g / 0.7 scoops")
-        XCTAssert(mockedView?.lunchAmount == "50 g / 1.3 scoops")
-        XCTAssert(mockedView?.dinnerAmount == "75 g / 2.0 scoops")
-        XCTAssert(mockedView?.snackAmount == "100 g / 2.6 scoops")
+        testObject.didLoadView(with: HuelVanillaShake())
+
+        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.7 scoops")
+        XCTAssertEqual(ui?.lunchAmount, "50 g / 1.3 scoops")
+        XCTAssertEqual(ui?.dinnerAmount, "75 g / 2.0 scoops")
+        XCTAssertEqual(ui?.snackAmount, "100 g / 2.6 scoops")
     }
 
-    /** Given: "Get Huel" button is pressed
-     *  When:  -
-     *  Then:  The "open" function gets called with the expected URL
+    /** Given: User has distributed calories
+     *  When:  Page is loaded and flavour system is "bar"
+     *  Then:  The calories will be calculated to grams and number of HUEL bars
      */
-    func test_didPressGetHuel() {
-        let expectedUrl = "https://huel.com/products/huel"
-        testObject!.didPressGetHuel()
-        
-        XCTAssert(testUrlHandler?.urlStringVisited == expectedUrl, "Expected link was not used!")
+    func test_didLoadView_bar() {
+        testObject.didLoadView(with: HuelBar())
+
+        XCTAssertEqual(ui?.breakfastAmount, "0.4 bars (26 g)")
+        XCTAssertEqual(ui?.lunchAmount, "0.8 bars (52 g)")
+        XCTAssertEqual(ui?.dinnerAmount, "1.2 bars (79 g)")
+        XCTAssertEqual(ui?.snackAmount, "1.6 bars (105 g)")
+    }
+
+    /** Given: No signed in user exists
+     *  When:  Page is loaded
+     *  Then:  Nothing should happen
+     */
+    func test_didLoadView_noSignedInUser() {
+        userManager.user = nil
+        testObject.didLoadView(with: HuelBar())
+
+        XCTAssertEqual(ui?.breakfastAmount, nil)
+        XCTAssertEqual(ui?.lunchAmount, nil)
+        XCTAssertEqual(ui?.dinnerAmount, nil)
+        XCTAssertEqual(ui?.snackAmount, nil)
+    }
+
+    /** Given: User doesn't have any calorie distribution
+     *  When:  Page is loaded
+     *  Then:  Nothing should happen
+     */
+    func test_didLoadView_noCalorieDistribution() {
+        userManager.user?.calorieDistribution = CalorieDistribution()
+        testObject.didLoadView(with: HuelBar())
+
+        XCTAssertEqual(ui?.breakfastAmount, nil)
+        XCTAssertEqual(ui?.lunchAmount, nil)
+        XCTAssertEqual(ui?.dinnerAmount, nil)
+        XCTAssertEqual(ui?.snackAmount, nil)
     }
 }
 
-private class TestUrlHandler: UrlHandler {
-    var urlStringVisited: String?
-    
-    func openURL(_ url: URL) -> Bool {
-        urlStringVisited = url.absoluteString
-        return true
-    }
-    
-}
-
-private class MealPlanMock: MealPlanPresentable {
-    var breakfastAmount: String?
-    var lunchAmount: String?
-    var dinnerAmount: String?
-    var snackAmount: String?
-    
-    func setBreakfastAmount(amountLabel: String?) {
-        breakfastAmount = amountLabel
-    }
-    
-    func setLunchAmount(amountLabel: String?) {
-        lunchAmount = amountLabel
-    }
-    
-    func setDinnerAmount(amountLabel: String?) {
-        dinnerAmount = amountLabel
-    }
-    
-    func setSnackAmount(amountLabel: String?) {
-        snackAmount = amountLabel
-    }
-}

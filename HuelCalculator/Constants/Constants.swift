@@ -27,10 +27,11 @@ struct Constants {
         static let viewControllerName = "AppFeedbackViewController"
         static let appStoreUrl = "itms-apps://itunes.apple.com/app/id1188836017"
         static let emailRecipient = "lindanordstrom86@gmail.com"
-        static let emailSubject = "test"
-        static let emailMessage = "<b>test</b><br><br>test"
+        static let emailSubject = "Feedback: Huel Calculator"
+        static let emailMessage = "<br><i>Enter your feedback here</i><br><br>-----------------------<br>App version: %@<br>Device: %@<br>iOS version: %@<br>-----------------------<br>"
         static let couldNotOpenEmailAlertTitle = "Could not open your email client"
         static let couldNotOpenEmailAlertMessage = "There was a problem opening your email client, please send your message manually to lindanordstrom86@gmail.com"
+        static let appVersionKey = "CFBundleShortVersionString"
     }
     struct PersonalDetailsPage {
         static let segueToThisPageName = "showPersonalDetailsPage"

@@ -10,7 +10,6 @@ import Foundation
 
 protocol UserManager {
     func signedInUserExists() -> Bool
-    func removeUser()
     func getSignedInUser() -> User?
     func saveUserToDataStore(user: User?)
     func saveOldCalorieDistributionsIfNeeded(user: inout User?)
@@ -29,10 +28,6 @@ class HuelUserManager: UserManager {
 
     func signedInUserExists() -> Bool {
         return getSignedInUser() != nil
-    }
-
-    func removeUser() {
-        dataStore.removeObject(forKey: Constants.Keys.user)
     }
 
     func getSignedInUser() -> User? {

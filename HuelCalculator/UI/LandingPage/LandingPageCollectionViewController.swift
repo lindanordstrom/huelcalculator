@@ -68,7 +68,7 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width  = view.frame.size.width * 0.4
         let height = width
-        // in case you you want the cell to be 40% of your controllers view
+
         return CGSize(width: width, height: height)
     }
 

@@ -9,35 +9,32 @@
 import UIKit
 import MessageUI
 
-class AppFeedbackViewController: UIViewController, MFMailComposeViewControllerDelegate {
+protocol AppFeedbackUI: class {
+    func showMailComposeView(recipients: [String]?, subject: String, message: String)
+    func showMailError()
+}
+
+class AppFeedbackViewController: UIViewController, AppFeedbackUI {
+
+    private var presenter: AppFeedbackPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = AppFeedbackPresenter(view: self)
     }
 
     @IBAction func emailButtonPressed(_ sender: Any) {
-        let mailComposeController = configureMailController()
-        guard MFMailComposeViewController.canSendMail() else {
-            showMailError()
-            return
-        }
-
-        present(mailComposeController, animated: true, completion: nil)
+        let canSendMail = MFMailComposeViewController.canSendMail()
+        presenter?.didPressSendEmailButton(canSendMail: canSendMail)
     }
 
     @IBAction func rateTheAppButtonPressed(_ sender: Any) {
-        UrlManager.shared.open(Constants.AppFeedbackPage.appStoreUrl)
+        presenter?.didPressRateTheApp()
     }
 
-    func configureMailController() -> MFMailComposeViewController {
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-
-        mailComposerVC.setToRecipients([Constants.AppFeedbackPage.emailRecipient])
-        mailComposerVC.setSubject(Constants.AppFeedbackPage.emailSubject)
-        mailComposerVC.setMessageBody(Constants.AppFeedbackPage.emailMessage, isHTML: true)
-
-        return mailComposerVC
+    func showMailComposeView(recipients: [String]?, subject: String, message: String) {
+        let mailComposeController = configureMailController(recipients: recipients, subject: subject, message: message)
+        present(mailComposeController, animated: true, completion: nil)
     }
 
     func showMailError() {
@@ -48,6 +45,19 @@ class AppFeedbackViewController: UIViewController, MFMailComposeViewControllerDe
         present(sendMailErrorAlert, animated: true, completion: nil)
     }
 
+    private func configureMailController(recipients: [String]?, subject: String, message: String) -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+
+        mailComposerVC.setToRecipients(recipients)
+        mailComposerVC.setSubject(subject)
+        mailComposerVC.setMessageBody(message, isHTML: true)
+
+        return mailComposerVC
+    }
+}
+
+extension AppFeedbackViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }

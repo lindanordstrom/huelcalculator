@@ -10,114 +10,162 @@ import XCTest
 @testable import HuelCalculator
 
 class PersonalDetailsPresenterTest: XCTestCase {
-    
-    private var testObject: PersonalDetailsPresenter?
-    private var mockedView: PersonalDetailsMock?
-    
+
+    private var testObject: PersonalDetailsPresenter!
+    private var ui: MockedPersonalDetailsUI!
+    private var userManager: MockedUserManager!
+
     override func setUp() {
         super.setUp()
-        testObject = PersonalDetailsPresenter()
-        mockedView = PersonalDetailsMock()
-        testObject?.set(view: mockedView!)
+        ui = MockedPersonalDetailsUI()
+        userManager = MockedUserManager()
+        testObject = PersonalDetailsPresenter(view: ui, userManager: userManager)
     }
-    
+
     override func tearDown() {
         testObject = nil
-        mockedView = nil
+        ui = nil
+        userManager = nil
         super.tearDown()
     }
-    
+
+    /** Given: No previously saved user exists
+     *  When:  The PersonalDetails view is loaded
+     *  Then:  All fields are shown empty
+     */
+    func test_didLoadViewWhenNoSavedUserExists() {
+        testObject?.didLoadView()
+
+        XCTAssertTrue(ui.resetAllFieldsCalled)
+    }
+
+    /** Given: A saved user exists with preference set to metrics
+     *  When:  The PersonalDetails view is loaded
+     *  Then:  All fields are populated with the saved users details
+     *  And:   The view shown according to the metric system
+     */
+    func test_didLoadViewWhenMetricUserExists() {
+        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        testObject?.didLoadView()
+
+        XCTAssertTrue(ui.updateUIToMetricSystemCalled)
+        XCTAssertTrue(ui.populateFieldsWithUserCalled)
+        XCTAssertEqual(ui.user?.age, 30)
+    }
+
+    /** Given: A saved user exists with preference set to imperial
+     *  When:  The PersonalDetails view is loaded
+     *  Then:  All fields are populated with the saved users details
+     *  And:   The view shown according to the imperial system
+     */
+    func test_didLoadViewWhenImperialUserExists() {
+        userManager.user = User(preferredUnitOfMeasurement: .imperial, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        testObject?.didLoadView()
+
+        XCTAssertTrue(ui.updateUIToImperialSystemCalled)
+        XCTAssertTrue(ui.populateFieldsWithUserCalled)
+        XCTAssertEqual(ui.user?.age, 30)
+    }
+
+
     /** Given: User selects metric unit system
      *  When:  -
-     *  Then:  height and weight is shown in kg/cm
+     *  Then:  The view shown according to the metric system
      */
     func test_didChangeMeasurementValue_metric() {
         testObject?.didChangeMeasurementValue(value: User.UnitOfMeasurement.metric)
-        
-        XCTAssertTrue(mockedView!.updateUIToMetricSystemCalled, "updateUIToMetricSystem was not called")
+
+        XCTAssertTrue(ui.updateUIToMetricSystemCalled)
     }
-    
+
     /** Given: User selects imperial unit system
      *  When:  -
-     *  Then:  height and weight is shown in lb/feet
+     *  Then:  The view shown according to the imperial system
      */
     func test_didChangeMeasurementValue_imperial() {
         testObject?.didChangeMeasurementValue(value: User.UnitOfMeasurement.imperial)
-        
-        XCTAssertTrue(mockedView!.updateUIToImperialSystemCalled, "updateUIToImperialSystem was not called")
+
+        XCTAssertTrue(ui.updateUIToImperialSystemCalled)
     }
-    
+
     /** Given: User enters text in all fields
-     *  When:  Pressing "Calculate"
-     *  Then:  The next view is displayed with correct remaining daily calories
+     *  And:   No previous user details exists
+     *  When:  Pressing "Done"
+     *  Then:  The user is saved
+     *  And:   daily calorie consumption is calculated
+     *  And:   the personal details view is dismissed
      */
-    func test_didPressCalculateButton() {
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.metric, age: 30, gender: User.Gender.male, height: 177, weight: 60, goal: User.Goal.lose, activityLevel: User.ActivityLevel.moderately, flavour: User.Flavour.vanilla)
-        testObject?.didPressCalculateButton(user: user)
-        
-        XCTAssertTrue(mockedView!.navigateToCalorieDistributionViewControllerCalled, "navigateToCalorieDistributionViewController was not called")
-        XCTAssert(mockedView!.dailyCalorieConsumption == 1919)
+    func test_didPressDoneButton() {
+        let user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+
+        testObject?.didPressDoneButton(user: user)
+
+        XCTAssertTrue(userManager.saveUserToDataStoreCalled)
+        XCTAssertEqual(userManager.user?.age, 30)
+        XCTAssertTrue(userManager.saveOldCalorieDistributionsIfNeededCalled)
+        XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, nil)
+        XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
+        XCTAssertEqual(ui.showErrorMessageFlag, false)
+        XCTAssertTrue(ui.dismissViewControllerCalled)
     }
-    
+
+    /** Given: User enters text in all fields
+     *  And:   Previous user details exists
+     *  When:  Pressing "Done"
+     *  Then:  The user is saved
+     *  And:   previous entered calorie distribution is saved to the new user
+     *  And:   daily calorie consumption is calculated
+     *  And:   the personal details view is dismissed
+     */
+    func test_didPressDoneButtonWhenPreviousDetailsExists() {
+        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 20, gender: .female, height: 160, weight: 50, goal: .maintain, activityLevel: .very)
+        userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 2000, breakfast: 500, lunch: 500, dinner: 500, snack: 500)
+
+        let user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+
+        testObject?.didPressDoneButton(user: user)
+
+        XCTAssertTrue(userManager.saveUserToDataStoreCalled)
+        XCTAssertEqual(userManager.user?.age, 30)
+        XCTAssertTrue(userManager.saveOldCalorieDistributionsIfNeededCalled)
+        XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, 500)
+        XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
+        XCTAssertEqual(ui.showErrorMessageFlag, false)
+        XCTAssertTrue(ui.dismissViewControllerCalled)
+    }
+
     /** Given: User enters text in all but one field
-     *  When:  Pressing "Calculate"
+     *  When:  Pressing "Done"
      *  Then:  An Error message is displayed
      */
-    func test_didPressCalculateButton_missingInputData() {
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: 30, gender: User.Gender.male, height: 177, weight: 60, goal: User.Goal.lose, activityLevel: nil, flavour: User.Flavour.vanilla)
-        testObject?.didPressCalculateButton(user: user)
-        
-        XCTAssertTrue(mockedView!.showErrorMessageCalled, "showErrorMessage was not called")
+    func test_didPressDoneButton_missingInputData() {
+        let user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: nil, weight: 60, goal: .lose, activityLevel: .moderately)
+        testObject?.didPressDoneButton(user: user)
+
+        XCTAssertTrue(ui.showErrorMessageCalled)
+        XCTAssertEqual(ui.showErrorMessageFlag, true)
     }
-    
+
     /** Given: User enters text in no fields
-     *  When:  Pressing "Calculate"
+     *  When:  Pressing "Done"
      *  Then:  An Error message is displayed
      */
-    func test_didPressCalculateButton_noInputData() {
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement.imperial, age: nil, gender: User.Gender.male, height: nil, weight: nil, goal: User.Goal.lose, activityLevel: nil, flavour: User.Flavour.vanilla)
-        testObject?.didPressCalculateButton(user: user)
-        
-        XCTAssertTrue(mockedView!.showErrorMessageCalled, "showErrorMessage was not called")
+    func test_didPressDoneButton_noInputData() {
+        let user = User(preferredUnitOfMeasurement: .metric, age: nil, gender: .male, height: nil, weight: nil, goal: .lose, activityLevel: .moderately)
+        testObject?.didPressDoneButton(user: user)
+
+        XCTAssertTrue(ui.showErrorMessageCalled)
+        XCTAssertEqual(ui.showErrorMessageFlag, true)
     }
-    
+
     /** Given: User enters text in all fields
      *  When:  Pressing "Reset"
      *  Then:  All fields should become empty
      */
     func test_didPressResetButton() {
         testObject?.didPressResetButton()
-        
-        XCTAssertTrue(mockedView!.resetAllFieldsCalled, "resetAllFields was not called")
+
+        XCTAssertTrue(ui.resetAllFieldsCalled)
     }
 }
 
-private class PersonalDetailsMock: PersonalDetailsPresentable {
-    var resetAllFieldsCalled = false
-    var showErrorMessageCalled = false
-    var navigateToCalorieDistributionViewControllerCalled = false
-    var updateUIToMetricSystemCalled = false
-    var updateUIToImperialSystemCalled = false
-    var dailyCalorieConsumption: Int?
-    
-    func resetAllFields() {
-        resetAllFieldsCalled = true
-    }
-    
-    func showErrorMessage() {
-        showErrorMessageCalled = true
-    }
-    
-    func navigateToCalorieDistributionViewController(user: User) {
-        dailyCalorieConsumption = user.dailyCalorieConsumption
-        navigateToCalorieDistributionViewControllerCalled = true
-    }
-    
-    func updateUIToMetricSystem() {
-        updateUIToMetricSystemCalled = true
-    }
-    
-    func updateUIToImperialSystem() {
-        updateUIToImperialSystemCalled = true
-    }
-}
