@@ -25,11 +25,11 @@ class ActivityPickerViewController: UIViewController {
     
     init(index: Int) {
         selectedIndex = index
-        super.init(nibName: "ActivityPickerViewController", bundle: nil)
+        super.init(nibName: Constants.PersonalDetailsPage.activityPickerViewController, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     override func viewDidLoad() {

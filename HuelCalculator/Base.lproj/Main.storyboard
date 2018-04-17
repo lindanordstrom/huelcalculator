@@ -273,6 +273,58 @@
             </objects>
             <point key="canvasLocation" x="1765.217391304348" y="935.86956521739137"/>
         </scene>
+        <!--App Feedback View Controller-->
+        <scene sceneID="jEA-5l-VeP">
+            <objects>
+                <viewController storyboardIdentifier="AppFeedbackViewController" id="ZjV-f1-Ig8" customClass="AppFeedbackViewController" customModule="HuelCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WTE-QB-Bdb"/>
+                        <viewControllerLayoutGuide type="bottom" id="wn3-Cj-iZx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O2h-jC-YLJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAK-Dt-Vvu">
+                                <rect key="frame" x="107" y="84" width="200" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="F1S-lW-I2U"/>
+                                </constraints>
+                                <state key="normal" title="Email feedback">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="emailButtonPressed:" destination="ZjV-f1-Ig8" eventType="touchUpInside" id="S4z-rp-4MD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LY-4I-eva">
+                                <rect key="frame" x="107" y="137" width="200" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="bPy-Vb-9XH"/>
+                                </constraints>
+                                <state key="normal" title="Rate on AppStore">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="rateTheAppButtonPressed:" destination="ZjV-f1-Ig8" eventType="touchUpInside" id="xPy-bw-jl2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8LY-4I-eva" firstAttribute="top" secondItem="nAK-Dt-Vvu" secondAttribute="bottom" constant="23" id="8QN-im-Twc"/>
+                            <constraint firstItem="nAK-Dt-Vvu" firstAttribute="centerX" secondItem="O2h-jC-YLJ" secondAttribute="centerX" id="gZv-2x-S8u"/>
+                            <constraint firstItem="nAK-Dt-Vvu" firstAttribute="top" secondItem="WTE-QB-Bdb" secondAttribute="bottom" constant="64" id="hq5-Cf-pLi"/>
+                            <constraint firstItem="8LY-4I-eva" firstAttribute="centerX" secondItem="nAK-Dt-Vvu" secondAttribute="centerX" id="k30-cD-bf6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNV-I5-TdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2549" y="933"/>
+        </scene>
         <!--Huel Calculator-->
         <scene sceneID="A8E-Gg-vvp">
             <objects>
@@ -709,6 +761,6 @@
         <image name="menu_shake" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LYj-dw-wge"/>
+        <segue reference="RyF-nA-cmg"/>
     </inferredMetricsTieBreakers>
 </document>

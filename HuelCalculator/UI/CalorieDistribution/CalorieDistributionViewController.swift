@@ -48,10 +48,10 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     }
 
     @IBAction func inputFieldUpdated(_ sender: UITextField) {
-        let breakfast = Int(breakfastCaloriesInputField.text ?? "0") ?? 0
-        let lunch = Int(lunchCaloriesInputField.text ?? "0") ?? 0
-        let dinner = Int(dinnerCaloriesInputField.text ?? "0") ?? 0
-        let snack = Int(snackCaloriesInputField.text ?? "0") ?? 0
+        let breakfast = Int(breakfastCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
+        let lunch = Int(lunchCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
+        let dinner = Int(dinnerCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
+        let snack = Int(snackCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
 
         presenter?.updateUserConsumption(breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
         presenter?.updateInputFields()
@@ -86,11 +86,11 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     }
     
     func showPopupWarning(remainingCalories: Int) {
-        let alert = UIAlertController(title: "Warning", message: "Your remaining calories are \(remainingCalories), are you sure you want to continue?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: { action in
-            self.performSegue(withIdentifier: "showMealPlanPage", sender: nil)
+        let alert = UIAlertController(title: Constants.General.warningAlertTitle, message: "\(Constants.CalorieDistributionPage.remainingCaloriesAlertMessagePart1)\(remainingCalories)\(Constants.CalorieDistributionPage.remainingCaloriesAlertMessagePart2)", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Constants.General.yesButtonText, style: UIAlertActionStyle.default, handler: { action in
+            self.performSegue(withIdentifier: Constants.MealPlanPage.segueToThisPageName, sender: nil)
         }))
-        alert.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Constants.General.noButtonText, style: UIAlertActionStyle.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -99,7 +99,7 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     }
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard identifier == "showMealPlanPage" else {
+        guard identifier == Constants.MealPlanPage.segueToThisPageName else {
             return true
         }
         return presenter?.shouldShowMealPlanPage(remainingCalories: remainingCaloriesLabel.text) ?? false

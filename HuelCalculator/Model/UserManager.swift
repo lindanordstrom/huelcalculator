@@ -32,18 +32,18 @@ class HuelUserManager: UserManager {
     }
 
     func removeUser() {
-        dataStore.removeObject(forKey: "user")
+        dataStore.removeObject(forKey: Constants.Keys.user)
     }
 
     func getSignedInUser() -> User? {
-        guard let userData = dataStore.object(forKey: "user") as? Data else { return nil }
+        guard let userData = dataStore.object(forKey: Constants.Keys.user) as? Data else { return nil }
         return try? JSONDecoder().decode(User.self, from: userData)
     }
 
     func saveUserToDataStore(user: User?) {
         guard let user = user,
             let encodedUser = try? JSONEncoder().encode(user) else { return }
-        dataStore.set(encodedUser, forKey: "user")
+        dataStore.set(encodedUser, forKey: Constants.Keys.user)
     }
 
     func saveOldCalorieDistributionsIfNeeded(user: inout User?) {

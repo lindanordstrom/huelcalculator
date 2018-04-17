@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 protocol LandingPageUI: class {
     func showCalculationPage(with product: MealReplacementProduct)
     func showAppFeedback()
@@ -26,8 +24,8 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
 
     func showCalculationPage(with product: MealReplacementProduct) {
         presenter?.showPersonalDetailsPageIfNeeded()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "CalorieDistributionViewController") as? CalorieDistributionViewController else {
+        let storyboard = UIStoryboard(name: Constants.General.storyboardMain, bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.CalorieDistributionPage.viewControllerName) as? CalorieDistributionViewController else {
             return
         }
         vc.product = product
@@ -35,13 +33,17 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
     }
     
     func showAppFeedback() {
-        // TODO
+        let storyboard = UIStoryboard(name: Constants.General.storyboardMain, bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.AppFeedbackPage.viewControllerName) as? AppFeedbackViewController else {
+            return
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func showErrorAndPersonalDetailsPage() {
-        let alert = UIAlertController(title: "No profile added", message: "You need to enter your personal details to be able to calculate your daily needs", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
-            self.performSegue(withIdentifier: "showPersonalDetailsPage", sender: nil)
+        let alert = UIAlertController(title: Constants.LandingPage.noProfileAlertTitle, message: Constants.LandingPage.noProfileAlertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Constants.General.okButtonText, style: UIAlertActionStyle.default, handler: { action in
+            self.performSegue(withIdentifier: Constants.PersonalDetailsPage.segueToThisPageName, sender: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -53,7 +55,7 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? LandingPageItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.LandingPage.cellIdentifier, for: indexPath) as? LandingPageItemCell
 
         let titleAndImage = presenter?.getTitleAndImageFrom(indexPath: indexPath)
 

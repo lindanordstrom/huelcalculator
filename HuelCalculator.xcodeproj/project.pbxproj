@@ -11,6 +11,10 @@
 		439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27C207BBB0B00E7F50D /* MealReplacementProduct.swift */; };
 		439BB280207BC29B00E7F50D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27F207BC29B00E7F50D /* UserManager.swift */; };
 		439BB284207BC2C400E7F50D /* MealCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB283207BC2C400E7F50D /* MealCalculator.swift */; };
+		43B6E9AB2085FD950050361E /* AppFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AA2085FD950050361E /* AppFeedbackViewController.swift */; };
+		43B6E9AD2085FDA40050361E /* AppFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */; };
+		43B6E9AF2086081F0050361E /* UrlHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AE2086081F0050361E /* UrlHandler.swift */; };
+		43B6E9B2208613840050361E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9B1208613840050361E /* Constants.swift */; };
 		43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */; };
 		43C8AFCA2084A89200772D3F /* LandingPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */; };
 		43C8AFCC2084C32F00772D3F /* LandingPageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */; };
@@ -48,6 +52,10 @@
 		439BB27C207BBB0B00E7F50D /* MealReplacementProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealReplacementProduct.swift; sourceTree = "<group>"; };
 		439BB27F207BC29B00E7F50D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		439BB283207BC2C400E7F50D /* MealCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCalculator.swift; sourceTree = "<group>"; };
+		43B6E9AA2085FD950050361E /* AppFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackViewController.swift; sourceTree = "<group>"; };
+		43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackPresenter.swift; sourceTree = "<group>"; };
+		43B6E9AE2086081F0050361E /* UrlHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlHandler.swift; sourceTree = "<group>"; };
+		43B6E9B1208613840050361E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageCollectionViewController.swift; sourceTree = "<group>"; };
 		43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPagePresenter.swift; sourceTree = "<group>"; };
 		43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageItemCell.swift; sourceTree = "<group>"; };
@@ -97,8 +105,26 @@
 			children = (
 				439BB27F207BC29B00E7F50D /* UserManager.swift */,
 				439BB283207BC2C400E7F50D /* MealCalculator.swift */,
+				43B6E9AE2086081F0050361E /* UrlHandler.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		43B6E9A92085FD690050361E /* AppFeedbackPage */ = {
+			isa = PBXGroup;
+			children = (
+				43B6E9AA2085FD950050361E /* AppFeedbackViewController.swift */,
+				43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */,
+			);
+			path = AppFeedbackPage;
+			sourceTree = "<group>";
+		};
+		43B6E9B02086134F0050361E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				43B6E9B1208613840050361E /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		43C8AFC62084A85200772D3F /* LandingPage */ = {
@@ -168,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				43C8AFC62084A85200772D3F /* LandingPage */,
+				43B6E9A92085FD690050361E /* AppFeedbackPage */,
 				BF23FD9A1DFB80C9004A2C26 /* PersonalDetail */,
 				BF23FD961DFB80C9004A2C26 /* CalorieDistribution */,
 				BF23FD981DFB80C9004A2C26 /* MealPlan */,
@@ -234,6 +261,7 @@
 		BFE4646C1DFB3CDA00687A16 /* HuelCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				43B6E9B02086134F0050361E /* Constants */,
 				439BB27E207BC28700E7F50D /* Model */,
 				BF23FD8D1DFB75D0004A2C26 /* UI */,
 				BF2096B81DFF5A7C006EF21E /* DataObjects */,
@@ -303,7 +331,7 @@
 					};
 					BFE464691DFB3CD900687A16 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = Y39538G73S;
+						DevelopmentTeam = Y97Q299W29;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
@@ -365,17 +393,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				43C8AFCC2084C32F00772D3F /* LandingPageItemCell.swift in Sources */,
+				43B6E9AB2085FD950050361E /* AppFeedbackViewController.swift in Sources */,
 				439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */,
 				43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */,
 				BF4517BF1E093B4C00D682D5 /* ActivityPickerViewController.swift in Sources */,
 				BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */,
 				BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */,
 				BF2096BE1DFF65B4006EF21E /* CalorieDistributionPresenter.swift in Sources */,
+				43B6E9AF2086081F0050361E /* UrlHandler.swift in Sources */,
 				BF2096BC1DFF653F006EF21E /* PersonalDetailsPresenter.swift in Sources */,
 				43C8AFCA2084A89200772D3F /* LandingPagePresenter.swift in Sources */,
+				43B6E9B2208613840050361E /* Constants.swift in Sources */,
 				439BB280207BC29B00E7F50D /* UserManager.swift in Sources */,
 				439BB27B207BBA5C00E7F50D /* CalorieDistribution.swift in Sources */,
 				BF2096BA1DFF5A96006EF21E /* User.swift in Sources */,
+				43B6E9AD2085FDA40050361E /* AppFeedbackPresenter.swift in Sources */,
 				BFE4646E1DFB3CDA00687A16 /* AppDelegate.swift in Sources */,
 				BF23FDA01DFB80EF004A2C26 /* MealPlanPresenter.swift in Sources */,
 				439BB284207BC2C400E7F50D /* MealCalculator.swift in Sources */,
@@ -544,11 +576,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y39538G73S;
+				DEVELOPMENT_TEAM = Y97Q299W29;
 				INFOPLIST_FILE = HuelCalculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = se.lindaccnordstrom.HuelCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = se.lindaccnordstrom.HuelCalculatorx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -559,11 +591,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y39538G73S;
+				DEVELOPMENT_TEAM = Y97Q299W29;
 				INFOPLIST_FILE = HuelCalculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = se.lindaccnordstrom.HuelCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = se.lindaccnordstrom.HuelCalculatorx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;

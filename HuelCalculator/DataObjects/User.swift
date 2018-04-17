@@ -31,17 +31,17 @@ class User: Codable {
         static func getActivityString(activity: User.ActivityLevel) -> String {
             switch activity {
             case .sedentary:
-                return "Sedentary - little or no exercise"
+                return Constants.User.sedentaryActive
             case .lightly:
-                return "Lightly Active - exercise 1-3 times/week"
+                return Constants.User.lightlyActive
             case .moderately:
-                return "Moderately Active - exercise 3-5 times/week"
+                return Constants.User.moderatelyActive
             case .very:
-                return "Very Active - hard exercise 7-6 times/week"
+                return Constants.User.veryActive
             case .extra:
-                return "Extra Active - very hard exercise or physical job"
+                return Constants.User.extraActive
             default:
-                return "Select activity"
+                return Constants.User.selectActivity
             }
         }
     }

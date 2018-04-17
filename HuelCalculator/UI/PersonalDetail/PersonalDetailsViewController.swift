@@ -54,14 +54,14 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         dismissKeyboard()
 
         // TODO: sort this out - always save height and weight in metric instead?
-        let inches = Float(inchesInputField.text ?? "") ?? 0
-        let height = (Float(heightInputField.text ?? "") ?? 0) + inches * 0.0833333333
+        let inches = Float(inchesInputField.text ?? Constants.General.emptyString) ?? 0
+        let height = (Float(heightInputField.text ?? Constants.General.emptyString) ?? 0) + inches * 0.0833333333
         
         let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex),
-                        age: Int(ageInputField.text ?? ""),
+                        age: Int(ageInputField.text ?? Constants.General.emptyString),
                         gender: User.Gender(rawValue: genderSelector.selectedSegmentIndex),
                         height: height > 0 ? height : nil,
-                        weight: Float(weightInputField.text ?? ""),
+                        weight: Float(weightInputField.text ?? Constants.General.emptyString),
                         goal: User.Goal(rawValue: goalSelector.selectedSegmentIndex),
                         activityLevel: selectedActivity)
 
@@ -145,10 +145,10 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     }
     
     func updateUIToImperialSystem() {
-        heightUnitLabel.text = "inches"
-        weightUnitLabel.text = "pounds"
+        heightUnitLabel.text = Constants.PersonalDetailsPage.inches
+        weightUnitLabel.text = Constants.PersonalDetailsPage.pounds
         for index in 0..<goalSelector.numberOfSegments {
-            let title = goalSelector.titleForSegment(at: index)?.replacingOccurrences(of: "0.5 kg", with: "1 lb")
+            let title = goalSelector.titleForSegment(at: index)?.replacingOccurrences(of: Constants.PersonalDetailsPage.halfKg, with: Constants.PersonalDetailsPage.onePound)
             goalSelector.setTitle(title, forSegmentAt: index)
         }
         heightInputFieldHideFeetConstraint.isActive = false
@@ -156,10 +156,10 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     }
     
     func updateUIToMetricSystem() {
-        heightUnitLabel.text = "cm"
-        weightUnitLabel.text = "kg"
+        heightUnitLabel.text = Constants.PersonalDetailsPage.cm
+        weightUnitLabel.text = Constants.PersonalDetailsPage.kg
         for index in 0..<goalSelector.numberOfSegments {
-            let title = goalSelector.titleForSegment(at: index)?.replacingOccurrences(of: "1 lb", with: "0.5 kg")
+            let title = goalSelector.titleForSegment(at: index)?.replacingOccurrences(of: Constants.PersonalDetailsPage.onePound, with: Constants.PersonalDetailsPage.halfKg)
             goalSelector.setTitle(title, forSegmentAt: index)
         }
         heightInputFieldShowFeetConstraint.isActive = false

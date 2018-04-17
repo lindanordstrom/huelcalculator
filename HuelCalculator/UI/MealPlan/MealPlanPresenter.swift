@@ -31,10 +31,10 @@ class MealPlanPresenter {
 
         if product is HuelBar {
             let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
-            return String(format: "%.1f bars (%.0f g)", bars, gram)
+            return String(format: Constants.MealPlanPage.numberOfBarsAndGrams, bars, gram)
         } else {
             let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
-            return String(format: "%.0f g / %.1f scoops", gram, scoops)
+            return String(format: Constants.MealPlanPage.numberOfGramsAndScoops, gram, scoops)
         }
     }
 }

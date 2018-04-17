@@ -8,31 +8,13 @@
 
 import UIKit
 
-protocol UrlHandler {
-    func openURL(_ url: URL) -> Bool
-}
-
-extension UIApplication: UrlHandler {}
-
 class LandingPagePresenter {
-
-    private let urlHandler: UrlHandler
-    private let huelUrl = "https://huel.com/products/huel"
     private weak var view: LandingPageUI?
-
-    private enum menuItem: String {
-        case vanillaShake = "Vanilla"
-        case unflavouredShake = "Unflavoured"
-        case bar = "Bar"
-        case shop = "Buy Huel"
-        case appFeedback = "App Feedback"
-    }
 
     private let menuItems: [menuItem] = [.unflavouredShake, .vanillaShake, .bar, .shop, .appFeedback]
 
-    init(view: LandingPageUI, urlHandler: UrlHandler = UIApplication.shared) {
+    init(view: LandingPageUI) {
         self.view = view
-        self.urlHandler = urlHandler
     }
 
     func numberOfItemsOnLandingPage() -> Int {
@@ -85,9 +67,6 @@ class LandingPagePresenter {
     }
 
     private func didPressGetHuel() {
-        guard let url = URL(string: huelUrl) else {
-            return
-        }
-        _ = urlHandler.openURL(url)
+        UrlManager.shared.open(Constants.LandingPage.getHuelUrl)
     }
 }
