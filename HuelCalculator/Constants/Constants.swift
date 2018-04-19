@@ -58,7 +58,7 @@ struct Constants {
         static let sedentaryActive = "Sedentary - little or no exercise"
         static let lightlyActive =  "Lightly Active - exercise 1-3 times/week"
         static let moderatelyActive =  "Moderately Active - exercise 3-5 times/week"
-        static let veryActive =  "Very Active - hard exercise 7-6 times/week"
+        static let veryActive =  "Very Active - hard exercise 6-7 times/week"
         static let extraActive =  "Extra Active - very hard exercise or physical job"
         static let selectActivity =  "Select activity"
     }

@@ -61,6 +61,7 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
 
         cell?.title.text = titleAndImage?.title
         cell?.image.image = titleAndImage?.image
+        cell?.image.highlightedImage = titleAndImage?.highlightedImage
     
         return cell ?? UICollectionViewCell()
     }
@@ -74,7 +75,7 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let inset = view.frame.size.width * 0.07
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -85,5 +86,14 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectItemOnLandingPage(indexPath: indexPath)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            switch kind {
+            case UICollectionElementKindSectionHeader:
+                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
+            default:
+                assert(false, "Unexpected element kind")
+            }
     }
 }

@@ -102,7 +102,7 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
         guard identifier == Constants.MealPlanPage.segueToThisPageName else {
             return true
         }
-        return presenter?.shouldShowMealPlanPage(remainingCalories: remainingCaloriesLabel.text) ?? false
+        return presenter?.shouldShowMealPlanPage(remainingCalories: Int(remainingCaloriesLabel.text ?? Constants.General.emptyString)) ?? false
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

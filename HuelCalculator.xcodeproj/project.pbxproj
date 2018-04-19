@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432B65912088BA790001643A /* MealCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432B65902088BA790001643A /* MealCalculatorTests.swift */; };
+		432B65942088BCFC0001643A /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432B65932088BCFC0001643A /* UserTests.swift */; };
 		439BB27B207BBA5C00E7F50D /* CalorieDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27A207BBA5C00E7F50D /* CalorieDistribution.swift */; };
 		439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27C207BBB0B00E7F50D /* MealReplacementProduct.swift */; };
 		439BB280207BC29B00E7F50D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB27F207BC29B00E7F50D /* UserManager.swift */; };
 		439BB284207BC2C400E7F50D /* MealCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB283207BC2C400E7F50D /* MealCalculator.swift */; };
+		43A9F47920879E4100C5492E /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9F47820879E4100C5492E /* UserManagerTests.swift */; };
 		43B6E9AB2085FD950050361E /* AppFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AA2085FD950050361E /* AppFeedbackViewController.swift */; };
 		43B6E9AD2085FDA40050361E /* AppFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */; };
 		43B6E9AF2086081F0050361E /* UrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AE2086081F0050361E /* UrlManager.swift */; };
@@ -54,10 +57,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		432B65902088BA790001643A /* MealCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCalculatorTests.swift; sourceTree = "<group>"; };
+		432B65932088BCFC0001643A /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		439BB27A207BBA5C00E7F50D /* CalorieDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieDistribution.swift; sourceTree = "<group>"; };
 		439BB27C207BBB0B00E7F50D /* MealReplacementProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealReplacementProduct.swift; sourceTree = "<group>"; };
 		439BB27F207BC29B00E7F50D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		439BB283207BC2C400E7F50D /* MealCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCalculator.swift; sourceTree = "<group>"; };
+		43A9F47820879E4100C5492E /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		43B6E9AA2085FD950050361E /* AppFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackViewController.swift; sourceTree = "<group>"; };
 		43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackPresenter.swift; sourceTree = "<group>"; };
 		43B6E9AE2086081F0050361E /* UrlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlManager.swift; sourceTree = "<group>"; };
@@ -112,12 +118,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		432B65922088BCD80001643A /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				432B65932088BCFC0001643A /* UserTests.swift */,
+			);
+			path = DataObjects;
+			sourceTree = "<group>";
+		};
 		439BB27E207BC28700E7F50D /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				439BB27F207BC29B00E7F50D /* UserManager.swift */,
 				439BB283207BC2C400E7F50D /* MealCalculator.swift */,
 				43B6E9AE2086081F0050361E /* UrlManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		43A9F47520879C8400C5492E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43A9F47820879E4100C5492E /* UserManagerTests.swift */,
+				432B65902088BA790001643A /* MealCalculatorTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,7 +306,9 @@
 			isa = PBXGroup;
 			children = (
 				43D81B1820865CAD00C5E6D3 /* Mocks */,
+				43A9F47520879C8400C5492E /* Model */,
 				BF2096B21DFF58EF006EF21E /* UI */,
+				432B65922088BCD80001643A /* DataObjects */,
 				BFC3CFD51DFB8D5C001E2F6F /* Info.plist */,
 			);
 			path = HuelCalculatorTests;
@@ -432,10 +457,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432B65912088BA790001643A /* MealCalculatorTests.swift in Sources */,
 				BF2096C21DFF66A3006EF21E /* CalorieDistributionPresenterTests.swift in Sources */,
 				BF2096B71DFF58EF006EF21E /* MealPlanPresenterTest.swift in Sources */,
 				43D81B1E20865D3D00C5E6D3 /* LandingPagePresenterTests.swift in Sources */,
+				43A9F47920879E4100C5492E /* UserManagerTests.swift in Sources */,
 				BF2096C01DFF663D006EF21E /* PersonalDetailsPresenterTests.swift in Sources */,
+				432B65942088BCFC0001643A /* UserTests.swift in Sources */,
 				43D81B1A20865CB900C5E6D3 /* Mocks.swift in Sources */,
 				43D81B2020865DC100C5E6D3 /* AppFeedbackPresenterTests.swift in Sources */,
 			);

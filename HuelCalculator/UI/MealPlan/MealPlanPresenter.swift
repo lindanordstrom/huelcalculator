@@ -31,12 +31,12 @@ class MealPlanPresenter {
         guard let calories = calories else { return nil }
         let gram = HuelMealCalculator.gramsToReach(calories: calories, product: product)
 
-        if product is HuelBar {
-            let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
-            return String(format: Constants.MealPlanPage.numberOfBarsAndGrams, bars, gram)
-        } else {
+        guard product is HuelBar else {
             let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
             return String(format: Constants.MealPlanPage.numberOfGramsAndScoops, gram, scoops)
         }
+        
+        let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
+        return String(format: Constants.MealPlanPage.numberOfBarsAndGrams, bars, gram)
     }
 }

@@ -9,7 +9,6 @@
 import XCTest
 @testable import HuelCalculator
 
-
 class LandingPagePresenterTests: XCTestCase {
 
     private var testObject: LandingPagePresenter!

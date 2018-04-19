@@ -11,15 +11,16 @@ import Foundation
 class CalorieDistributionPresenter {
     
     private weak var view: CalorieDistributionUI?
+    private var userManager: UserManager
     
-    init(view: CalorieDistributionUI) {
+    init(view: CalorieDistributionUI, userManager: UserManager = HuelUserManager.shared) {
         self.view = view
+        self.userManager = userManager
     }
     
-    func shouldShowMealPlanPage(remainingCalories: String?) -> Bool {
-        guard let remainingCaloriesString = remainingCalories,
-            let remainingCalories = Int(remainingCaloriesString) else {
-                return false
+    func shouldShowMealPlanPage(remainingCalories: Int?) -> Bool {
+        guard let remainingCalories = remainingCalories else {
+            return false
         }
         guard remainingCalories == 0 else {
             view?.showPopupWarning(remainingCalories: remainingCalories)
@@ -30,7 +31,7 @@ class CalorieDistributionPresenter {
     }
     
     func didPressSplitEquallyButton() {
-        let user = HuelUserManager.shared.getSignedInUser()
+        let user = userManager.getSignedInUser()
         guard let calories = user?.calorieDistribution.dailyCalorieConsumption else {
             return
         }
@@ -42,11 +43,11 @@ class CalorieDistributionPresenter {
     }
     
     func updateUserConsumption(breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
-        HuelUserManager.shared.distributeCalories(breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
+        userManager.distributeCalories(breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
     }
 
     func updateInputFields() {
-        let user = HuelUserManager.shared.getSignedInUser()
+        let user = userManager.getSignedInUser()
         let dailyConsumption = user?.calorieDistribution.dailyCalorieConsumption ?? 0
         let breakfast = user?.calorieDistribution.breakfast ?? 0
         let lunch = user?.calorieDistribution.lunch ?? 0

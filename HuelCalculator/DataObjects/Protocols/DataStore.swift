@@ -11,7 +11,6 @@ import Foundation
 protocol DataStore {
     func set(_ value: Any?, forKey defaultName: String)
     func object(forKey defaultName: String) -> Any?
-    func removeObject(forKey defaultName: String)
 }
 
 extension UserDefaults: DataStore {}

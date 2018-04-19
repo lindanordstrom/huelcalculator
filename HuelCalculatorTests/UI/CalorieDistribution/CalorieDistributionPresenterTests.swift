@@ -1,142 +1,163 @@
-////
-////  CalorieDistributionPresenterTests.swift
-////  HuelCalculator
-////
-////  Created by Linda on 12/12/2016.
-////  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
-////
 //
-//import XCTest
-//@testable import HuelCalculator
+//  CalorieDistributionPresenterTests.swift
+//  HuelCalculator
 //
-// TODO
-//class CalorieDistributionPresenterTests: XCTestCase {
+//  Created by Linda on 12/12/2016.
+//  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
-//    private var testObject: CalorieDistributionPresenter?
-//    private var mockedView: CalorieDistributionMock?
-//
-//    override func setUp() {
-//        super.setUp()
-//        testObject = CalorieDistributionPresenter()
-//        mockedView = CalorieDistributionMock()
-//        testObject?.set(view: mockedView!)
-//    }
-//
-//    override func tearDown() {
-//        testObject = nil
-//        mockedView = nil
-//        super.tearDown()
-//    }
-//
-//    /** Given: User enters a number in any field
-//     *  When:  The focus leaves the input field
-//     *  Then:  The remaining calories decreases with the same amount will be displayed in black
-//     */
-//    func test_didUpdateInputField() {
-//        testObject?.didUpdateInputField(dailyConsumtion: 500, breakfast: "10", lunch: "20", dinner: "", snack: "")
-//        XCTAssertTrue(mockedView!.setRemainingCaloriesLabelBlackCalled)
-//        XCTAssert(mockedView?.remainingCalories == 470)
-//    }
-//
-//    /** Given: User enters a number larger than the remaining calories in any field
-//     *  When:  The focus leaves the input field
-//     *  Then:  The remaining calories decreases with the same amount and the negative amount will be displayed in red
-//     */
-//    func test_didUpdateInputField_caloriesExceeded() {
-//        testObject?.didUpdateInputField(dailyConsumtion: 500, breakfast: "10", lunch: "491", dinner: "", snack: "")
-//        XCTAssertTrue(mockedView!.setRemainingCaloriesLabelRedCalled)
-//        XCTAssert(mockedView?.remainingCalories == -1)
-//    }
-//
-//    /** Given: User presses the "split equally" button
-//     *  When:  -
-//     *  Then:  The remaining calories will be split equally into the fields with the "remainder" calories added to Dinner
-//     */
-//    func test_didPressSplitEquallyButton() {
-//        testObject?.didPressSplitEquallyButton(calories: 403)
-//        XCTAssert(mockedView?.breakfastCalories == 100)
-//        XCTAssert(mockedView?.lunchCalories == 100)
-//        XCTAssert(mockedView?.dinnerCalories == 103)
-//        XCTAssert(mockedView?.snackCalories == 100)
-//    }
-//
-//    /** Given: User presses the "next" button
-//     *  When:  Remaining calories is 0
-//     *  Then:  The next view is displayed
-//     */
-//    func test_didPressNextButton_remainingCaloriesZero() {
-//        testObject?.didPressNextButton(remainingCalories: "0")
-//        XCTAssertTrue(mockedView!.navigateToMealPlanViewControllerCalled)
-//    }
-//
-//    /** Given: User presses the "next" button
-//     *  When:  Remaining calories is more than 0
-//     *  Then:  The a warning popup with remaining calories is displayed
-//     */
-//    func test_didPressNextButton_remainingCaloriesMoreThanZero() {
-//        testObject?.didPressNextButton(remainingCalories: "1")
-//        XCTAssertTrue(mockedView!.showPopupWarningCalled)
-//        XCTAssert(mockedView?.remainingCalories == 1)
-//    }
-//
-//    /** Given: User presses the "next" button
-//     *  When:  Remaining calories is less than 0
-//     *  Then:  The a warning popup with remaining calories is displayed
-//     */
-//    func test_didPressNextButton_remainingCaloriesLessThanZero() {
-//        testObject?.didPressNextButton(remainingCalories: "-1")
-//        XCTAssertTrue(mockedView!.showPopupWarningCalled)
-//        XCTAssert(mockedView?.remainingCalories == -1)
-//    }
-//}
-//
-//private class CalorieDistributionMock: CalorieDistributionPresentable {
-//
-//    var navigateToMealPlanViewControllerCalled = false
-//    var setRemainingCaloriesLabelRedCalled = false
-//    var setRemainingCaloriesLabelBlackCalled = false
-//    var showPopupWarningCalled = false
-//    var breakfastCalories: Int?
-//    var lunchCalories: Int?
-//    var dinnerCalories: Int?
-//    var snackCalories: Int?
-//    var remainingCalories: Int?
-//
-//    func navigateToMealPlanViewController() {
-//        navigateToMealPlanViewControllerCalled = true
-//    }
-//
-//    func setRemainingCaloriesLabel(calories: Int) {
-//        remainingCalories = calories
-//    }
-//
-//    func setBreakfastCaloriesInputField(calories: Int) {
-//        breakfastCalories = calories
-//    }
-//
-//    func setLunchCaloriesInputField(calories: Int) {
-//        lunchCalories = calories
-//    }
-//
-//    func setDinnerCaloriesInputField(calories: Int) {
-//        dinnerCalories = calories
-//    }
-//
-//    func setSnackCaloriesInputField(calories: Int) {
-//        snackCalories = calories
-//    }
-//
-//    func setRemainingCaloriesLabelRed() {
-//        setRemainingCaloriesLabelRedCalled = true
-//    }
-//
-//    func setRemainingCaloriesLabelBlack() {
-//        setRemainingCaloriesLabelBlackCalled = true
-//    }
-//
-//    func showPopupWarning(remainingCalories: Int) {
-//        self.remainingCalories = remainingCalories
-//        showPopupWarningCalled = true
-//    }
-//}
-//
+
+import XCTest
+@testable import HuelCalculator
+
+class CalorieDistributionPresenterTests: XCTestCase {
+
+    private var testObject: CalorieDistributionPresenter!
+    private var mockedView: MockedCalorieDistributionUI!
+    private var userManager: MockedUserManager!
+
+    override func setUp() {
+        super.setUp()
+        mockedView = MockedCalorieDistributionUI()
+        userManager = MockedUserManager()
+        testObject = CalorieDistributionPresenter(view: mockedView, userManager: userManager)
+        userManager.user = User(preferredUnitOfMeasurement: nil, age: nil, gender: nil, height: nil, weight: nil, goal: nil, activityLevel: nil)
+    }
+
+    override func tearDown() {
+        testObject = nil
+        mockedView = nil
+        userManager = nil
+        super.tearDown()
+    }
+
+
+    /** Given:
+     *  When:  update user consumption is called
+     *  Then:  The userManager updates the user with the correct calorie distributions
+     */
+    func test_updateUserConsumption() {
+        testObject.updateUserConsumption(breakfast: 20, lunch: 30, dinner: 40, snack: 50)
+
+        XCTAssertTrue(userManager.distributeCaloriesCalled)
+        XCTAssertEqual(userManager.calorieDistribution?.breakfast, 20)
+        XCTAssertEqual(userManager.calorieDistribution?.lunch, 30)
+        XCTAssertEqual(userManager.calorieDistribution?.dinner, 40)
+        XCTAssertEqual(userManager.calorieDistribution?.snack, 50)
+    }
+
+    /** Given: The signed in user has updated the calorie distribution
+     *  And:   The used amount of calories do not exceed the daily consumption
+     *  When:  The input fields gets updated
+     *  Then:  The UI is updated with correct calorie amounts
+     *  And:   The UI label color is set to black
+     */
+    func test_updateInputField() {
+        userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 2010, breakfast: 500, lunch: 500, dinner: 500, snack: 500)
+
+        testObject?.updateInputFields()
+
+        XCTAssertTrue(mockedView.setRemainingCaloriesLabelBlackCalled)
+        XCTAssertEqual(mockedView.remainingCalories, 10)
+        XCTAssertEqual(mockedView.breakfastCalories, 500)
+        XCTAssertEqual(mockedView.lunchCalories, 500)
+        XCTAssertEqual(mockedView.dinnerCalories, 500)
+        XCTAssertEqual(mockedView.snackCalories, 500)
+    }
+
+    /** Given: The signed in user has updated the calorie distribution
+     *  And:   The used amount of calories exceeds the daily consumption
+     *  When:  The input fields gets updated
+     *  Then:  The UI is updated with correct calorie amounts
+     *  And:   The UI label color is set to red
+     */
+    func test_updateInputFieldWhenUsedCaloriesExceedsDailyConsumption() {
+        userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 1990, breakfast: 500, lunch: 500, dinner: 500, snack: 500)
+
+        testObject?.updateInputFields()
+
+        XCTAssertTrue(mockedView.setRemainingCaloriesLabelRedCalled)
+        XCTAssertEqual(mockedView.remainingCalories, -10)
+        XCTAssertEqual(mockedView.breakfastCalories, 500)
+        XCTAssertEqual(mockedView.lunchCalories, 500)
+        XCTAssertEqual(mockedView.dinnerCalories, 500)
+        XCTAssertEqual(mockedView.snackCalories, 500)
+    }
+
+    /** Given:
+     *  When:  User presses the "split equally" button
+     *  Then:  The remaining calories will be split equally into the fields with the "remainder" calories added to Dinner
+     */
+    func test_didPressSplitEquallyButton() {
+        userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 403, breakfast: nil, lunch: nil, dinner: nil, snack: nil)
+
+        testObject?.didPressSplitEquallyButton()
+
+        XCTAssertTrue(userManager.distributeCaloriesCalled)
+        XCTAssertEqual(userManager.calorieDistribution?.breakfast, 100)
+        XCTAssertEqual(userManager.calorieDistribution?.lunch, 100)
+        XCTAssertEqual(userManager.calorieDistribution?.dinner, 103)
+        XCTAssertEqual(userManager.calorieDistribution?.snack, 100)
+    }
+
+    /** Given: User does not have any calorie consumtion
+     *  When:  User presses the "split equally" button
+     *  Then:  distribute calories should not be called
+     */
+    func test_didPressSplitEquallyButtonWhenNoDailyCalorieConsumptionExists() {
+        testObject?.didPressSplitEquallyButton()
+
+        XCTAssertFalse(userManager.distributeCaloriesCalled)
+        XCTAssertEqual(userManager.calorieDistribution?.breakfast, nil)
+    }
+
+    /** Given: Remaining calories are 0
+     *  When:  Asked if the controller should show the meal plan page
+     *  Then:  true should be returned
+     *  And:   No warning should be displayed
+     */
+    func test_shouldShowMealPlanPage_remainingCaloriesZero() {
+        let result = testObject.shouldShowMealPlanPage(remainingCalories: 0)
+
+        XCTAssertFalse(mockedView.showPopupWarningCalled)
+        XCTAssertTrue(result)
+    }
+
+    /** Given: Remaining calories are more than 0
+     *  When:  Asked if the controller should show the meal plan page
+     *  Then:  false should be returned
+     *  And:   A warning with remaining calories should be displayed
+     */
+    func test_shouldShowMealPlanPage_remainingCaloriesMoreThanZero() {
+        let result = testObject.shouldShowMealPlanPage(remainingCalories: 1)
+
+        XCTAssertTrue(mockedView.showPopupWarningCalled)
+        XCTAssertFalse(result)
+        XCTAssertEqual(mockedView.remainingCalories, 1)
+    }
+
+    /** Given: Remaining calories are less than 0
+     *  When:  Asked if the controller should show the meal plan page
+     *  Then:  false should be returned
+     *  And:   A warning with remaining calories should be displayed
+     */
+    func test_shouldShowMealPlanPage_remainingCaloriesLessThanZero() {
+        let result = testObject.shouldShowMealPlanPage(remainingCalories: -1)
+
+        XCTAssertTrue(mockedView.showPopupWarningCalled)
+        XCTAssertFalse(result)
+        XCTAssertEqual(mockedView.remainingCalories, -1)
+    }
+
+    /** Given: Remaining calories are nil
+     *  When:  Asked if the controller should show the meal plan page
+     *  Then:  false should be returned
+     */
+    func test_shouldShowMealPlanPage_remainingCaloriesNil() {
+        let result = testObject.shouldShowMealPlanPage(remainingCalories: nil)
+
+        XCTAssertFalse(mockedView.showPopupWarningCalled)
+        XCTAssertFalse(result)
+    }
+}
+
+

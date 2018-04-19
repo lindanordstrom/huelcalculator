@@ -80,6 +80,50 @@ class MockedPersonalDetailsUI: PersonalDetailsUI {
     }
 }
 
+class MockedCalorieDistributionUI: CalorieDistributionUI {
+    var setRemainingCaloriesLabelRedCalled = false
+    var setRemainingCaloriesLabelBlackCalled = false
+    var showPopupWarningCalled = false
+    var breakfastCalories: Int?
+    var lunchCalories: Int?
+    var dinnerCalories: Int?
+    var snackCalories: Int?
+    var remainingCalories: Int?
+
+    func setRemainingCaloriesLabel(calories: Int) {
+        remainingCalories = calories
+    }
+
+    func setBreakfastCaloriesInputField(calories: Int) {
+        breakfastCalories = calories
+    }
+
+    func setLunchCaloriesInputField(calories: Int) {
+        lunchCalories = calories
+    }
+
+    func setDinnerCaloriesInputField(calories: Int) {
+        dinnerCalories = calories
+    }
+
+    func setSnackCaloriesInputField(calories: Int) {
+        snackCalories = calories
+    }
+
+    func setRemainingCaloriesLabelRed() {
+        setRemainingCaloriesLabelRedCalled = true
+    }
+
+    func setRemainingCaloriesLabelBlack() {
+        setRemainingCaloriesLabelBlackCalled = true
+    }
+
+    func showPopupWarning(remainingCalories: Int) {
+        self.remainingCalories = remainingCalories
+        showPopupWarningCalled = true
+    }
+}
+
 class MockedMealPlanUI: MealPlanUI {
     var breakfastAmount: String?
     var lunchAmount: String?
@@ -164,5 +208,23 @@ class MockedUrlHandler: UrlHandler {
     func open(_ url: URL, options: [String : Any], completionHandler completion: ((Bool) -> Swift.Void)?) {
         openURLCalled = true
         urlString = url.absoluteString
+    }
+}
+
+class MockedDataStore: DataStore {
+    var setValueForeKeyCalled = false
+    var objectForKeyCalled = false
+    var key: String?
+    var value: Any?
+
+    func set(_ value: Any?, forKey defaultName: String) {
+        setValueForeKeyCalled = true
+        self.value = value
+        key = defaultName
+    }
+    func object(forKey defaultName: String) -> Any? {
+        objectForKeyCalled = true
+        key = defaultName
+        return value
     }
 }
