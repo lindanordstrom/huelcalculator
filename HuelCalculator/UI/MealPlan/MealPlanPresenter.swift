@@ -33,10 +33,11 @@ class MealPlanPresenter {
 
         guard product is HuelBar else {
             let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
-            return String(format: Constants.MealPlanPage.numberOfGramsAndScoops, gram, scoops)
+            let water = gram * 5
+            return String(format: Constants.MealPlanPage.numberOfGramsScoopsAndKcal, gram, scoops, water, calories)
         }
         
         let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
-        return String(format: Constants.MealPlanPage.numberOfBarsAndGrams, bars, gram)
+        return String(format: Constants.MealPlanPage.numberOfBarsGramsAndKcal, bars, gram, calories)
     }
 }

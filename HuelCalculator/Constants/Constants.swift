@@ -50,8 +50,8 @@ struct Constants {
     }
     struct MealPlanPage {
         static let segueToThisPageName = "showMealPlanPage"
-        static let numberOfBarsAndGrams = "%.1f bars (%.0f g)"
-        static let numberOfGramsAndScoops = "%.0f g / %.1f scoops"
+        static let numberOfBarsGramsAndKcal = "%.1f bars / %.0f g\nTotal: %d kcal"
+        static let numberOfGramsScoopsAndKcal = "%.0f g / %.1f scoops\n%.0f ml water\nTotal: %d kcal"
     }
 
     struct User {
