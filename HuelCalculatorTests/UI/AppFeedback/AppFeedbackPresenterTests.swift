@@ -62,7 +62,7 @@ class AppFeedbackPresenterTests: XCTestCase {
         testObject?.didPressSendEmailButton(canSendMail: true)
 
         XCTAssertTrue(ui.showMailComposeViewCalled)
-        XCTAssertEqual(ui.mail.recipients.first, "lindanordstrom86@gmail.com")
+        XCTAssertEqual(ui.mail.recipients.first, "huelcalculator@gmail.com")
         XCTAssertEqual(ui.mail.subject, "Feedback: Huel Calculator")
         XCTAssertEqual(ui.mail.message, "<br><i>Enter your feedback here</i><br><br>-----------------------<br>App version: 1.0.1<br>Device: mockedModelName<br>iOS version: mockedSystemVersion<br>-----------------------<br>")
     }

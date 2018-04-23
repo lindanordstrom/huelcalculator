@@ -94,6 +94,7 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
                 return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
             default:
                 assert(false, "Unexpected element kind")
+                return UICollectionReusableView()
             }
     }
 }

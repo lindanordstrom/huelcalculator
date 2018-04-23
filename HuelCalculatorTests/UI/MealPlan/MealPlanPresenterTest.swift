@@ -39,10 +39,10 @@ class MealPlanPresenterTest: XCTestCase {
     func test_didLoadView_unflavoured() {
         testObject.didLoadView(with: HuelUnflavouredShake())
 
-        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.6 scoops")
-        XCTAssertEqual(ui?.lunchAmount, "49 g / 1.3 scoops")
-        XCTAssertEqual(ui?.dinnerAmount, "74 g / 1.9 scoops")
-        XCTAssertEqual(ui?.snackAmount, "98 g / 2.6 scoops")
+        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.6 scoops\n123 ml water\nTotal: 100 kcal")
+        XCTAssertEqual(ui?.lunchAmount, "49 g / 1.3 scoops\n246 ml water\nTotal: 200 kcal")
+        XCTAssertEqual(ui?.dinnerAmount, "74 g / 1.9 scoops\n369 ml water\nTotal: 300 kcal")
+        XCTAssertEqual(ui?.snackAmount, "98 g / 2.6 scoops\n491 ml water\nTotal: 400 kcal")
     }
 
     /** Given: User has distributed calories
@@ -52,10 +52,10 @@ class MealPlanPresenterTest: XCTestCase {
     func test_didLoadView_vanilla() {
         testObject.didLoadView(with: HuelVanillaShake())
 
-        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.7 scoops")
-        XCTAssertEqual(ui?.lunchAmount, "50 g / 1.3 scoops")
-        XCTAssertEqual(ui?.dinnerAmount, "75 g / 2.0 scoops")
-        XCTAssertEqual(ui?.snackAmount, "100 g / 2.6 scoops")
+        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.7 scoops\n125 ml water\nTotal: 100 kcal")
+        XCTAssertEqual(ui?.lunchAmount, "50 g / 1.3 scoops\n250 ml water\nTotal: 200 kcal")
+        XCTAssertEqual(ui?.dinnerAmount, "75 g / 2.0 scoops\n375 ml water\nTotal: 300 kcal")
+        XCTAssertEqual(ui?.snackAmount, "100 g / 2.6 scoops\n500 ml water\nTotal: 400 kcal")
     }
 
     /** Given: User has distributed calories
@@ -65,10 +65,10 @@ class MealPlanPresenterTest: XCTestCase {
     func test_didLoadView_bar() {
         testObject.didLoadView(with: HuelBar())
 
-        XCTAssertEqual(ui?.breakfastAmount, "0.4 bars (26 g)")
-        XCTAssertEqual(ui?.lunchAmount, "0.8 bars (52 g)")
-        XCTAssertEqual(ui?.dinnerAmount, "1.2 bars (79 g)")
-        XCTAssertEqual(ui?.snackAmount, "1.6 bars (105 g)")
+        XCTAssertEqual(ui?.breakfastAmount, "0.4 bars / 26 g\nTotal: 100 kcal")
+        XCTAssertEqual(ui?.lunchAmount, "0.8 bars / 52 g\nTotal: 200 kcal")
+        XCTAssertEqual(ui?.dinnerAmount, "1.2 bars / 79 g\nTotal: 300 kcal")
+        XCTAssertEqual(ui?.snackAmount, "1.6 bars / 105 g\nTotal: 400 kcal")
     }
 
     /** Given: No signed in user exists
