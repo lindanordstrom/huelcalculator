@@ -20,7 +20,7 @@ protocol PersonalDetailsUI: class {
 class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     
     @IBOutlet var measurementSystemSelector: UISegmentedControl!
-    @IBOutlet var ageInputField: UITextField!
+    @IBOutlet var bornYearInputField: UITextField!
     @IBOutlet var genderSelector: UISegmentedControl!
     @IBOutlet var heightInputField: UITextField!
     @IBOutlet var heightUnitLabel: UILabel!
@@ -57,7 +57,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         let height = (Float(heightInputField.text ?? Constants.General.emptyString) ?? 0) + inches * 0.0833333333
         
         let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex),
-                        age: Int(ageInputField.text ?? Constants.General.emptyString),
+                        bornYear: bornYearInputField.text,
                         gender: User.Gender(rawValue: genderSelector.selectedSegmentIndex),
                         height: height > 0 ? height : nil,
                         weight: Float(weightInputField.text ?? Constants.General.emptyString),
@@ -94,7 +94,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     
     func resetAllFields() {
         measurementSystemSelector.selectedSegmentIndex = 0
-        ageInputField.text = nil
+        bornYearInputField.text = nil
         genderSelector.selectedSegmentIndex = 0
         heightInputField.text = nil
         weightInputField.text = nil
@@ -106,7 +106,6 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
 
     func populateFieldsWith(user: User) {
         guard let preferredUnitOfMeasurementIndex = user.preferredUnitOfMeasurement?.rawValue,
-            let age = user.age,
             let genderIndex = user.gender?.rawValue,
             let height = user.height,
             let weight = user.weight,
@@ -118,7 +117,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         }
 
         measurementSystemSelector.selectedSegmentIndex = preferredUnitOfMeasurementIndex
-        ageInputField.text = "\(age)"
+        bornYearInputField.text = user.bornYear
         genderSelector.selectedSegmentIndex = genderIndex
         if user.preferredUnitOfMeasurement == User.UnitOfMeasurement.imperial {
             let feetAndInches = feetToFeetWithInches(feetWithRemainder: height)

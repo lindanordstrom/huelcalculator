@@ -45,12 +45,12 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  And:   The view shown according to the metric system
      */
     func test_didLoadViewWhenMetricUserExists() {
-        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        userManager.user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
         testObject?.didLoadView()
 
         XCTAssertTrue(ui.updateUIToMetricSystemCalled)
         XCTAssertTrue(ui.populateFieldsWithUserCalled)
-        XCTAssertEqual(ui.user?.age, 30)
+        XCTAssertEqual(ui.user?.height, 177)
     }
 
     /** Given: A saved user exists with preference set to imperial
@@ -59,12 +59,12 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  And:   The view shown according to the imperial system
      */
     func test_didLoadViewWhenImperialUserExists() {
-        userManager.user = User(preferredUnitOfMeasurement: .imperial, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        userManager.user = User(preferredUnitOfMeasurement: .imperial, bornYear: "1980", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
         testObject?.didLoadView()
 
         XCTAssertTrue(ui.updateUIToImperialSystemCalled)
         XCTAssertTrue(ui.populateFieldsWithUserCalled)
-        XCTAssertEqual(ui.user?.age, 30)
+        XCTAssertEqual(ui.user?.height, 177)
     }
 
 
@@ -96,12 +96,12 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  And:   the personal details view is dismissed
      */
     func test_didPressDoneButton() {
-        let user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        let user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
 
         testObject?.didPressDoneButton(user: user)
 
         XCTAssertTrue(userManager.saveUserToDataStoreCalled)
-        XCTAssertEqual(userManager.user?.age, 30)
+        XCTAssertEqual(userManager.user?.height, 177)
         XCTAssertTrue(userManager.saveOldCalorieDistributionsIfNeededCalled)
         XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, nil)
         XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
@@ -118,15 +118,15 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  And:   the personal details view is dismissed
      */
     func test_didPressDoneButtonWhenPreviousDetailsExists() {
-        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 20, gender: .female, height: 160, weight: 50, goal: .maintain, activityLevel: .very)
+        userManager.user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .female, height: 160, weight: 50, goal: .maintain, activityLevel: .very)
         userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 2000, breakfast: 500, lunch: 500, dinner: 500, snack: 500)
 
-        let user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        let user = User(preferredUnitOfMeasurement: .metric, bornYear: "1970", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
 
         testObject?.didPressDoneButton(user: user)
 
         XCTAssertTrue(userManager.saveUserToDataStoreCalled)
-        XCTAssertEqual(userManager.user?.age, 30)
+        XCTAssertEqual(userManager.user?.height, 177)
         XCTAssertTrue(userManager.saveOldCalorieDistributionsIfNeededCalled)
         XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, 500)
         XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
@@ -139,7 +139,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  Then:  An Error message is displayed
      */
     func test_didPressDoneButton_missingInputData() {
-        let user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: nil, weight: 60, goal: .lose, activityLevel: .moderately)
+        let user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: nil, weight: 60, goal: .lose, activityLevel: .moderately)
         testObject?.didPressDoneButton(user: user)
 
         XCTAssertTrue(ui.showErrorMessageCalled)
@@ -151,7 +151,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
      *  Then:  An Error message is displayed
      */
     func test_didPressDoneButton_noInputData() {
-        let user = User(preferredUnitOfMeasurement: .metric, age: nil, gender: .male, height: nil, weight: nil, goal: .lose, activityLevel: .moderately)
+        let user = User(preferredUnitOfMeasurement: .metric, bornYear: nil, gender: .male, height: nil, weight: nil, goal: .lose, activityLevel: .moderately)
         testObject?.didPressDoneButton(user: user)
 
         XCTAssertTrue(ui.showErrorMessageCalled)

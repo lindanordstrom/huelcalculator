@@ -20,7 +20,7 @@ class CalorieDistributionPresenterTests: XCTestCase {
         mockedView = MockedCalorieDistributionUI()
         userManager = MockedUserManager()
         testObject = CalorieDistributionPresenter(view: mockedView, userManager: userManager)
-        userManager.user = User(preferredUnitOfMeasurement: nil, age: nil, gender: nil, height: nil, weight: nil, goal: nil, activityLevel: nil)
+        userManager.user = User(preferredUnitOfMeasurement: nil, bornYear: nil, gender: nil, height: nil, weight: nil, goal: nil, activityLevel: nil)
     }
 
     override func tearDown() {

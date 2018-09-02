@@ -47,7 +47,7 @@ class LandingPagePresenterTests: XCTestCase {
      *  Then: Nothing should happen
      */
     func test_showPersonalDetailsPageIfNeededWhenUserAlreadyExists() {
-        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        userManager.user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
 
         testObject.showPersonalDetailsPageIfNeeded()
 

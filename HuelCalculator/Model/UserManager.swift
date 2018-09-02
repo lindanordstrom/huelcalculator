@@ -31,11 +31,25 @@ class HuelUserManager: UserManager {
     }
 
     func getSignedInUser() -> User? {
-        guard let userData = dataStore.object(forKey: Constants.Keys.user) as? Data else { return nil }
-        return try? JSONDecoder().decode(User.self, from: userData)
+        guard let userData = dataStore.object(forKey: Constants.Keys.user) as? Data,
+        let user = try? JSONDecoder().decode(User.self, from: userData) else { return nil }
+        updateUser(user)
+        return user
+    }
+    
+    private func updateUser(_ user: User?) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        guard let bornYear = user?.bornYear,
+            let startDate = dateFormatter.date(from: bornYear),
+            let yearsSince = Calendar.current.dateComponents([.year], from: startDate, to: Date()).year else {
+                return
+        }
+        user?.age = yearsSince
     }
 
     func saveUserToDataStore(user: User?) {
+        updateUser(user)
         guard let user = user,
             let encodedUser = try? JSONEncoder().encode(user) else { return }
         dataStore.set(encodedUser, forKey: Constants.Keys.user)

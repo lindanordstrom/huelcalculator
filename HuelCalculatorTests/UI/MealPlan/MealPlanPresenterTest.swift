@@ -21,7 +21,7 @@ class MealPlanPresenterTest: XCTestCase {
         userManager = MockedUserManager()
         testObject = MealPlanPresenter(view: ui, userManager: userManager)
 
-        userManager.user = User(preferredUnitOfMeasurement: .metric, age: 30, gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        userManager.user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
         userManager.user?.calorieDistribution = CalorieDistribution(dailyCalorieConsumption: 2000, breakfast: 100, lunch: 200, dinner: 300, snack: 400)
     }
 

@@ -52,17 +52,18 @@ class User: Codable {
     }
     
     var preferredUnitOfMeasurement: UnitOfMeasurement?
-    var age: Int?
+    var bornYear: String?
     var gender: Gender?
     var height: Float?
     var weight: Float?
     var goal: Goal?
     var activityLevel: ActivityLevel?
     var calorieDistribution = CalorieDistribution()
+    var age: Int?
     
-    init(preferredUnitOfMeasurement: UnitOfMeasurement?, age: Int?, gender: Gender?, height: Float?, weight: Float?, goal: Goal?, activityLevel: ActivityLevel?) {
+    init(preferredUnitOfMeasurement: UnitOfMeasurement?, bornYear: String?, gender: Gender?, height: Float?, weight: Float?, goal: Goal?, activityLevel: ActivityLevel?) {
         self.preferredUnitOfMeasurement = preferredUnitOfMeasurement
-        self.age = age
+        self.bornYear = bornYear
         self.gender = gender
         self.height = height
         self.weight = weight

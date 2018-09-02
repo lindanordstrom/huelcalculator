@@ -41,7 +41,7 @@ class PersonalDetailsPresenter {
     
     func didPressDoneButton(user: User?) {
         var user = user
-        guard user?.age != nil, user?.weight != nil, user?.height != nil else {
+        guard user?.bornYear?.isEmpty == false, user?.weight != nil, user?.height != nil else {
             view?.showErrorMessage(true)
             return
         }
