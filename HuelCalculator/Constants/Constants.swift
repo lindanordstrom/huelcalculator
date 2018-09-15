@@ -55,12 +55,11 @@ struct Constants {
     }
 
     struct User {
-        static let sedentaryActive = "Sedentary - little or no exercise"
-        static let lightlyActive =  "Lightly Active - exercise 1-3 times/week"
-        static let moderatelyActive =  "Moderately Active - exercise 3-5 times/week"
-        static let veryActive =  "Very Active - hard exercise 6-7 times/week"
-        static let extraActive =  "Extra Active - very hard exercise or physical job"
-        static let selectActivity =  "Select activity"
+        static let sedentaryActive = "Little or no exercise"
+        static let lightlyActive =  "Exercise 1-3 times/week"
+        static let moderatelyActive =  "Exercise 3-5 times/week"
+        static let veryActive =  "Exercise 6-7 times/week"
+        static let extraActive =  "Hard daily exercise/physical job"
     }
 
     struct Keys {
