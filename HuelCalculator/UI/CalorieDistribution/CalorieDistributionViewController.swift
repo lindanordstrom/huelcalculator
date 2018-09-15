@@ -36,6 +36,7 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
         presenter = CalorieDistributionPresenter(view: self)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CalorieDistributionViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        Analytics.log(withName: "CalorieDistribution", contentType: "Page", contentId: nil, customAttributes: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

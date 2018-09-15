@@ -30,6 +30,7 @@ class LandingPageViewController: UIViewController, LandingPageUI {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = LandingPagePresenter(view: self)
+        Analytics.log(withName: "LandingPage", contentType: "Page", contentId: nil, customAttributes: nil)
     }
 
     func showCalculationPage(with product: MealReplacementProduct) {

@@ -29,6 +29,7 @@ class MealPlanViewController: UIViewController, MealPlanUI {
         super.viewDidLoad()
         presenter = MealPlanPresenter(view: self)
         presenter?.didLoadView(with: product)
+        Analytics.log(withName: "MealPlan", contentType: "Page", contentId: nil, customAttributes: nil)
     }
     
     func setBreakfastAmount(amountLabel: String?) {

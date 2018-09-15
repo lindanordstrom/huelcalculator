@@ -21,6 +21,7 @@ class AppFeedbackViewController: UIViewController, AppFeedbackUI {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = AppFeedbackPresenter(view: self)
+        Analytics.log(withName: "AppFeedback", contentType: "Page", contentId: nil, customAttributes: nil)
     }
 
     @IBAction func emailButtonPressed(_ sender: Any) {

@@ -77,5 +77,6 @@ class LandingPagePresenter {
 
     private func didPressGetHuel() {
         urlManager.open(Constants.LandingPage.getHuelUrl)
+        Analytics.log(withName: "GetHuel", contentType: "WebPage", contentId: nil, customAttributes: nil)
     }
 }

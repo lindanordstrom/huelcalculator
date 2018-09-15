@@ -42,6 +42,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         addListenerToDismissKeyboardOnTap()
         presenter = PersonalDetailsPresenter(view: self)
         presenter?.didLoadView()
+        Analytics.log(withName: "PersonalDetails", contentType: "Page", contentId: nil, customAttributes: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
