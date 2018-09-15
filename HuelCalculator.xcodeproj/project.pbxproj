@@ -18,7 +18,7 @@
 		43B6E9AD2085FDA40050361E /* AppFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */; };
 		43B6E9AF2086081F0050361E /* UrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9AE2086081F0050361E /* UrlManager.swift */; };
 		43B6E9B2208613840050361E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6E9B1208613840050361E /* Constants.swift */; };
-		43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */; };
+		43C8AFC82084A88300772D3F /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC72084A88300772D3F /* LandingPageViewController.swift */; };
 		43C8AFCA2084A89200772D3F /* LandingPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */; };
 		43C8AFCC2084C32F00772D3F /* LandingPageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */; };
 		43D51928207FAD2000EDF397 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D51927207FAD2000EDF397 /* DataStore.swift */; };
@@ -68,7 +68,7 @@
 		43B6E9AC2085FDA40050361E /* AppFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackPresenter.swift; sourceTree = "<group>"; };
 		43B6E9AE2086081F0050361E /* UrlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlManager.swift; sourceTree = "<group>"; };
 		43B6E9B1208613840050361E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageCollectionViewController.swift; sourceTree = "<group>"; };
+		43C8AFC72084A88300772D3F /* LandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
 		43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPagePresenter.swift; sourceTree = "<group>"; };
 		43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageItemCell.swift; sourceTree = "<group>"; };
 		43D51927207FAD2000EDF397 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		43C8AFC62084A85200772D3F /* LandingPage */ = {
 			isa = PBXGroup;
 			children = (
-				43C8AFC72084A88300772D3F /* LandingPageCollectionViewController.swift */,
+				43C8AFC72084A88300772D3F /* LandingPageViewController.swift */,
 				43C8AFC92084A89200772D3F /* LandingPagePresenter.swift */,
 				43C8AFCB2084C32F00772D3F /* LandingPageItemCell.swift */,
 			);
@@ -484,7 +484,7 @@
 				43C8AFCC2084C32F00772D3F /* LandingPageItemCell.swift in Sources */,
 				43B6E9AB2085FD950050361E /* AppFeedbackViewController.swift in Sources */,
 				439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */,
-				43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */,
+				43C8AFC82084A88300772D3F /* LandingPageViewController.swift in Sources */,
 				BF4517BF1E093B4C00D682D5 /* PickerViewController.swift in Sources */,
 				43D81B152086457A00C5E6D3 /* UrlHandler.swift in Sources */,
 				BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */,

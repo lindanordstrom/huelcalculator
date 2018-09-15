@@ -14,9 +14,19 @@ protocol LandingPageUI: class {
     func showErrorAndPersonalDetailsPage()
 }
 
-class LandingPageCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, LandingPageUI {
+class LandingPageViewController: UIViewController, LandingPageUI {
     var presenter: LandingPagePresenter?
 
+    @IBOutlet var collectionView: UICollectionView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.deselectItem(at: indexPath, animated: animated)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = LandingPagePresenter(view: self)
@@ -47,54 +57,58 @@ class LandingPageCollectionViewController: UICollectionViewController, UICollect
         }))
         self.present(alert, animated: true, completion: nil)
     }
+}
 
-    // MARK: UICollectionViewDataSource
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+// MARK: UICollectionViewDataSource
+extension LandingPageViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfItemsOnLandingPage() ?? 0
     }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.LandingPage.cellIdentifier, for: indexPath) as? LandingPageItemCell
-
+        
         let titleAndImage = presenter?.getTitleAndImageFrom(indexPath: indexPath)
-
+        
         cell?.title.text = titleAndImage?.title
         cell?.image.image = titleAndImage?.image
         cell?.image.highlightedImage = titleAndImage?.highlightedImage
-    
+        
         return cell ?? UICollectionViewCell()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width  = view.frame.size.width * 0.4
         let height = width
-
+        
         return CGSize(width: width, height: height)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let inset = view.frame.size.width * 0.07
         return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return view.frame.size.width * 0.07
     }
+    
+}
 
-    // MARK: UICollectionViewDelegate
-
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+// MARK: UICollectionViewDelegate
+extension LandingPageViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectItemOnLandingPage(indexPath: indexPath)
     }
-
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            switch kind {
-            case UICollectionElementKindSectionHeader:
-                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
-            default:
-                assert(false, "Unexpected element kind")
-                return UICollectionReusableView()
-            }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
+        default:
+            assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
+        }
     }
 }
