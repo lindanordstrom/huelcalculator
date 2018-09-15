@@ -41,7 +41,7 @@ struct Constants {
         static let cm = "cm"
         static let halfKg = "0.5 kg"
         static let onePound = "1 lb"
-        static let activityPickerViewController = "ActivityPickerViewController"
+        static let pickerViewController = "PickerViewController"
     }
     struct CalorieDistributionPage {
         static let viewControllerName = "CalorieDistributionViewController"

@@ -38,8 +38,8 @@
 		BF23FD9D1DFB80C9004A2C26 /* MealPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */; };
 		BF23FD9E1DFB80C9004A2C26 /* PersonalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */; };
 		BF23FDA01DFB80EF004A2C26 /* MealPlanPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */; };
-		BF4517BF1E093B4C00D682D5 /* ActivityPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4517BD1E093B4B00D682D5 /* ActivityPickerViewController.swift */; };
-		BF4517C01E093B4C00D682D5 /* ActivityPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF4517BE1E093B4C00D682D5 /* ActivityPickerViewController.xib */; };
+		BF4517BF1E093B4C00D682D5 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4517BD1E093B4B00D682D5 /* PickerViewController.swift */; };
+		BF4517C01E093B4C00D682D5 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF4517BE1E093B4C00D682D5 /* PickerViewController.xib */; };
 		BFE4646E1DFB3CDA00687A16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE4646D1DFB3CDA00687A16 /* AppDelegate.swift */; };
 		BFE464731DFB3CDA00687A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE464711DFB3CDA00687A16 /* Main.storyboard */; };
 		BFE464751DFB3CDA00687A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFE464741DFB3CDA00687A16 /* Assets.xcassets */; };
@@ -88,8 +88,8 @@
 		BF23FD991DFB80C9004A2C26 /* MealPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanViewController.swift; sourceTree = "<group>"; };
 		BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsViewController.swift; sourceTree = "<group>"; };
 		BF23FD9F1DFB80EF004A2C26 /* MealPlanPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenter.swift; sourceTree = "<group>"; };
-		BF4517BD1E093B4B00D682D5 /* ActivityPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPickerViewController.swift; sourceTree = "<group>"; };
-		BF4517BE1E093B4C00D682D5 /* ActivityPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityPickerViewController.xib; sourceTree = "<group>"; };
+		BF4517BD1E093B4B00D682D5 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		BF4517BE1E093B4C00D682D5 /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
 		BFC3CFD11DFB8D5C001E2F6F /* HuelCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuelCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC3CFD51DFB8D5C001E2F6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFE4646A1DFB3CDA00687A16 /* HuelCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuelCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +214,15 @@
 			path = AppFeedback;
 			sourceTree = "<group>";
 		};
+		7D9E4DB3214D5AFE00980BB5 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BF4517BD1E093B4B00D682D5 /* PickerViewController.swift */,
+				BF4517BE1E093B4C00D682D5 /* PickerViewController.xib */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		BF2096B21DFF58EF006EF21E /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +278,7 @@
 				BF23FD9A1DFB80C9004A2C26 /* PersonalDetail */,
 				BF23FD961DFB80C9004A2C26 /* CalorieDistribution */,
 				BF23FD981DFB80C9004A2C26 /* MealPlan */,
+				7D9E4DB3214D5AFE00980BB5 /* Shared */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -296,8 +306,6 @@
 			children = (
 				BF23FD9B1DFB80C9004A2C26 /* PersonalDetailsViewController.swift */,
 				BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */,
-				BF4517BD1E093B4B00D682D5 /* ActivityPickerViewController.swift */,
-				BF4517BE1E093B4C00D682D5 /* ActivityPickerViewController.xib */,
 			);
 			path = PersonalDetail;
 			sourceTree = "<group>";
@@ -445,7 +453,7 @@
 			files = (
 				BFE464781DFB3CDA00687A16 /* LaunchScreen.storyboard in Resources */,
 				BFE464751DFB3CDA00687A16 /* Assets.xcassets in Resources */,
-				BF4517C01E093B4C00D682D5 /* ActivityPickerViewController.xib in Resources */,
+				BF4517C01E093B4C00D682D5 /* PickerViewController.xib in Resources */,
 				BFE464731DFB3CDA00687A16 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,7 +485,7 @@
 				43B6E9AB2085FD950050361E /* AppFeedbackViewController.swift in Sources */,
 				439BB27D207BBB0B00E7F50D /* MealReplacementProduct.swift in Sources */,
 				43C8AFC82084A88300772D3F /* LandingPageCollectionViewController.swift in Sources */,
-				BF4517BF1E093B4C00D682D5 /* ActivityPickerViewController.swift in Sources */,
+				BF4517BF1E093B4C00D682D5 /* PickerViewController.swift in Sources */,
 				43D81B152086457A00C5E6D3 /* UrlHandler.swift in Sources */,
 				BF23FD9C1DFB80C9004A2C26 /* CalorieDistributionViewController.swift in Sources */,
 				43D81B172086458600C5E6D3 /* DeviceInfo.swift in Sources */,

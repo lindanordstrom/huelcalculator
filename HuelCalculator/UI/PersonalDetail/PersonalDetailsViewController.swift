@@ -34,7 +34,6 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     @IBOutlet var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
 
     private var selectedActivity: User.ActivityLevel?
-    private var selectedActivityIndex: Int?
 
     private var presenter: PersonalDetailsPresenter?
 
@@ -78,11 +77,11 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     
     @IBAction func activitySelectorPressed() {
         dismissKeyboard()
-        let pickerView = ActivityPickerViewController(index: selectedActivityIndex ?? 0)
-        pickerView.modalPresentationStyle = .overCurrentContext
-        pickerView.set { (activityValue, index) in
-            self.setActivity(activity: activityValue, index: index)
+        let pickerView = PickerViewController(with: User.ActivityLevel.self, index: selectedActivity?.rawValue ?? 0) { (activityLevel: Pickable?) in
+            
+            self.setActivity(activity: activityLevel as? User.ActivityLevel)
         }
+        pickerView.modalPresentationStyle = .overCurrentContext
         present(pickerView, animated: false, completion: nil)
     }
     
@@ -99,7 +98,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         heightInputField.text = nil
         weightInputField.text = nil
         goalSelector.selectedSegmentIndex = 0
-        setActivity(activity: User.ActivityLevel.moderately, index: 2)
+        setActivity(activity: User.ActivityLevel.moderately)
         updateUIToMetricSystem()
         showErrorMessage(false)
     }
@@ -110,8 +109,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
             let height = user.height,
             let weight = user.weight,
             let goalIndex = user.goal?.rawValue,
-            let activity = user.activityLevel,
-            let activityIndex = user.activityLevel?.rawValue else {
+            let activity = user.activityLevel else {
                 resetAllFields()
                 return
         }
@@ -128,7 +126,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         }
         weightInputField.text = "\(weight)"
         goalSelector.selectedSegmentIndex = goalIndex
-        setActivity(activity: activity, index: activityIndex)
+        setActivity(activity: activity)
     }
     
     func showErrorMessage(_ flag: Bool) {
@@ -179,15 +177,13 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         view.endEditing(true)
     }
 
-    private func setActivity(activity: User.ActivityLevel?, index: Int?) {
+    private func setActivity(activity: User.ActivityLevel?) {
         guard let activity = activity else {
             selectedActivity = nil
-            selectedActivityIndex = nil
             return
         }
-        let activityString = User.ActivityLevel.getActivityString(activity: activity)
+        let activityString = activity.description
         activityButton.setTitle(activityString, for: .normal)
         selectedActivity = activity
-        selectedActivityIndex = index
     }
 }

@@ -8,6 +8,12 @@
 
 import Foundation
 
+protocol Pickable {
+    var description: String { get }
+    static var itemCount: Int { get }
+    static func itemAt(rawValue: Int) -> Pickable?
+}
+
 class User: Codable {
     enum Gender: Int, Codable {
         case male
@@ -20,7 +26,7 @@ class User: Codable {
         case gain
     }
     
-    enum ActivityLevel: Int, Codable {
+    enum ActivityLevel: Int, Codable, Pickable {
         case sedentary
         case lightly
         case moderately
@@ -28,21 +34,23 @@ class User: Codable {
         case extra
         case count
         
-        static func getActivityString(activity: User.ActivityLevel) -> String {
-            switch activity {
-            case .sedentary:
-                return Constants.User.sedentaryActive
-            case .lightly:
-                return Constants.User.lightlyActive
-            case .moderately:
-                return Constants.User.moderatelyActive
-            case .very:
-                return Constants.User.veryActive
-            case .extra:
-                return Constants.User.extraActive
-            default:
-                return Constants.User.selectActivity
+        var description: String {
+            switch self {
+            case .sedentary: return Constants.User.sedentaryActive
+            case .lightly: return Constants.User.lightlyActive
+            case .moderately: return Constants.User.moderatelyActive
+            case .very: return Constants.User.veryActive
+            case .extra: return Constants.User.extraActive
+            default: return ""
             }
+        }
+        
+        static var itemCount: Int {
+            return ActivityLevel.count.rawValue
+        }
+        
+        static func itemAt(rawValue: Int) -> Pickable? {
+            return ActivityLevel(rawValue: rawValue)
         }
     }
     

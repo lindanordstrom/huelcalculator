@@ -1,5 +1,5 @@
 //
-//  ActivityPickerViewController.swift
+//  PickerViewController.swift
 //  HuelCalculator
 //
 //  Created by Linda on 20/12/2016.
@@ -8,24 +8,31 @@
 
 import UIKit
 
-class ActivityPickerViewController: UIViewController {
-    
-    typealias SelectionClosure = (User.ActivityLevel?, Int) -> ()
+class PickerViewController: UIViewController {
     
     private let animationTime: TimeInterval = 0.3
     private var selectedIndex: Int
     
     @IBOutlet private weak var background: UIView?
-    @IBOutlet private weak var picker: UIPickerView?
+    @IBOutlet private weak var picker: UIPickerView? {
+        didSet {
+            picker?.delegate = self
+            picker?.dataSource = self
+            picker?.selectRow(selectedIndex, inComponent: 0, animated: false)
+        }
+    }
     
     @IBOutlet private weak var visibleConstraint: NSLayoutConstraint?
     @IBOutlet private weak var inVisibleConstraint: NSLayoutConstraint?
     
-    private var selectionCallback: SelectionClosure?
+    private var closure: ((Pickable?) -> Void)?
+    private var pickableType: Pickable.Type
     
-    init(index: Int) {
+    init(with type: Pickable.Type, index: Int, closure: ((Pickable?) -> Void)?) {
         selectedIndex = index
-        super.init(nibName: Constants.PersonalDetailsPage.activityPickerViewController, bundle: nil)
+        self.closure = closure
+        self.pickableType = type
+        super.init(nibName: Constants.PersonalDetailsPage.pickerViewController, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,11 +42,8 @@ class ActivityPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setInitialState()
-        picker?.delegate = self
-        picker?.dataSource = self
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ActivityPickerViewController.doneButtonPressed))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(doneButtonPressed))
         view.addGestureRecognizer(tap)
-        picker?.selectRow(selectedIndex, inComponent: 0, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,17 +51,10 @@ class ActivityPickerViewController: UIViewController {
         makeVisible()
     }
     
-    func set(selectionCallback: SelectionClosure?) {
-        self.selectionCallback = selectionCallback
-    }
-    
     @IBAction private func doneButtonPressed() {
-        guard let value = picker?.selectedRow(inComponent: 0) else {
-            return
-        }
-        
-        let activityLevel = User.ActivityLevel(rawValue: value)
-        selectionCallback?(activityLevel, value)
+        guard let index = picker?.selectedRow(inComponent: 0) else { return }
+        let item = pickableType.itemAt(rawValue: index)
+        closure?(item)
         makeInvisible()
     }
     @IBAction func cancelButtonPressed() {
@@ -89,33 +86,16 @@ class ActivityPickerViewController: UIViewController {
     }
 }
 
-extension ActivityPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return User.ActivityLevel.count.rawValue
+        return pickableType.itemCount
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        guard let activityValue = User.ActivityLevel(rawValue: row) else {
-            return UILabel()
-        }
-        
-        var pickerLabel = view as? UILabel;
-        
-        if (pickerLabel == nil)
-        {
-            pickerLabel = UILabel()
-            pickerLabel?.font = UIFont(name: "Montserrat", size: 15)
-            pickerLabel?.textAlignment = NSTextAlignment.center
-        }
-        
-        pickerLabel?.text = User.ActivityLevel.getActivityString(activity: activityValue)
-        
-        return pickerLabel ?? UILabel()
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickableType.itemAt(rawValue: row)?.description
     }
-    
 }
