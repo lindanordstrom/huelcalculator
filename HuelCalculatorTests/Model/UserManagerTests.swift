@@ -19,7 +19,7 @@ class UserManagerTests: XCTestCase {
         dataStore = MockedDataStore()
         testObject = HuelUserManager(dataStore: dataStore)
     }
-    
+
     override func tearDown() {
         dataStore = nil
         testObject = nil
@@ -52,7 +52,6 @@ class UserManagerTests: XCTestCase {
         XCTAssertEqual(dataStore.key, Constants.Keys.user)
     }
 
-
     /** Given: No previous user have been saved
      *  When:  Asking for the signed in user
      *  Then:  no user should be returned
@@ -79,7 +78,6 @@ class UserManagerTests: XCTestCase {
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertEqual(dataStore.key, Constants.Keys.user)
     }
-
 
     /** Given:
      *  When:  Asking to save a user to the data store

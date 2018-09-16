@@ -17,8 +17,8 @@ protocol LandingPageUI: class {
 class LandingPageViewController: UIViewController, LandingPageUI {
     var presenter: LandingPagePresenter?
 
-    @IBOutlet var collectionView: UICollectionView!
-    
+    @IBOutlet private var collectionView: UICollectionView!
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -36,27 +36,33 @@ class LandingPageViewController: UIViewController, LandingPageUI {
     func showCalculationPage(with product: MealReplacementProduct) {
         presenter?.showPersonalDetailsPageIfNeeded()
         let storyboard = UIStoryboard(name: Constants.General.storyboardMain, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.CalorieDistributionPage.viewControllerName) as? CalorieDistributionViewController else {
+        let identifier = Constants.CalorieDistributionPage.viewControllerName
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? CalorieDistributionViewController else {
             return
         }
-        vc.product = product
-        navigationController?.pushViewController(vc, animated: true)
+        viewController.product = product
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showAppFeedback() {
         let storyboard = UIStoryboard(name: Constants.General.storyboardMain, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.AppFeedbackPage.viewControllerName) as? AppFeedbackViewController else {
+        let identifier = Constants.AppFeedbackPage.viewControllerName
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? AppFeedbackViewController else {
             return
         }
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     func showErrorAndPersonalDetailsPage() {
-        let alert = UIAlertController(title: Constants.LandingPage.noProfileAlertTitle, message: Constants.LandingPage.noProfileAlertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: Constants.General.okButtonText, style: UIAlertActionStyle.default, handler: { action in
+        let alert = UIAlertController(title: Constants.LandingPage.noProfileAlertTitle,
+                                      message: Constants.LandingPage.noProfileAlertMessage,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Constants.General.okButtonText,
+                                      style: UIAlertActionStyle.default) { _ in
             self.performSegue(withIdentifier: Constants.PersonalDetailsPage.segueToThisPageName, sender: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
+            }
+        )
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -68,7 +74,8 @@ extension LandingPageViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.LandingPage.cellIdentifier, for: indexPath) as? LandingPageItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.LandingPage.cellIdentifier,
+                                                      for: indexPath) as? LandingPageItemCell
         
         let titleAndImage = presenter?.getTitleAndImageFrom(indexPath: indexPath)
         
@@ -80,7 +87,7 @@ extension LandingPageViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width  = view.frame.size.width * 0.4
+        let width = view.frame.size.width * 0.4
         let height = width
         
         return CGSize(width: width, height: height)
@@ -106,7 +113,9 @@ extension LandingPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
+            return collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                   withReuseIdentifier: "Header",
+                                                                   for: indexPath)
         default:
             assert(false, "Unexpected element kind")
             return UICollectionReusableView()

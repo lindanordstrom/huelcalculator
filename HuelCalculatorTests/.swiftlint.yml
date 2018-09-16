@@ -1,0 +1,6 @@
+disabled_rules: 
+- force_cast
+- line_length
+- identifier_name
+- implicitly_unwrapped_optional
+- force_unwrapping

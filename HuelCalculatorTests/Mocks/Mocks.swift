@@ -184,14 +184,10 @@ class MockedUserManager: UserManager {
 
 class MockedDeviceInfo: DeviceInfo {
     var systemVersion: String {
-        get {
-            return "mockedSystemVersion"
-        }
+        return "mockedSystemVersion"
     }
     var modelName: String {
-        get {
-            return "mockedModelName"
-        }
+        return "mockedModelName"
     }
 }
 
@@ -205,7 +201,7 @@ class MockedUrlHandler: UrlHandler {
         return true
     }
     @available(iOS 10.0, *)
-    func open(_ url: URL, options: [String : Any], completionHandler completion: ((Bool) -> Swift.Void)?) {
+    func open(_ url: URL, options: [String: Any], completionHandler completion: ((Bool) -> Swift.Void)?) {
         openURLCalled = true
         urlString = url.absoluteString
     }

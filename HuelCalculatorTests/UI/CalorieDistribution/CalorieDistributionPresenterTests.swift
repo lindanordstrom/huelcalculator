@@ -30,7 +30,6 @@ class CalorieDistributionPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-
     /** Given:
      *  When:  update user consumption is called
      *  Then:  The userManager updates the user with the correct calorie distributions
@@ -159,5 +158,3 @@ class CalorieDistributionPresenterTests: XCTestCase {
         XCTAssertFalse(result)
     }
 }
-
-

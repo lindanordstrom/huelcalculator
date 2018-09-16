@@ -17,11 +17,11 @@ protocol MealPlanUI: class {
 
 class MealPlanViewController: UIViewController, MealPlanUI {
 
-    @IBOutlet var breakfastAmountLabel: UILabel!
-    @IBOutlet var lunchAmountLabel: UILabel!
-    @IBOutlet var dinnerAmountLabel: UILabel!
-    @IBOutlet var snackAmountLabel: UILabel!
-    
+    @IBOutlet private var breakfastAmountLabel: UILabel!
+    @IBOutlet private var lunchAmountLabel: UILabel!
+    @IBOutlet private var dinnerAmountLabel: UILabel!
+    @IBOutlet private var snackAmountLabel: UILabel!
+
     private var presenter: MealPlanPresenter?
     var product: MealReplacementProduct?
 
@@ -31,7 +31,7 @@ class MealPlanViewController: UIViewController, MealPlanUI {
         presenter?.didLoadView(with: product)
         Analytics.log(withName: "MealPlan", contentType: "Page", contentId: nil, customAttributes: nil)
     }
-    
+
     func setBreakfastAmount(amountLabel: String?) {
         breakfastAmountLabel.text = amountLabel
     }

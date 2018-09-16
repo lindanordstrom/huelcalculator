@@ -6,9 +6,9 @@
 //  Copyright © 2018 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
+// swiftlint:disable line_length
 
-enum menuItem: String {
+enum MenuItem: String {
     case vanillaShake = "Vanilla"
     case unflavouredShake = "Unflavoured"
     case bar = "Bar"
@@ -37,9 +37,9 @@ struct Constants {
         static let segueToThisPageName = "showPersonalDetailsPage"
         static let inches = "inches"
         static let pounds = "pounds"
-        static let kg = "kg"
-        static let cm = "cm"
-        static let halfKg = "0.5 kg"
+        static let kilo = "kg"
+        static let centimeter = "cm"
+        static let halfKilo = "0.5 kg"
         static let onePound = "1 lb"
         static let pickerViewController = "PickerViewController"
     }

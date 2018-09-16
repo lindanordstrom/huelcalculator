@@ -99,4 +99,3 @@ class MealPlanPresenterTest: XCTestCase {
         XCTAssertEqual(ui?.snackAmount, nil)
     }
 }
-

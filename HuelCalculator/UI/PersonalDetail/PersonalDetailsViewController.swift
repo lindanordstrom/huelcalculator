@@ -18,20 +18,20 @@ protocol PersonalDetailsUI: class {
 }
 
 class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
-    
-    @IBOutlet var measurementSystemSelector: UISegmentedControl!
-    @IBOutlet var bornYearInputField: UITextField!
-    @IBOutlet var genderSelector: UISegmentedControl!
-    @IBOutlet var heightInputField: UITextField!
-    @IBOutlet var heightUnitLabel: UILabel!
-    @IBOutlet var inchesInputField: UITextField!
-    @IBOutlet var weightInputField: UITextField!
-    @IBOutlet var weightUnitLabel: UILabel!
-    @IBOutlet var activityButton: UIButton!
-    @IBOutlet var goalSelector: UISegmentedControl!
-    @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet var heightInputFieldShowFeetConstraint: NSLayoutConstraint!
-    @IBOutlet var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
+
+    @IBOutlet private var measurementSystemSelector: UISegmentedControl!
+    @IBOutlet private var bornYearInputField: UITextField!
+    @IBOutlet private var genderSelector: UISegmentedControl!
+    @IBOutlet private var heightInputField: UITextField!
+    @IBOutlet private var heightUnitLabel: UILabel!
+    @IBOutlet private var inchesInputField: UITextField!
+    @IBOutlet private var weightInputField: UITextField!
+    @IBOutlet private var weightUnitLabel: UILabel!
+    @IBOutlet private var activityButton: UIButton!
+    @IBOutlet private var goalSelector: UISegmentedControl!
+    @IBOutlet private var errorMessageLabel: UILabel!
+    @IBOutlet private var heightInputFieldShowFeetConstraint: NSLayoutConstraint!
+    @IBOutlet private var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
 
     private var selectedActivity: User.ActivityLevel?
 
@@ -49,14 +49,15 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         super.viewDidAppear(animated)
         presenter?.didLoadView()
     }
-    
-    @IBAction func doneButtonPressed() {
-        dismissKeyboard()
 
+    @IBAction private func doneButtonPressed() {
+        dismissKeyboard()
+        
         let inches = Float(inchesInputField.text ?? Constants.General.emptyString) ?? 0
         let height = (Float(heightInputField.text ?? Constants.General.emptyString) ?? 0) + inches * 0.0833333333
         
-        let user = User(preferredUnitOfMeasurement: User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex),
+        let preferredUnitOfMeasurement = User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex)
+        let user = User(preferredUnitOfMeasurement: preferredUnitOfMeasurement,
                         bornYear: bornYearInputField.text,
                         gender: User.Gender(rawValue: genderSelector.selectedSegmentIndex),
                         height: height > 0 ? height : nil,
@@ -67,26 +68,26 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         presenter?.didPressDoneButton(user: user)
     }
     
-    @IBAction func resetButtonPressed() {
+    @IBAction private func resetButtonPressed() {
         dismissKeyboard()
         presenter?.didPressResetButton()
     }
 
-    @IBAction func closeButtonPressed(_ sender: Any) {
+    @IBAction private func closeButtonPressed(_ sender: Any) {
         dismissViewController()
     }
     
-    @IBAction func activitySelectorPressed() {
+    @IBAction private func activitySelectorPressed() {
         dismissKeyboard()
-        let pickerView = PickerViewController(with: User.ActivityLevel.self, index: selectedActivity?.rawValue ?? 0) { (activityLevel: Pickable?) in
-            
+        let pickerView = PickerViewController(with: User.ActivityLevel.self,
+                                              index: selectedActivity?.rawValue ?? 0) { (activityLevel: Pickable?) in
             self.setActivity(activity: activityLevel as? User.ActivityLevel)
         }
         pickerView.modalPresentationStyle = .overCurrentContext
         present(pickerView, animated: false, completion: nil)
     }
     
-    @IBAction func measurementSelectorValueChanged() {
+    @IBAction private func measurementSelectorValueChanged() {
         let index = measurementSystemSelector.selectedSegmentIndex
         guard let selectedUnitOfMeasurement = User.UnitOfMeasurement(rawValue: index) else { return }
         presenter?.didChangeMeasurementValue(value: selectedUnitOfMeasurement)
@@ -145,7 +146,9 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         heightUnitLabel.text = Constants.PersonalDetailsPage.inches
         weightUnitLabel.text = Constants.PersonalDetailsPage.pounds
         for index in 0..<goalSelector.numberOfSegments {
-            let title = goalSelector.titleForSegment(at: index)?.replacingOccurrences(of: Constants.PersonalDetailsPage.halfKg, with: Constants.PersonalDetailsPage.onePound)
+            var title = goalSelector.titleForSegment(at: index)
+            title = title?.replacingOccurrences(of: Constants.PersonalDetailsPage.halfKilo,
+                                                with: Constants.PersonalDetailsPage.onePound)
             goalSelector.setTitle(title, forSegmentAt: index)
         }
         heightInputFieldHideFeetConstraint.isActive = false
@@ -153,10 +156,12 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     }
     
     func updateUIToMetricSystem() {
-        heightUnitLabel.text = Constants.PersonalDetailsPage.cm
-        weightUnitLabel.text = Constants.PersonalDetailsPage.kg
+        heightUnitLabel.text = Constants.PersonalDetailsPage.centimeter
+        weightUnitLabel.text = Constants.PersonalDetailsPage.kilo
         for index in 0..<goalSelector.numberOfSegments {
-            let title = goalSelector.titleForSegment(at: index)?.replacingOccurrences(of: Constants.PersonalDetailsPage.onePound, with: Constants.PersonalDetailsPage.halfKg)
+            var title = goalSelector.titleForSegment(at: index)
+            title = title?.replacingOccurrences(of: Constants.PersonalDetailsPage.onePound,
+                                                with: Constants.PersonalDetailsPage.halfKilo)
             goalSelector.setTitle(title, forSegmentAt: index)
         }
         heightInputFieldShowFeetConstraint.isActive = false

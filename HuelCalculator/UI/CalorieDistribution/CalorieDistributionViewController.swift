@@ -21,11 +21,11 @@ protocol CalorieDistributionUI: class {
 
 class CalorieDistributionViewController: UIViewController, CalorieDistributionUI {
     
-    @IBOutlet var remainingCaloriesLabel: UILabel!
-    @IBOutlet var breakfastCaloriesInputField: UITextField!
-    @IBOutlet var lunchCaloriesInputField: UITextField!
-    @IBOutlet var dinnerCaloriesInputField: UITextField!
-    @IBOutlet var snackCaloriesInputField: UITextField!
+    @IBOutlet private var remainingCaloriesLabel: UILabel!
+    @IBOutlet private var breakfastCaloriesInputField: UITextField!
+    @IBOutlet private var lunchCaloriesInputField: UITextField!
+    @IBOutlet private var dinnerCaloriesInputField: UITextField!
+    @IBOutlet private var snackCaloriesInputField: UITextField!
         
     private var presenter: CalorieDistributionPresenter?
 
@@ -34,7 +34,8 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = CalorieDistributionPresenter(view: self)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CalorieDistributionViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(CalorieDistributionViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         Analytics.log(withName: "CalorieDistribution", contentType: "Page", contentId: nil, customAttributes: nil)
     }
@@ -44,16 +45,16 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
         presenter?.updateInputFields()
     }
     
-    @IBAction func splitEquallyButtonPressed() {
+    @IBAction private func splitEquallyButtonPressed() {
         presenter?.didPressSplitEquallyButton()
     }
 
-    @IBAction func inputFieldUpdated(_ sender: UITextField) {
+    @IBAction private func inputFieldUpdated(_ sender: UITextField) {
         let breakfast = Int(breakfastCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
         let lunch = Int(lunchCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
         let dinner = Int(dinnerCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
         let snack = Int(snackCaloriesInputField.text ?? Constants.General.zeroString) ?? 0
-
+        
         presenter?.updateUserConsumption(breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
         presenter?.updateInputFields()
     }
@@ -87,12 +88,22 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     }
     
     func showPopupWarning(remainingCalories: Int) {
-        let alert = UIAlertController(title: Constants.General.warningAlertTitle, message: "\(Constants.CalorieDistributionPage.remainingCaloriesAlertMessagePart1)\(remainingCalories)\(Constants.CalorieDistributionPage.remainingCaloriesAlertMessagePart2)", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: Constants.General.yesButtonText, style: UIAlertActionStyle.default, handler: { action in
-            self.performSegue(withIdentifier: Constants.MealPlanPage.segueToThisPageName, sender: nil)
-        }))
-        alert.addAction(UIAlertAction(title: Constants.General.noButtonText, style: UIAlertActionStyle.cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        var message = Constants.CalorieDistributionPage.remainingCaloriesAlertMessagePart1
+        message += "\(remainingCalories)"
+        message += Constants.CalorieDistributionPage.remainingCaloriesAlertMessagePart2
+        
+        let alert = UIAlertController(title: Constants.General.warningAlertTitle,
+                                      message: message,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Constants.General.yesButtonText,
+                                      style: UIAlertActionStyle.default) { _ in
+                                        self.performSegue(withIdentifier: Constants.MealPlanPage.segueToThisPageName, sender: nil)
+            }
+        )
+        alert.addAction(UIAlertAction(title: Constants.General.noButtonText,
+                                      style: UIAlertActionStyle.cancel,
+                                      handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func dismissKeyboard() {
@@ -107,8 +118,8 @@ class CalorieDistributionViewController: UIViewController, CalorieDistributionUI
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? MealPlanViewController {
-            vc.product = product
+        if let viewController = segue.destination as? MealPlanViewController {
+            viewController.product = product
         }
     }
 }

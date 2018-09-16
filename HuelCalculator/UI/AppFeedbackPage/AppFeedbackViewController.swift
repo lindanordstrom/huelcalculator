@@ -24,12 +24,12 @@ class AppFeedbackViewController: UIViewController, AppFeedbackUI {
         Analytics.log(withName: "AppFeedback", contentType: "Page", contentId: nil, customAttributes: nil)
     }
 
-    @IBAction func emailButtonPressed(_ sender: Any) {
+    @IBAction private func emailButtonPressed(_ sender: Any) {
         let canSendMail = MFMailComposeViewController.canSendMail()
         presenter?.didPressSendEmailButton(canSendMail: canSendMail)
     }
 
-    @IBAction func rateTheAppButtonPressed(_ sender: Any) {
+    @IBAction private func rateTheAppButtonPressed(_ sender: Any) {
         presenter?.didPressRateTheApp()
     }
 
@@ -39,7 +39,9 @@ class AppFeedbackViewController: UIViewController, AppFeedbackUI {
     }
 
     func showMailError() {
-        let sendMailErrorAlert = UIAlertController(title: Constants.AppFeedbackPage.couldNotOpenEmailAlertTitle, message: Constants.AppFeedbackPage.couldNotOpenEmailAlertMessage, preferredStyle: .alert)
+        let sendMailErrorAlert = UIAlertController(title: Constants.AppFeedbackPage.couldNotOpenEmailAlertTitle,
+                                                   message: Constants.AppFeedbackPage.couldNotOpenEmailAlertMessage,
+                                                   preferredStyle: .alert)
         let dismiss = UIAlertAction(title: Constants.General.okButtonText, style: .default, handler: nil)
         sendMailErrorAlert.addAction(dismiss)
 

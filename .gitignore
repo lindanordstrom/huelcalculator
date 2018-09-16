@@ -72,3 +72,6 @@ fastlane/test_output
 #Ignore Crashlytics.Framework
 Crashlytics.framework/
 Fabric.framework/
+
+# buildlog for swxftlint
+xcodebuild.log

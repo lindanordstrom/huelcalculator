@@ -23,7 +23,7 @@ class AppFeedbackPresenterTests: XCTestCase {
         urlHandler = MockedUrlHandler()
         testObject = AppFeedbackPresenter(view: ui, device: deviceInfo, urlManager: UrlManager(urlHandler: urlHandler))
     }
-    
+
     override func tearDown() {
         ui = nil
         deviceInfo = nil
@@ -64,6 +64,12 @@ class AppFeedbackPresenterTests: XCTestCase {
         XCTAssertTrue(ui.showMailComposeViewCalled)
         XCTAssertEqual(ui.mail.recipients.first, "huelcalculator@gmail.com")
         XCTAssertEqual(ui.mail.subject, "Feedback: Huel Calculator")
-        XCTAssertEqual(ui.mail.message, "<br><i>Enter your feedback here</i><br><br>-----------------------<br>App version: 2.0.1<br>Device: mockedModelName<br>iOS version: mockedSystemVersion<br>-----------------------<br>")
+        var emailMessage = "<br><i>Enter your feedback here</i><br><br>"
+        emailMessage += "-----------------------<br>"
+        emailMessage += "App version: 2.1.0<br>"
+        emailMessage += "Device: mockedModelName<br>"
+        emailMessage += "iOS version: mockedSystemVersion<br>"
+        emailMessage += "-----------------------<br>"
+        XCTAssertEqual(ui.mail.message, emailMessage)
     }
 }

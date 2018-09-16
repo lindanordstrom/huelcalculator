@@ -67,7 +67,6 @@ class PersonalDetailsPresenterTest: XCTestCase {
         XCTAssertEqual(ui.user?.height, 177)
     }
 
-
     /** Given: User selects metric unit system
      *  When:  -
      *  Then:  The view shown according to the metric system
@@ -168,4 +167,3 @@ class PersonalDetailsPresenterTest: XCTestCase {
         XCTAssertTrue(ui.resetAllFieldsCalled)
     }
 }
-

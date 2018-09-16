@@ -13,7 +13,7 @@ class LandingPagePresenter {
     private var urlManager: UrlManager
     private var userManager: UserManager
 
-    private let menuItems: [menuItem] = [.unflavouredShake, .vanillaShake, .bar, .shop, .appFeedback]
+    private let menuItems: [MenuItem] = [.unflavouredShake, .vanillaShake, .bar, .shop, .appFeedback]
 
     init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared) {
         self.view = view

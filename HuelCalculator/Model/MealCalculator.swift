@@ -6,8 +6,6 @@
 //  Copyright © 2018 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
-
 protocol MealCalculator {
     static func numberOfScoops(calories: Int, product: MealReplacementProduct) -> Float
     static func numberOfBars(calories: Int, product: MealReplacementProduct) -> Float

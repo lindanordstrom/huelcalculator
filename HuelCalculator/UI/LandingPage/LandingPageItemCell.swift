@@ -9,6 +9,7 @@
 import UIKit
 
 class LandingPageItemCell: UICollectionViewCell {
+    // swiftlint:disable private_outlet
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var image: UIImageView!
 }

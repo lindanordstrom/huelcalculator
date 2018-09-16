@@ -6,10 +6,8 @@
 //  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
-
 class PersonalDetailsPresenter {
-    
+
     private weak var view: PersonalDetailsUI?
     private var userManager: UserManager
 
@@ -38,7 +36,7 @@ class PersonalDetailsPresenter {
     func didPressResetButton() {
         view?.resetAllFields()
     }
-    
+
     func didPressDoneButton(user: User?) {
         var user = user
         guard user?.bornYear?.count == 4, user?.weight != nil, user?.height != nil else {
@@ -51,7 +49,7 @@ class PersonalDetailsPresenter {
         view?.showErrorMessage(false)
         view?.dismissViewController()
     }
-    
+
     func didChangeMeasurementValue(value: User.UnitOfMeasurement) {
         switch value {
         case .imperial:

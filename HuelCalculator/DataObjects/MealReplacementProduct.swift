@@ -6,8 +6,6 @@
 //  Copyright © 2018 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
-
 protocol MealReplacementProduct {
     var kcalPer100gram: Int { get }
 }

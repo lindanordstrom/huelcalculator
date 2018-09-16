@@ -6,8 +6,6 @@
 //  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
-
 protocol Pickable {
     var description: String { get }
     static var itemCount: Int { get }
@@ -79,6 +77,3 @@ class User: Codable {
         self.activityLevel = activityLevel
     }
 }
-
-
-

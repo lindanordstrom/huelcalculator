@@ -64,7 +64,6 @@ class LandingPagePresenterTests: XCTestCase {
         XCTAssertTrue(ui.showErrorAndPersonalDetailsPageCalled)
     }
 
-
     /** Given:
      *  When: Going through the different menu items
      *  Then: The correct image and title should be returned
@@ -91,7 +90,6 @@ class LandingPagePresenterTests: XCTestCase {
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_feedack"))
     }
 
-
     /** Given:
      *  When: Selecting the different menu items
      *  Then: The correct view should load
@@ -117,4 +115,3 @@ class LandingPagePresenterTests: XCTestCase {
         XCTAssertTrue(ui.showAppFeedbackCalled)
     }
 }
-

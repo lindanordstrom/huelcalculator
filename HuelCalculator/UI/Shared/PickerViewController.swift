@@ -57,32 +57,33 @@ class PickerViewController: UIViewController {
         closure?(item)
         makeInvisible()
     }
-    @IBAction func cancelButtonPressed() {
+    
+    @IBAction private func cancelButtonPressed() {
         makeInvisible()
     }
     
     private func makeVisible() {
-        UIView.animate(withDuration: animationTime, animations: {
+        UIView.animate(withDuration: animationTime) {
             self.inVisibleConstraint?.isActive = false
             self.visibleConstraint?.isActive = true
             self.background?.alpha = 1
             self.view.layoutIfNeeded()
-        })
+        }
     }
     
     private func makeInvisible() {
         UIView.animate(withDuration: animationTime, animations: {
             self.setInitialState()
             self.view.layoutIfNeeded()
-        }, completion: { (Bool) in
+        }, completion: { _ in
             self.dismiss(animated: false, completion: nil)
         })
     }
     
     private func setInitialState() {
-        self.visibleConstraint?.isActive = false
-        self.inVisibleConstraint?.isActive = true
-        self.background?.alpha = 0
+        visibleConstraint?.isActive = false
+        inVisibleConstraint?.isActive = true
+        background?.alpha = 0
     }
 }
 

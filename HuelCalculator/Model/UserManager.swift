@@ -65,7 +65,6 @@ class HuelUserManager: UserManager {
         user?.calorieDistribution.snack = oldUser.calorieDistribution.snack
     }
 
-
     func distributeCalories(breakfast: Int, lunch: Int, dinner: Int, snack: Int) {
         let user = getSignedInUser()
         user?.calorieDistribution.breakfast = breakfast

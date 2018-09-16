@@ -1,0 +1,37 @@
+disabled_rules:
+- trailing_whitespace
+
+# some rules are only opt-in
+opt_in_rules:
+    - empty_count
+    - force_unwrapping
+    - object_literal
+    - operator_usage_whitespace
+    - overridden_super_call
+    - private_outlet
+    - private_action
+    - toggle_bool
+    - trailing_closure
+    - unneeded_parentheses_in_closure_argument
+    - vertical_parameter_alignment_on_call
+    - yoda_condition
+    - closure_spacing
+    - collection_alignment
+    - first_where
+    - function_default_parameter_at_end
+    - implicit_return
+    - implicitly_unwrapped_optional
+
+analyzer_rules: # Rules run by `swiftlint analyze` (experimental)
+    - unused_private_declaration
+    - unused_import
+
+# Rules
+line_length:
+    warning: 145
+    ignores_function_declarations: true
+    ignores_comments: true
+
+large_tuple:
+    warning: 4
+    error: 10

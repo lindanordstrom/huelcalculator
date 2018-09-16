@@ -40,4 +40,3 @@ class AppFeedbackPresenter {
         urlManager.open(Constants.AppFeedbackPage.appStoreUrl)
     }
 }
-

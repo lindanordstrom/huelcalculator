@@ -6,8 +6,6 @@
 //  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
-
 class CalorieDistributionPresenter {
     
     private weak var view: CalorieDistributionUI?

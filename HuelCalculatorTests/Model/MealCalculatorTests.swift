@@ -12,7 +12,7 @@ import XCTest
 class MealCalculatorTests: XCTestCase {
 
     private var testObject = HuelMealCalculator.self
-    
+
     func test_gramsToReachWithHuelUnflavouredShake() {
         let result = testObject.gramsToReach(calories: 814, product: HuelUnflavouredShake())
         XCTAssertEqual(result, 200)

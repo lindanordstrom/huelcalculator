@@ -6,8 +6,6 @@
 //  Copyright © 2018 Linda CC Nordstrom. All rights reserved.
 //
 
-import Foundation
-
 struct CalorieDistribution: Codable {
     var dailyCalorieConsumption: Int?
     var breakfast: Int?
