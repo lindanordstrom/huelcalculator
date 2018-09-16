@@ -31,6 +31,11 @@ Release minor
 fastlane ios patch
 ```
 Release patch
+### ios build
+```
+fastlane ios build
+```
+Release patch
 
 ----
 

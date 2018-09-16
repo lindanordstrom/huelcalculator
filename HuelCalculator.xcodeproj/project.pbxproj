@@ -31,6 +31,7 @@
 		7D9E4DB7214DC12A00980BB5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D9E4DB5214DC12A00980BB5 /* Fabric.framework */; };
 		7D9E4DB8214DC12A00980BB5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D9E4DB6214DC12A00980BB5 /* Crashlytics.framework */; };
 		7D9E4DBA214DC6BE00980BB5 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E4DB9214DC6BE00980BB5 /* Analytics.swift */; };
+		7D9E4DBC214E53AC00980BB5 /* Info-Debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D9E4DBB214E53AC00980BB5 /* Info-Debug.plist */; };
 		BF2096B71DFF58EF006EF21E /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */; };
 		BF2096BA1DFF5A96006EF21E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B91DFF5A96006EF21E /* User.swift */; };
 		BF2096BC1DFF653F006EF21E /* PersonalDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */; };
@@ -84,6 +85,7 @@
 		7D9E4DB5214DC12A00980BB5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		7D9E4DB6214DC12A00980BB5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		7D9E4DB9214DC6BE00980BB5 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		7D9E4DBB214E53AC00980BB5 /* Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Debug.plist"; sourceTree = "<group>"; };
 		BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
 		BF2096B91DFF5A96006EF21E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsPresenter.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				BFE464741DFB3CDA00687A16 /* Assets.xcassets */,
 				BFE464761DFB3CDA00687A16 /* LaunchScreen.storyboard */,
 				BFE464791DFB3CDA00687A16 /* Info.plist */,
+				7D9E4DBB214E53AC00980BB5 /* Info-Debug.plist */,
 			);
 			path = HuelCalculator;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				BFE464781DFB3CDA00687A16 /* LaunchScreen.storyboard in Resources */,
 				BFE464751DFB3CDA00687A16 /* Assets.xcassets in Resources */,
 				BF4517C01E093B4C00D682D5 /* PickerViewController.xib in Resources */,
+				7D9E4DBC214E53AC00980BB5 /* Info-Debug.plist in Resources */,
 				BFE464731DFB3CDA00687A16 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,7 +721,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = HuelCalculator/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HuelCalculator/Info-Debug.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.lindaccnordstrom.HuelCalculator;
@@ -725,6 +729,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_SUFFIX = "";
 			};
 			name = Debug;
 		};
