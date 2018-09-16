@@ -32,6 +32,7 @@
 		7D9E4DB8214DC12A00980BB5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D9E4DB6214DC12A00980BB5 /* Crashlytics.framework */; };
 		7D9E4DBA214DC6BE00980BB5 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E4DB9214DC6BE00980BB5 /* Analytics.swift */; };
 		7D9E4DBC214E53AC00980BB5 /* Info-Debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D9E4DBB214E53AC00980BB5 /* Info-Debug.plist */; };
+		7D9E4DBE214E897B00980BB5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D9E4DBD214E897B00980BB5 /* Keys.plist */; };
 		BF2096B71DFF58EF006EF21E /* MealPlanPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */; };
 		BF2096BA1DFF5A96006EF21E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096B91DFF5A96006EF21E /* User.swift */; };
 		BF2096BC1DFF653F006EF21E /* PersonalDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */; };
@@ -86,6 +87,7 @@
 		7D9E4DB6214DC12A00980BB5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		7D9E4DB9214DC6BE00980BB5 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		7D9E4DBB214E53AC00980BB5 /* Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Debug.plist"; sourceTree = "<group>"; };
+		7D9E4DBD214E897B00980BB5 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		BF2096B51DFF58EF006EF21E /* MealPlanPresenterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanPresenterTest.swift; sourceTree = "<group>"; };
 		BF2096B91DFF5A96006EF21E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BF2096BB1DFF653F006EF21E /* PersonalDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetailsPresenter.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				BFE464761DFB3CDA00687A16 /* LaunchScreen.storyboard */,
 				BFE464791DFB3CDA00687A16 /* Info.plist */,
 				7D9E4DBB214E53AC00980BB5 /* Info-Debug.plist */,
+				7D9E4DBD214E897B00980BB5 /* Keys.plist */,
 			);
 			path = HuelCalculator;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D9E4DBE214E897B00980BB5 /* Keys.plist in Resources */,
 				BFE464781DFB3CDA00687A16 /* LaunchScreen.storyboard in Resources */,
 				BFE464751DFB3CDA00687A16 /* Assets.xcassets in Resources */,
 				BF4517C01E093B4C00D682D5 /* PickerViewController.xib in Resources */,
@@ -488,7 +492,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 4b5a9dfac3d582db0065baf8344fac9473bd8681 65e33455b3aef43e60b00f1870b631b04c8ae441a448dd268f8e04705567ca9b";
+			shellScript = "./Fabric.framework/run `defaults read \"${SRCROOT}/HuelCalculator/Keys.plist\" FabricApiKey` `defaults read \"${SRCROOT}/HuelCalculator/Keys.plist\" FabricBuildSecret`";
 		};
 /* End PBXShellScriptBuildPhase section */
 

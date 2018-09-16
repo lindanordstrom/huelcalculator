@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Fabric.with([Crashlytics.self])
+        if let apiKey = valueForAPIKey(keyname: "FabricApiKey") {
+            Fabric.with([Crashlytics.self.start(withAPIKey: apiKey)])
+        }
         return true
     }
 
@@ -43,6 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    private func valueForAPIKey(keyname: String) -> String? {
+        guard let filePath = Bundle.main.path(forResource: "Keys", ofType: "plist"),
+            let plist = NSDictionary(contentsOfFile: filePath),
+            let value = plist.object(forKey: keyname) as? String else { return nil }
+        
+        return value
+    }
 
 }
 
