@@ -443,6 +443,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -486,12 +487,13 @@
 			files = (
 			);
 			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run `defaults read \"${SRCROOT}/HuelCalculator/Keys.plist\" FabricApiKey` `defaults read \"${SRCROOT}/HuelCalculator/Keys.plist\" FabricBuildSecret`";
+			shellScript = "\"${PROJECT_DIR}/Fabric.framework/run\" `/usr/libexec/PlistBuddy -c \"Print FabricApiKey\" HuelCalculator/Keys.plist` `/usr/libexec/PlistBuddy -c \"Print FabricBuildSecret\" HuelCalculator/Keys.plist`\n";
 		};
 		7D9E4DBF214E98B800980BB5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -504,7 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint && swiftlint analyze --compiler-log-path xcodebuild.log\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint \nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
