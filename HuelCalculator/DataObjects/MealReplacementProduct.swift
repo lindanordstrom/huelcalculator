@@ -10,14 +10,14 @@ protocol MealReplacementProduct {
     var kcalPer100gram: Int { get }
 }
 
-struct HuelVanillaShake: MealReplacementProduct {
+struct HuelBlackEditionShake: MealReplacementProduct {
+    var kcalPer100gram = 444
+}
+
+struct HuelShake: MealReplacementProduct {
     var kcalPer100gram = 400
 }
 
-struct HuelUnflavouredShake: MealReplacementProduct {
-    var kcalPer100gram = 407
-}
-
 struct HuelBar: MealReplacementProduct {
-    var kcalPer100gram = 382
+    var kcalPer100gram = 406
 }

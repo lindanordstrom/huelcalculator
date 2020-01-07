@@ -9,9 +9,9 @@
 // swiftlint:disable line_length
 
 enum MenuItem: String {
-    case vanillaShake = "Vanilla"
-    case unflavouredShake = "Unflavoured"
-    case bar = "Bar"
+    case huelShake = "Huel Shake v.3.0 (any flavour)"
+    case huelBlackShake = "Huel Black Edition v.1.0 (any flavour)"
+    case bar = "Huel Bar v.3.1 (any flavour)"
     case shop = "Buy Huel"
     case appFeedback = "App Feedback"
 }
@@ -21,6 +21,8 @@ struct Constants {
         static let cellIdentifier = "Cell"
         static let noProfileAlertTitle = "No profile added"
         static let noProfileAlertMessage = "You need to enter your personal details to be able to calculate your daily needs"
+        static let infoPopupAlertTitle = "Updated to Huel v.3.0"
+        static let infoPopupAlertMessage = "This app is now updated according to Huel Shake v.3.0 and the new scoop size (200kcal per scoop) and Huel Bar 3.1 (200kcal per bar). Appologies for the delayed update."
         static let getHuelUrl = "https://huel.com/products/huel"
     }
     struct AppFeedbackPage {

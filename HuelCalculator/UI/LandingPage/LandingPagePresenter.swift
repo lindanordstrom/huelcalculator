@@ -12,13 +12,15 @@ class LandingPagePresenter {
     private weak var view: LandingPageUI?
     private var urlManager: UrlManager
     private var userManager: UserManager
+    private var infoPopupKey: String
 
-    private let menuItems: [MenuItem] = [.unflavouredShake, .vanillaShake, .bar, .shop, .appFeedback]
+    private let menuItems: [MenuItem] = [.huelShake, .huelBlackShake, .bar, .shop, .appFeedback]
 
-    init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared) {
+    init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared, infoPopupKey: String = "infoPopupShown") {
         self.view = view
         self.urlManager = urlManager
         self.userManager = userManager
+        self.infoPopupKey = infoPopupKey
     }
 
     func numberOfItemsOnLandingPage() -> Int {
@@ -33,8 +35,11 @@ class LandingPagePresenter {
         var highlightedImage: UIImage?
 
         switch menuItem {
-        case .unflavouredShake, .vanillaShake:
+        case .huelShake:
             image = #imageLiteral(resourceName: "menu_shake")
+            highlightedImage = #imageLiteral(resourceName: "menu_shake_highlighted")
+        case .huelBlackShake:
+            image = #imageLiteral(resourceName: "menu_shake_black")
             highlightedImage = #imageLiteral(resourceName: "menu_shake_highlighted")
         case .bar:
             image = #imageLiteral(resourceName: "menu_bar")
@@ -54,10 +59,10 @@ class LandingPagePresenter {
         let menuItem = menuItems[indexPath.item]
 
         switch menuItem {
-        case .unflavouredShake:
-            view?.showCalculationPage(with: HuelUnflavouredShake())
-        case .vanillaShake:
-            view?.showCalculationPage(with: HuelVanillaShake())
+        case .huelShake:
+            view?.showCalculationPage(with: HuelShake())
+        case .huelBlackShake:
+            view?.showCalculationPage(with: HuelBlackEditionShake())
         case .bar:
             view?.showCalculationPage(with: HuelBar())
         case .shop:
@@ -73,6 +78,14 @@ class LandingPagePresenter {
         }
 
         view?.showErrorAndPersonalDetailsPage()
+    }
+    
+    func showInfoPopupAlertIfNeeded() {
+        if !UserDefaults.standard.bool(forKey: infoPopupKey) {
+            UserDefaults.standard.set(true, forKey: infoPopupKey)
+            
+            view?.showInfoPopupAlert()
+        }
     }
 
     private func didPressGetHuel() {

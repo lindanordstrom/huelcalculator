@@ -12,6 +12,7 @@ protocol LandingPageUI: class {
     func showCalculationPage(with product: MealReplacementProduct)
     func showAppFeedback()
     func showErrorAndPersonalDetailsPage()
+    func showInfoPopupAlert()
 }
 
 class LandingPageViewController: UIViewController, LandingPageUI {
@@ -31,6 +32,7 @@ class LandingPageViewController: UIViewController, LandingPageUI {
         super.viewDidLoad()
         presenter = LandingPagePresenter(view: self)
         Analytics.log(withName: "LandingPage", contentType: "Page", contentId: nil, customAttributes: nil)
+        presenter?.showInfoPopupAlertIfNeeded()
     }
 
     func showCalculationPage(with product: MealReplacementProduct) {
@@ -61,6 +63,16 @@ class LandingPageViewController: UIViewController, LandingPageUI {
                                       style: UIAlertActionStyle.default) { _ in
             self.performSegue(withIdentifier: Constants.PersonalDetailsPage.segueToThisPageName, sender: nil)
             }
+        )
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showInfoPopupAlert() {
+        let alert = UIAlertController(title: Constants.LandingPage.infoPopupAlertTitle,
+                                      message: Constants.LandingPage.infoPopupAlertMessage,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Constants.General.okButtonText,
+                                      style: UIAlertActionStyle.default)
         )
         present(alert, animated: true, completion: nil)
     }
