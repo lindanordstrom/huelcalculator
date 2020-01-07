@@ -33,29 +33,29 @@ class MealPlanPresenterTest: XCTestCase {
     }
 
     /** Given: User has distributed calories
-     *  When:  Page is loaded and flavour system is "unflavoured"
-     *  Then:  The calories will be calculated to scoops/grams of unflavoured HUEL
+     *  When:  Page is loaded and flavour system is Huel Shake
+     *  Then:  The calories will be calculated to scoops/grams of HUEL
      */
-    func test_didLoadView_unflavoured() {
-        testObject.didLoadView(with: HuelUnflavouredShake())
+    func test_didLoadView_huel_shake() {
+        testObject.didLoadView(with: HuelShake())
 
-        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.6 scoops\n123 ml water\nTotal: 100 kcal")
-        XCTAssertEqual(ui?.lunchAmount, "49 g / 1.3 scoops\n246 ml water\nTotal: 200 kcal")
-        XCTAssertEqual(ui?.dinnerAmount, "74 g / 1.9 scoops\n369 ml water\nTotal: 300 kcal")
-        XCTAssertEqual(ui?.snackAmount, "98 g / 2.6 scoops\n491 ml water\nTotal: 400 kcal")
+        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.5 scoops\n125 ml water\nTotal: 100 kcal")
+        XCTAssertEqual(ui?.lunchAmount, "50 g / 1.0 scoops\n250 ml water\nTotal: 200 kcal")
+        XCTAssertEqual(ui?.dinnerAmount, "75 g / 1.5 scoops\n375 ml water\nTotal: 300 kcal")
+        XCTAssertEqual(ui?.snackAmount, "100 g / 2.0 scoops\n500 ml water\nTotal: 400 kcal")
     }
 
     /** Given: User has distributed calories
-     *  When:  Page is loaded and flavour system is "vanilla"
-     *  Then:  The calories will be calculated to scoops/grams of vanilla HUEL
+     *  When:  Page is loaded and flavour system is Huel Black Edition
+     *  Then:  The calories will be calculated to scoops/grams of Black Edition HUEL
      */
-    func test_didLoadView_vanilla() {
-        testObject.didLoadView(with: HuelVanillaShake())
+    func test_didLoadView_huel_black_edition() {
+        testObject.didLoadView(with: HuelBlackEditionShake())
 
-        XCTAssertEqual(ui?.breakfastAmount, "25 g / 0.7 scoops\n125 ml water\nTotal: 100 kcal")
-        XCTAssertEqual(ui?.lunchAmount, "50 g / 1.3 scoops\n250 ml water\nTotal: 200 kcal")
-        XCTAssertEqual(ui?.dinnerAmount, "75 g / 2.0 scoops\n375 ml water\nTotal: 300 kcal")
-        XCTAssertEqual(ui?.snackAmount, "100 g / 2.6 scoops\n500 ml water\nTotal: 400 kcal")
+        XCTAssertEqual(ui?.breakfastAmount, "23 g / 0.5 scoops\n125 ml water\nTotal: 100 kcal")
+        XCTAssertEqual(ui?.lunchAmount, "45 g / 1.0 scoops\n250 ml water\nTotal: 200 kcal")
+        XCTAssertEqual(ui?.dinnerAmount, "68 g / 1.5 scoops\n375 ml water\nTotal: 300 kcal")
+        XCTAssertEqual(ui?.snackAmount, "90 g / 2.0 scoops\n500 ml water\nTotal: 400 kcal")
     }
 
     /** Given: User has distributed calories
@@ -65,10 +65,10 @@ class MealPlanPresenterTest: XCTestCase {
     func test_didLoadView_bar() {
         testObject.didLoadView(with: HuelBar())
 
-        XCTAssertEqual(ui?.breakfastAmount, "0.4 bars / 26 g\nTotal: 100 kcal")
-        XCTAssertEqual(ui?.lunchAmount, "0.8 bars / 52 g\nTotal: 200 kcal")
-        XCTAssertEqual(ui?.dinnerAmount, "1.2 bars / 79 g\nTotal: 300 kcal")
-        XCTAssertEqual(ui?.snackAmount, "1.6 bars / 105 g\nTotal: 400 kcal")
+        XCTAssertEqual(ui?.breakfastAmount, "0.5 bars / 25 g\nTotal: 100 kcal")
+        XCTAssertEqual(ui?.lunchAmount, "1.0 bars / 49 g\nTotal: 200 kcal")
+        XCTAssertEqual(ui?.dinnerAmount, "1.5 bars / 74 g\nTotal: 300 kcal")
+        XCTAssertEqual(ui?.snackAmount, "2.0 bars / 99 g\nTotal: 400 kcal")
     }
 
     /** Given: No signed in user exists

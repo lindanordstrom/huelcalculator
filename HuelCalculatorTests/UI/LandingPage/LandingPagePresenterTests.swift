@@ -15,13 +15,14 @@ class LandingPagePresenterTests: XCTestCase {
     private var ui: MockedLandingPageUI!
     private var urlHandler: MockedUrlHandler!
     private var userManager: MockedUserManager!
+    private let infoPopupKey = "TestInfoPopupKeyShown"
 
     override func setUp() {
         super.setUp()
         ui = MockedLandingPageUI()
         urlHandler = MockedUrlHandler()
         userManager = MockedUserManager()
-        testObject = LandingPagePresenter(view: ui, urlManager: UrlManager(urlHandler: urlHandler), userManager: userManager)
+        testObject = LandingPagePresenter(view: ui, urlManager: UrlManager(urlHandler: urlHandler), userManager: userManager, infoPopupKey: infoPopupKey)
     }
 
     override func tearDown() {
@@ -63,6 +64,30 @@ class LandingPagePresenterTests: XCTestCase {
 
         XCTAssertTrue(ui.showErrorAndPersonalDetailsPageCalled)
     }
+    
+    /** Given: Info popup has not been shown
+     *  When: Requested to show info popup if needed
+     *  Then: The UI should show an info popup
+     */
+    func test_showInfoPopupIfNeededWhenNotShownBefore() {
+        UserDefaults.standard.set(false, forKey: infoPopupKey)
+        
+        testObject.showInfoPopupAlertIfNeeded()
+        
+        XCTAssertTrue(ui.showInfoPopupAlertCalled)
+    }
+    
+    /** Given: Info popup has been shown before
+     *  When: Requested to show info popup if needed
+     *  Then: The UI should not show an info popup
+     */
+    func test_showInfoPopupIfNeededWhenShownBefore() {
+        UserDefaults.standard.set(true, forKey: infoPopupKey)
+        
+        testObject.showInfoPopupAlertIfNeeded()
+        
+        XCTAssertFalse(ui.showInfoPopupAlertCalled)
+    }
 
     /** Given:
      *  When: Going through the different menu items
@@ -70,15 +95,15 @@ class LandingPagePresenterTests: XCTestCase {
      */
     func test_getTitleAndImageFromIndexPath() {
         var result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(result.title, "Unflavoured")
+        XCTAssertEqual(result.title, "Huel Shake v.3.0 (any flavour)")
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_shake"))
 
         result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 1, section: 0))
-        XCTAssertEqual(result.title, "Vanilla")
-        XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_shake"))
+        XCTAssertEqual(result.title, "Huel Black Edition v.1.0 (any flavour)")
+        XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_shake_black"))
 
         result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(result.title, "Bar")
+        XCTAssertEqual(result.title, "Huel Bar v.3.1 (any flavour)")
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_bar"))
 
         result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 3, section: 0))
@@ -97,11 +122,11 @@ class LandingPagePresenterTests: XCTestCase {
     func test_didSelectItemOnLandingPage() {
         testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 0, section: 0))
         XCTAssertTrue(ui.showCalculationPageCalled)
-        XCTAssertEqual(ui.product?.kcalPer100gram, HuelUnflavouredShake().kcalPer100gram)
+        XCTAssertEqual(ui.product?.kcalPer100gram, HuelShake().kcalPer100gram)
 
         testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 1, section: 0))
         XCTAssertTrue(ui.showCalculationPageCalled)
-        XCTAssertEqual(ui.product?.kcalPer100gram, HuelVanillaShake().kcalPer100gram)
+        XCTAssertEqual(ui.product?.kcalPer100gram, HuelBlackEditionShake().kcalPer100gram)
 
         testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 2, section: 0))
         XCTAssertTrue(ui.showCalculationPageCalled)

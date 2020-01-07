@@ -5,6 +5,7 @@
 //  Created by Linda on 10/12/2016.
 //  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
+import Foundation
 
 class MealPlanPresenter {
     private weak var view: MealPlanUI?
@@ -31,7 +32,7 @@ class MealPlanPresenter {
 
         guard product is HuelBar else {
             let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
-            let water = gram * 5
+            let water = (round(scoops * 100) / 100) * 250
             return String(format: Constants.MealPlanPage.numberOfGramsScoopsAndKcal, gram, scoops, water, calories)
         }
         

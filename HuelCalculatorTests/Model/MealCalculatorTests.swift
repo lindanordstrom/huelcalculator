@@ -13,33 +13,33 @@ class MealCalculatorTests: XCTestCase {
 
     private var testObject = HuelMealCalculator.self
 
-    func test_gramsToReachWithHuelUnflavouredShake() {
-        let result = testObject.gramsToReach(calories: 814, product: HuelUnflavouredShake())
+    func test_gramsToReachWithHuelShake() {
+        let result = testObject.gramsToReach(calories: 800, product: HuelShake())
         XCTAssertEqual(result, 200)
     }
 
-    func test_gramsToReachWithHuelVanillaShake() {
-        let result = testObject.gramsToReach(calories: 800, product: HuelVanillaShake())
-        XCTAssertEqual(result, 200)
+    func test_gramsToReachWithHuelBlackEditionShake() {
+        let result = testObject.gramsToReach(calories: 800, product: HuelBlackEditionShake())
+        XCTAssertEqual(round(result), 180)
     }
 
     func test_gramsToReachWithHuelBar() {
-        let result = testObject.gramsToReach(calories: 764, product: HuelBar())
-        XCTAssertEqual(result, 200)
+        let result = testObject.gramsToReach(calories: 200, product: HuelBar())
+        XCTAssertEqual(round(result), 49)
     }
 
-    func test_numberOfScoopsWithHuelUnflavouredShake() {
-        let result = testObject.numberOfScoops(calories: 310, product: HuelUnflavouredShake())
-        XCTAssertEqual(round(result), 2)
+    func test_numberOfScoopsWithHueldShake() {
+        let result = testObject.numberOfScoops(calories: 400, product: HuelShake())
+        XCTAssertEqual(String(format: "%.1f", result), "2.0")
     }
 
-    func test_numberOfScoopsWithHuelVanillaShake() {
-        let result = testObject.numberOfScoops(calories: 304, product: HuelVanillaShake())
-        XCTAssertEqual(round(result), 2)
+    func test_numberOfScoopsWithHuelBlackEditionShake() {
+        let result = testObject.numberOfScoops(calories: 400, product: HuelBlackEditionShake())
+        XCTAssertEqual(String(format: "%.1f", result), "2.0")
     }
 
     func test_numberOfScoopsWithHuelBar() {
-        let result = testObject.numberOfBars(calories: 500, product: HuelVanillaShake())
-        XCTAssertEqual(round(result), 2)
+        let result = testObject.numberOfBars(calories: 500, product: HuelBar())
+        XCTAssertEqual(String(format: "%.1f", result), "2.5")
     }
 }

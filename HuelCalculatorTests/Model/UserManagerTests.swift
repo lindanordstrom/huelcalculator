@@ -74,7 +74,7 @@ class UserManagerTests: XCTestCase {
 
         let result = testObject.getSignedInUser()
 
-        XCTAssertEqual(result?.age, 38)
+        XCTAssertEqual(result?.age, 40)
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertEqual(dataStore.key, Constants.Keys.user)
     }
@@ -89,7 +89,7 @@ class UserManagerTests: XCTestCase {
         testObject.saveUserToDataStore(user: user)
 
         XCTAssertTrue(dataStore.setValueForeKeyCalled)
-        XCTAssertEqual(getUserFromMockDataStore()?.age, 38)
+        XCTAssertEqual(getUserFromMockDataStore()?.age, 40)
         XCTAssertEqual(dataStore.key, Constants.Keys.user)
     }
 
@@ -174,23 +174,23 @@ class UserManagerTests: XCTestCase {
         testObject.setUsersDailyCalorieConsumption()
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForeKeyCalled)
-        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 2542)
+        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 2526)
 
         saveUserToMockDataStore(User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .female, height: 180, weight: 70, goal: .lose, activityLevel: .very))
         testObject.setUsersDailyCalorieConsumption()
-        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 2042)
+        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 2025)
 
         saveUserToMockDataStore(User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 180, weight: 70, goal: .gain, activityLevel: .lightly))
         testObject.setUsersDailyCalorieConsumption()
-        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 2755)
+        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 2741)
 
         saveUserToMockDataStore(User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 180, weight: 70, goal: .maintain, activityLevel: .sedentary))
         testObject.setUsersDailyCalorieConsumption()
-        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 1968)
+        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 1956)
 
         saveUserToMockDataStore(User(preferredUnitOfMeasurement: .imperial, bornYear: "1980", gender: .male, height: 6, weight: 154, goal: .maintain, activityLevel: .extra))
         testObject.setUsersDailyCalorieConsumption()
-        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 3147)
+        XCTAssertEqual(getUserFromMockDataStore()?.calorieDistribution.dailyCalorieConsumption, 3128)
     }
 
     /** Given: A user have been saved but does not contain all the nessecary values

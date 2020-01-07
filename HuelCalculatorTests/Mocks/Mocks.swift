@@ -13,6 +13,7 @@ class MockedLandingPageUI: LandingPageUI {
     var showCalculationPageCalled = false
     var showAppFeedbackCalled = false
     var showErrorAndPersonalDetailsPageCalled = false
+    var showInfoPopupAlertCalled = false
     var product: MealReplacementProduct?
 
     func showCalculationPage(with product: MealReplacementProduct) {
@@ -24,6 +25,10 @@ class MockedLandingPageUI: LandingPageUI {
     }
     func showErrorAndPersonalDetailsPage() {
         showErrorAndPersonalDetailsPageCalled = true
+    }
+    
+    func showInfoPopupAlert() {
+        showInfoPopupAlertCalled = true
     }
 }
 
