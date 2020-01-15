@@ -68,7 +68,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQH-jG-qEM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQH-jG-qEM">
                                 <rect key="frame" x="96" y="88" width="208" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -115,7 +115,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="bTB-oe-bs2"/>
                                 </constraints>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Calculate">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -186,6 +186,11 @@
                                     <action selector="closeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v0P-20-3UG"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 kcal per day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qob-Ok-qLC">
+                                <rect key="frame" x="98" y="415" width="124.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -194,6 +199,7 @@
                             <constraint firstItem="76i-lk-61A" firstAttribute="centerY" secondItem="LO7-Fq-Or0" secondAttribute="centerY" id="1gk-1D-O5s"/>
                             <constraint firstItem="i50-Kb-p7G" firstAttribute="trailing" secondItem="3Wy-iG-cuf" secondAttribute="trailing" id="4VD-gW-GBC"/>
                             <constraint firstItem="E4H-Z5-8Sx" firstAttribute="bottom" secondItem="MSG-2N-u4k" secondAttribute="bottom" id="54d-xE-vcT"/>
+                            <constraint firstItem="Qob-Ok-qLC" firstAttribute="top" secondItem="VUN-Jt-gfx" secondAttribute="bottom" constant="7.5" id="5rI-Te-hDE"/>
                             <constraint firstItem="RQH-jG-qEM" firstAttribute="centerY" secondItem="Kxw-Yg-nPC" secondAttribute="centerY" id="8mP-cw-HiL"/>
                             <constraint firstItem="VUN-Jt-gfx" firstAttribute="top" secondItem="Rvh-iY-SHL" secondAttribute="bottom" constant="8" id="9qO-Mm-Xko"/>
                             <constraint firstItem="tEs-47-YES" firstAttribute="top" secondItem="ljU-bT-NZH" secondAttribute="bottom" constant="15.5" id="ABd-PQ-otY"/>
@@ -225,6 +231,7 @@
                             <constraint firstItem="Rvh-iY-SHL" firstAttribute="centerX" secondItem="Uy0-sk-GeJ" secondAttribute="centerX" id="dOq-9L-utp"/>
                             <constraint firstItem="rkk-7r-eGa" firstAttribute="centerY" secondItem="UCO-3O-21s" secondAttribute="centerY" id="dkc-CD-iTP"/>
                             <constraint firstItem="GOk-Mn-Ymv" firstAttribute="width" secondItem="LO7-Fq-Or0" secondAttribute="width" id="eX4-ok-EKq"/>
+                            <constraint firstItem="Qob-Ok-qLC" firstAttribute="centerX" secondItem="VUN-Jt-gfx" secondAttribute="centerX" id="f5X-Zy-xD4"/>
                             <constraint firstItem="rkk-7r-eGa" firstAttribute="leading" secondItem="MSG-2N-u4k" secondAttribute="leading" id="fft-2A-vcC"/>
                             <constraint firstItem="LO7-Fq-Or0" firstAttribute="leading" secondItem="Kxw-Yg-nPC" secondAttribute="leading" id="gkJ-aj-W6s"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RQH-jG-qEM" secondAttribute="trailing" id="h8g-8t-18W"/>
@@ -276,6 +283,7 @@
                         <outlet property="heightInputFieldShowFeetConstraint" destination="Qx8-RN-7UO" id="4sN-n7-xsE"/>
                         <outlet property="heightUnitLabel" destination="zpd-Uk-Ee2" id="mRG-7a-Q9F"/>
                         <outlet property="inchesInputField" destination="HhW-TN-Pwg" id="jSN-QQ-KCt"/>
+                        <outlet property="kcalLabel" destination="Qob-Ok-qLC" id="gFG-7U-F2A"/>
                         <outlet property="measurementSystemSelector" destination="Uy0-sk-GeJ" id="dzB-uh-Nym"/>
                         <outlet property="weightInputField" destination="rkk-7r-eGa" id="3aC-fS-HAs"/>
                         <outlet property="weightUnitLabel" destination="n55-s9-5WI" id="AuT-DY-U2f"/>
@@ -283,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1765.217391304348" y="935.86956521739137"/>
+            <point key="canvasLocation" x="1764.375" y="935"/>
         </scene>
         <!--App Feedback View Controller-->
         <scene sceneID="jEA-5l-VeP">
@@ -375,7 +383,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background2" translatesAutoresizingMaskIntoConstraints="NO" id="3yw-jw-7Ey">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="410"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="475-f7-sl6">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -843,7 +851,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jhE-61-JZZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gex-Et-9Tc">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -105,7 +105,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
         XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, nil)
         XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
         XCTAssertEqual(ui.showErrorMessageFlag, false)
-        XCTAssertTrue(ui.dismissViewControllerCalled)
+        XCTAssertEqual(ui.showKcalMessageFlag, true)
     }
 
     /** Given: User enters text in all fields
@@ -130,7 +130,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
         XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, 500)
         XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
         XCTAssertEqual(ui.showErrorMessageFlag, false)
-        XCTAssertTrue(ui.dismissViewControllerCalled)
+        XCTAssertEqual(ui.showKcalMessageFlag, true)
     }
 
     /** Given: User enters text in all but one field
@@ -143,6 +143,8 @@ class PersonalDetailsPresenterTest: XCTestCase {
 
         XCTAssertTrue(ui.showErrorMessageCalled)
         XCTAssertEqual(ui.showErrorMessageFlag, true)
+        XCTAssertTrue(ui.showKcalMessageCalled)
+        XCTAssertEqual(ui.showKcalMessageFlag, false)
     }
 
     /** Given: User enters text in no fields
@@ -155,6 +157,8 @@ class PersonalDetailsPresenterTest: XCTestCase {
 
         XCTAssertTrue(ui.showErrorMessageCalled)
         XCTAssertEqual(ui.showErrorMessageFlag, true)
+        XCTAssertTrue(ui.showKcalMessageCalled)
+        XCTAssertEqual(ui.showKcalMessageFlag, false)
     }
 
     /** Given: User enters text in all fields

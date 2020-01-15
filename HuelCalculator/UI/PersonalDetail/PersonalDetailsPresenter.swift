@@ -31,6 +31,8 @@ class PersonalDetailsPresenter {
         }
 
         view?.populateFieldsWith(user: user)
+        let calories = user.calorieDistribution.dailyCalorieConsumption
+        view?.showKcalMessage(true, calories: calories)
     }
 
     func didPressResetButton() {
@@ -41,13 +43,15 @@ class PersonalDetailsPresenter {
         var user = user
         guard user?.bornYear?.count == 4, user?.weight != nil, user?.height != nil else {
             view?.showErrorMessage(true)
+            view?.showKcalMessage(false, calories: nil)
             return
         }
         userManager.saveOldCalorieDistributionsIfNeeded(user: &user)
         userManager.saveUserToDataStore(user: user)
         userManager.setUsersDailyCalorieConsumption()
         view?.showErrorMessage(false)
-        view?.dismissViewController()
+        let calories = userManager.getSignedInUser()?.calorieDistribution.dailyCalorieConsumption
+        view?.showKcalMessage(true, calories: calories)
     }
 
     func didChangeMeasurementValue(value: User.UnitOfMeasurement) {

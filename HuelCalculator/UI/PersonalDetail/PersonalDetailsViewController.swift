@@ -12,6 +12,7 @@ protocol PersonalDetailsUI: class {
     func resetAllFields()
     func populateFieldsWith(user: User)
     func showErrorMessage(_ flag: Bool)
+    func showKcalMessage(_ flag: Bool, calories: Int?)
     func dismissViewController()
     func updateUIToImperialSystem()
     func updateUIToMetricSystem()
@@ -30,6 +31,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     @IBOutlet private var activityButton: UIButton!
     @IBOutlet private var goalSelector: UISegmentedControl!
     @IBOutlet private var errorMessageLabel: UILabel!
+    @IBOutlet private var kcalLabel: UILabel!
     @IBOutlet private var heightInputFieldShowFeetConstraint: NSLayoutConstraint!
     @IBOutlet private var heightInputFieldHideFeetConstraint: NSLayoutConstraint!
 
@@ -103,6 +105,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         setActivity(activity: User.ActivityLevel.moderately)
         updateUIToMetricSystem()
         showErrorMessage(false)
+        showKcalMessage(false, calories: nil)
     }
 
     func populateFieldsWith(user: User) {
@@ -133,6 +136,13 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     
     func showErrorMessage(_ flag: Bool) {
         errorMessageLabel.isHidden = !flag
+    }
+    
+    func showKcalMessage(_ flag: Bool, calories: Int?) {
+        kcalLabel.isHidden = !flag
+        if let calories = calories {
+            kcalLabel.text = "\(calories) kcal per day"
+        }
     }
 
     private func feetToFeetWithInches(feetWithRemainder: Float) -> (Int, Int) {

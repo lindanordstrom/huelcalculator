@@ -51,12 +51,14 @@ class MockedAppFeedbackUI: AppFeedbackUI {
 class MockedPersonalDetailsUI: PersonalDetailsUI {
     var resetAllFieldsCalled = false
     var showErrorMessageCalled = false
+    var showKcalMessageCalled = false
     var populateFieldsWithUserCalled = false
     var updateUIToMetricSystemCalled = false
     var updateUIToImperialSystemCalled = false
     var dismissViewControllerCalled = false
     var user: User?
     var showErrorMessageFlag: Bool?
+    var showKcalMessageFlag: Bool?
 
     func resetAllFields() {
         resetAllFieldsCalled = true
@@ -65,6 +67,11 @@ class MockedPersonalDetailsUI: PersonalDetailsUI {
     func showErrorMessage(_ flag: Bool) {
         showErrorMessageCalled = true
         showErrorMessageFlag = flag
+    }
+    
+    func showKcalMessage(_ flag: Bool, calories: Int?) {
+        showKcalMessageCalled = true
+        showKcalMessageFlag = flag
     }
 
     func populateFieldsWith(user: User) {
