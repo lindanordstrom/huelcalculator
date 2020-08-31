@@ -18,6 +18,10 @@ struct HuelShake: MealReplacementProduct {
     var kcalPer100gram = 400
 }
 
+struct HuelReadyToDrink: MealReplacementProduct {
+    var kcalPer100gram = 80
+}
+
 struct HuelBar: MealReplacementProduct {
     var kcalPer100gram = 406
 }

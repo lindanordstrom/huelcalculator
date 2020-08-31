@@ -11,6 +11,7 @@
 enum MenuItem: String {
     case huelShake = "Huel Shake v.3.0 (any flavour)"
     case huelBlackShake = "Huel Black Edition v.1.0 (any flavour)"
+    case huelReadyToDrink = "Huel Ready-to-drink (any flavour)"
     case bar = "Huel Bar v.3.1 (any flavour)"
     case shop = "Buy Huel"
     case appFeedback = "App Feedback"
@@ -54,6 +55,7 @@ struct Constants {
         static let segueToThisPageName = "showMealPlanPage"
         static let numberOfBarsGramsAndKcal = "%.1f bars / %.0f g\nTotal: %d kcal"
         static let numberOfGramsScoopsAndKcal = "%.0f g / %.1f scoops\n%.0f ml water\nTotal: %d kcal"
+        static let numberOfRtDBottlesMlAndKcal = "%.1f Ready-to-drink bottles / %.0f ml\nTotal: %d kcal"
     }
 
     struct User {

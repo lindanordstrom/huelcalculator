@@ -29,14 +29,20 @@ class MealPlanPresenter {
     private func amountString(calories: Int?, product: MealReplacementProduct) -> String? {
         guard let calories = calories else { return nil }
         let gram = HuelMealCalculator.gramsToReach(calories: calories, product: product)
-
-        guard product is HuelBar else {
+        
+        switch product {
+        case is HuelBar:
+            let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
+            return String(format: Constants.MealPlanPage.numberOfBarsGramsAndKcal, bars, gram, calories)
+        case is HuelShake, is HuelBlackEditionShake:
             let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
             let water = (round(scoops * 100) / 100) * 250
             return String(format: Constants.MealPlanPage.numberOfGramsScoopsAndKcal, gram, scoops, water, calories)
+        case is HuelReadyToDrink:
+            let bottles = HuelMealCalculator.numberOfReadyToDrinkBottles(calories: calories, product: product)
+            return String(format: Constants.MealPlanPage.numberOfRtDBottlesMlAndKcal, bottles, gram, calories)
+        default:
+            return nil
         }
-        
-        let bars = HuelMealCalculator.numberOfBars(calories: calories, product: product)
-        return String(format: Constants.MealPlanPage.numberOfBarsGramsAndKcal, bars, gram, calories)
     }
 }

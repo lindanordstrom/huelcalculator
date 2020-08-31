@@ -14,7 +14,7 @@ class LandingPagePresenter {
     private var userManager: UserManager
     private var infoPopupKey: String
 
-    private let menuItems: [MenuItem] = [.huelShake, .huelBlackShake, .bar, .shop, .appFeedback]
+    private let menuItems: [MenuItem] = [.huelShake, .huelBlackShake, .huelReadyToDrink, .bar, .shop, .appFeedback]
 
     init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared, infoPopupKey: String = "infoPopupShown") {
         self.view = view
@@ -38,7 +38,7 @@ class LandingPagePresenter {
         case .huelShake:
             image = #imageLiteral(resourceName: "menu_shake")
             highlightedImage = #imageLiteral(resourceName: "menu_shake_highlighted")
-        case .huelBlackShake:
+        case .huelBlackShake, .huelReadyToDrink:
             image = #imageLiteral(resourceName: "menu_shake_black")
             highlightedImage = #imageLiteral(resourceName: "menu_shake_highlighted")
         case .bar:
@@ -63,6 +63,8 @@ class LandingPagePresenter {
             view?.showCalculationPage(with: HuelShake())
         case .huelBlackShake:
             view?.showCalculationPage(with: HuelBlackEditionShake())
+        case .huelReadyToDrink:
+            view?.showCalculationPage(with: HuelReadyToDrink())
         case .bar:
             view?.showCalculationPage(with: HuelBar())
         case .shop:
