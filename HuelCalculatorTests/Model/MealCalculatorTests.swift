@@ -47,4 +47,9 @@ class MealCalculatorTests: XCTestCase {
         let result = testObject.numberOfReadyToDrinkBottles(calories: 600, product: HuelReadyToDrink())
         XCTAssertEqual(String(format: "%.1f", result), "1.5")
     }
+    
+    func test_numberOfScoopsWithHuelHotAndSavoury() {
+        let result = testObject.numberOfScoops(calories: 400, product: HuelHotAndSavoury())
+        XCTAssertEqual(String(format: "%.1f", result), "2.0")
+    }
 }

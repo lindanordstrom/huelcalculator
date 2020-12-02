@@ -38,6 +38,10 @@ class MealPlanPresenter {
             let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
             let water = (round(scoops * 100) / 100) * 250
             return String(format: Constants.MealPlanPage.numberOfGramsScoopsAndKcal, gram, scoops, water, calories)
+        case is HuelHotAndSavoury:
+            let scoops = HuelMealCalculator.numberOfScoops(calories: calories, product: product)
+            let water = (round(scoops * 10) / 10) * 105
+            return String(format: Constants.MealPlanPage.numberOfGramsScoopsAndKcalHotAndSavoury, gram, scoops, water, calories)
         case is HuelReadyToDrink:
             let bottles = HuelMealCalculator.numberOfReadyToDrinkBottles(calories: calories, product: product)
             return String(format: Constants.MealPlanPage.numberOfRtDBottlesMlAndKcal, bottles, gram, calories)

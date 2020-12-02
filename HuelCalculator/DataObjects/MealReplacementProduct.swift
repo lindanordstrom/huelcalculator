@@ -22,6 +22,13 @@ struct HuelReadyToDrink: MealReplacementProduct {
     var kcalPer100gram = 80
 }
 
+struct HuelHotAndSavoury: MealReplacementProduct {
+    var kcalPer100gram = 423
+    // Mexican Chilli v1.0: 425
+    // Thai Green Curry v1.0: 425
+    // Tomato & Herb v1.0: 421
+}
+
 struct HuelBar: MealReplacementProduct {
     var kcalPer100gram = 406
 }

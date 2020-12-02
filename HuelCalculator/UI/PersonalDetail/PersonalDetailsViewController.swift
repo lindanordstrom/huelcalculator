@@ -25,6 +25,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     @IBOutlet private var genderSelector: UISegmentedControl!
     @IBOutlet private var heightInputField: UITextField!
     @IBOutlet private var heightUnitLabel: UILabel!
+    @IBOutlet private var feetLabel: UILabel!
     @IBOutlet private var inchesInputField: UITextField!
     @IBOutlet private var weightInputField: UITextField!
     @IBOutlet private var weightUnitLabel: UILabel!
@@ -153,6 +154,9 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
     }
     
     func updateUIToImperialSystem() {
+        inchesInputField.isHidden = false
+        feetLabel.isHidden = false
+        
         heightUnitLabel.text = Constants.PersonalDetailsPage.inches
         weightUnitLabel.text = Constants.PersonalDetailsPage.pounds
         for index in 0..<goalSelector.numberOfSegments {
@@ -177,6 +181,8 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         heightInputFieldShowFeetConstraint.isActive = false
         heightInputFieldHideFeetConstraint.isActive = true
         inchesInputField.text = nil
+        inchesInputField.isHidden = true
+        feetLabel.isHidden = true
     }
     
     func dismissViewController() {

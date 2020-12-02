@@ -16,11 +16,20 @@ protocol MealCalculator {
 class HuelMealCalculator: MealCalculator {
     private static let gramsPerScoop: Float = 50
     private static let gramsPerScoopBlack: Float = 45
+    private static let gramsPerScoopHotAndSavoury: Float = 48
     private static let gramsPerBar: Float = 49
     private static let mlPerReadyToDrinkBottle: Float = 500
 
     static func numberOfScoops(calories: Int, product: MealReplacementProduct) -> Float {
-        let gramsPerScoop = product is HuelBlackEditionShake ? gramsPerScoopBlack : self.gramsPerScoop
+        let gramsPerScoop: Float
+        switch product {
+        case is HuelBlackEditionShake:
+            gramsPerScoop = gramsPerScoopBlack
+        case is HuelHotAndSavoury:
+            gramsPerScoop = gramsPerScoopHotAndSavoury
+        default:
+            gramsPerScoop = self.gramsPerScoop
+        }
         return gramsToReach(calories: calories, product: product) / gramsPerScoop
     }
 
