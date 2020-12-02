@@ -40,7 +40,7 @@ class LandingPagePresenterTests: XCTestCase {
     func test_didPressRateTheApp() {
         let numberOfMenuItems = testObject.numberOfItemsOnLandingPage()
 
-        XCTAssertEqual(numberOfMenuItems, 5)
+        XCTAssertEqual(numberOfMenuItems, 7)
     }
 
     /** Given: A user already exists
@@ -103,14 +103,22 @@ class LandingPagePresenterTests: XCTestCase {
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_shake_black"))
 
         result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 2, section: 0))
+        XCTAssertEqual(result.title, "Huel Ready-to-drink v.1.0 (any flavour)")
+        XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_readytodrink"))
+        
+        result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 3, section: 0))
+        XCTAssertEqual(result.title, "Huel Hot & Savoury v.1.0 (any flavour)")
+        XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_granola"))
+        
+        result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 4, section: 0))
         XCTAssertEqual(result.title, "Huel Bar v.3.1 (any flavour)")
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_bar"))
 
-        result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 3, section: 0))
+        result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 5, section: 0))
         XCTAssertEqual(result.title, "Buy Huel")
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_shop"))
 
-        result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 4, section: 0))
+        result = testObject.getTitleAndImageFrom(indexPath: IndexPath(item: 6, section: 0))
         XCTAssertEqual(result.title, "App Feedback")
         XCTAssertEqual(result.image, #imageLiteral(resourceName: "menu_feedack"))
     }
@@ -130,13 +138,21 @@ class LandingPagePresenterTests: XCTestCase {
 
         testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 2, section: 0))
         XCTAssertTrue(ui.showCalculationPageCalled)
+        XCTAssertEqual(ui.product?.kcalPer100gram, HuelReadyToDrink().kcalPer100gram)
+        
+        testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 3, section: 0))
+        XCTAssertTrue(ui.showCalculationPageCalled)
+        XCTAssertEqual(ui.product?.kcalPer100gram, HuelHotAndSavoury().kcalPer100gram)
+        
+        testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 4, section: 0))
+        XCTAssertTrue(ui.showCalculationPageCalled)
         XCTAssertEqual(ui.product?.kcalPer100gram, HuelBar().kcalPer100gram)
 
-        testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 3, section: 0))
+        testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 5, section: 0))
         XCTAssertTrue(urlHandler.openURLCalled)
         XCTAssertEqual(urlHandler.urlString, "https://huel.com/products/huel")
 
-        testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 4, section: 0))
+        testObject.didSelectItemOnLandingPage(indexPath: IndexPath(item: 6, section: 0))
         XCTAssertTrue(ui.showAppFeedbackCalled)
     }
 }
