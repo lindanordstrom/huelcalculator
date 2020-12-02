@@ -38,9 +38,12 @@ class LandingPagePresenter {
         case .huelShake:
             image = #imageLiteral(resourceName: "menu_shake")
             highlightedImage = #imageLiteral(resourceName: "menu_shake_highlighted")
-        case .huelBlackShake, .huelReadyToDrink:
+        case .huelBlackShake:
             image = #imageLiteral(resourceName: "menu_shake_black")
             highlightedImage = #imageLiteral(resourceName: "menu_shake_highlighted")
+        case .huelReadyToDrink:
+            image = #imageLiteral(resourceName: "menu_readytodrink")
+            highlightedImage = #imageLiteral(resourceName: "menu_readytodrink_highlighted")
         case .bar:
             image = #imageLiteral(resourceName: "menu_bar")
             highlightedImage = #imageLiteral(resourceName: "menu_bar_highlighted")

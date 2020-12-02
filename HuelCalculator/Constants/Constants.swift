@@ -11,7 +11,7 @@
 enum MenuItem: String {
     case huelShake = "Huel Shake v.3.0 (any flavour)"
     case huelBlackShake = "Huel Black Edition v.1.0 (any flavour)"
-    case huelReadyToDrink = "Huel Ready-to-drink (any flavour)"
+    case huelReadyToDrink = "Huel Ready-to-drink v.1.0 (any flavour)"
     case bar = "Huel Bar v.3.1 (any flavour)"
     case shop = "Buy Huel"
     case appFeedback = "App Feedback"
