@@ -56,7 +56,7 @@ struct Constants {
         static let segueToThisPageName = "showMealPlanPage"
         static let numberOfBarsGramsAndKcal = "%.1f bars / %.0f g\nTotal: %d kcal"
         static let numberOfGramsScoopsAndKcal = "%.0f g / %.1f scoops\n%.0f ml water\nTotal: %d kcal"
-        static let numberOfGramsScoopsAndKcalHotAndSavoury = "%.0f g / %.1f scoops\nAdd %.0fml of boiling water and stir thoroughly. Cover and leave for 5 minutes\nTotal: %d kcal"
+        static let numberOfGramsScoopsAndKcalHotAndSavoury = "%.0f g / %.1f scoops\n%.0fml of boiling water\nTotal: %d kcal"
         static let numberOfRtDBottlesMlAndKcal = "%.1f Ready-to-drink bottles / %.0f ml\nTotal: %d kcal"
     }
 

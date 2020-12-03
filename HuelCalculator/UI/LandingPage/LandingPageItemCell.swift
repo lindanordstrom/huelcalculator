@@ -10,6 +10,11 @@ import UIKit
 
 class LandingPageItemCell: UICollectionViewCell {
     // swiftlint:disable private_outlet
-    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var title: UILabel! {
+        didSet {
+            let fontSize = UIScreen.main.bounds.size.width <= 320 ? 12 : 15
+            title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        }
+    }
     @IBOutlet weak var image: UIImageView!
 }

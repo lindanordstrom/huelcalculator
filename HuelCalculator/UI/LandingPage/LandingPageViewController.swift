@@ -100,7 +100,7 @@ extension LandingPageViewController: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.size.width * 0.4
-        let height = width
+        let height = width * 0.9
         
         return CGSize(width: width, height: height)
     }
@@ -109,11 +109,6 @@ extension LandingPageViewController: UICollectionViewDataSource, UICollectionVie
         let inset = view.frame.size.width * 0.07
         return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return view.frame.size.width * 0.07
-    }
-    
 }
 
 // MARK: UICollectionViewDelegate
