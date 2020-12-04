@@ -5,6 +5,7 @@
 //  Created by Linda on 12/12/2016.
 //  Copyright © 2016 Linda CC Nordstrom. All rights reserved.
 //
+import Foundation
 
 protocol Pickable {
     var description: String { get }
@@ -65,7 +66,17 @@ class User: Codable {
     var goal: Goal?
     var activityLevel: ActivityLevel?
     var calorieDistribution = CalorieDistribution()
-    var age: Int?
+    
+    var age: Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        guard let bornYear = bornYear,
+              let startDate = dateFormatter.date(from: bornYear),
+              let yearsSince = Calendar.current.dateComponents([.year], from: startDate, to: Date()).year else {
+            return nil
+        }
+        return yearsSince
+    }
     
     init(preferredUnitOfMeasurement: UnitOfMeasurement?, bornYear: String?, gender: Gender?, height: Float?, weight: Float?, goal: Goal?, activityLevel: ActivityLevel?) {
         self.preferredUnitOfMeasurement = preferredUnitOfMeasurement

@@ -50,25 +50,41 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        measurementSystemSelector.addTarget(self, action: #selector(personalDetailsChanged), for: .valueChanged)
+        bornYearInputField.addTarget(self, action: #selector(personalDetailsChanged), for: .allEditingEvents)
+        genderSelector.addTarget(self, action: #selector(personalDetailsChanged), for: .valueChanged)
+        heightInputField.addTarget(self, action: #selector(personalDetailsChanged), for: .allEditingEvents)
+        inchesInputField.addTarget(self, action: #selector(personalDetailsChanged), for: .allEditingEvents)
+        weightInputField.addTarget(self, action: #selector(personalDetailsChanged), for: .allEditingEvents)
+        goalSelector.addTarget(self, action: #selector(personalDetailsChanged), for: .valueChanged)
+        
         presenter?.didLoadView()
+    }
+    
+    @objc func personalDetailsChanged() {
+        presenter?.fieldWasUpdated(user: getUserWithCurrentDetails())
+
     }
 
     @IBAction private func doneButtonPressed() {
         dismissKeyboard()
-        
+        presenter?.didPressDoneButton(user: getUserWithCurrentDetails())
+    }
+    
+    private func getUserWithCurrentDetails() -> User {
         let inches = Float(inchesInputField.text ?? Constants.General.emptyString) ?? 0
         let height = (Float(heightInputField.text ?? Constants.General.emptyString) ?? 0) + inches * 0.0833333333
         
         let preferredUnitOfMeasurement = User.UnitOfMeasurement(rawValue: measurementSystemSelector.selectedSegmentIndex)
-        let user = User(preferredUnitOfMeasurement: preferredUnitOfMeasurement,
-                        bornYear: bornYearInputField.text,
-                        gender: User.Gender(rawValue: genderSelector.selectedSegmentIndex),
-                        height: height > 0 ? height : nil,
-                        weight: Float(weightInputField.text ?? Constants.General.emptyString),
-                        goal: User.Goal(rawValue: goalSelector.selectedSegmentIndex),
-                        activityLevel: selectedActivity)
-
-        presenter?.didPressDoneButton(user: user)
+        
+        return User(preferredUnitOfMeasurement: preferredUnitOfMeasurement,
+                    bornYear: bornYearInputField.text,
+                    gender: User.Gender(rawValue: genderSelector.selectedSegmentIndex),
+                    height: height > 0 ? height : nil,
+                    weight: Float(weightInputField.text ?? Constants.General.emptyString),
+                    goal: User.Goal(rawValue: goalSelector.selectedSegmentIndex),
+                    activityLevel: selectedActivity)
     }
     
     @IBAction private func resetButtonPressed() {
@@ -85,6 +101,7 @@ class PersonalDetailsViewController: UIViewController, PersonalDetailsUI {
         let pickerView = PickerViewController(with: User.ActivityLevel.self,
                                               index: selectedActivity?.rawValue ?? 0) { (activityLevel: Pickable?) in
             self.setActivity(activity: activityLevel as? User.ActivityLevel)
+            self.personalDetailsChanged()
         }
         pickerView.modalPresentationStyle = .overCurrentContext
         present(pickerView, animated: false, completion: nil)

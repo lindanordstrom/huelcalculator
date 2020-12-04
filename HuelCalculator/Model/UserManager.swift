@@ -15,6 +15,7 @@ protocol UserManager {
     func saveOldCalorieDistributionsIfNeeded(user: inout User?)
     func distributeCalories(breakfast: Int, lunch: Int, dinner: Int, snack: Int)
     func setUsersDailyCalorieConsumption()
+    func getDailyCalorieConsumtion(for user: User?) -> Int?
 }
 
 class HuelUserManager: UserManager {
@@ -33,23 +34,10 @@ class HuelUserManager: UserManager {
     func getSignedInUser() -> User? {
         guard let userData = dataStore.object(forKey: Constants.Keys.user) as? Data,
         let user = try? JSONDecoder().decode(User.self, from: userData) else { return nil }
-        updateUser(user)
         return user
-    }
-    
-    private func updateUser(_ user: User?) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
-        guard let bornYear = user?.bornYear,
-            let startDate = dateFormatter.date(from: bornYear),
-            let yearsSince = Calendar.current.dateComponents([.year], from: startDate, to: Date()).year else {
-                return
-        }
-        user?.age = yearsSince
     }
 
     func saveUserToDataStore(user: User?) {
-        updateUser(user)
         guard let user = user,
             let encodedUser = try? JSONEncoder().encode(user) else { return }
         dataStore.set(encodedUser, forKey: Constants.Keys.user)
@@ -76,29 +64,33 @@ class HuelUserManager: UserManager {
 
     func setUsersDailyCalorieConsumption() {
         let user = getSignedInUser()
+        
+        let dailyCalorieConsumtion = getDailyCalorieConsumtion(for: user)
 
+        user?.calorieDistribution.dailyCalorieConsumption = dailyCalorieConsumtion
+
+        saveUserToDataStore(user: user)
+    }
+    
+    func getDailyCalorieConsumtion(for user: User?) -> Int? {
         guard let measurementUnit = user?.preferredUnitOfMeasurement,
-            let gender = user?.gender,
-            let age = user?.age,
-            let weight = user?.weight,
-            let height = user?.height,
-            let activity = user?.activityLevel,
-            let goal = user?.goal else {
-                return
+              let gender = user?.gender,
+              let age = user?.age,
+              let weight = user?.weight,
+              let height = user?.height,
+              let activity = user?.activityLevel,
+              let goal = user?.goal else {
+            return nil
         }
         let genderMultiplier = getGenderMultiplier(gender: gender)
         let activityMultiplier = getActivityMultiplier(activity: activity)
         let goalConstant = getGoalConstant(goal: goal)
         let weightMultiplier = getWeightMultiplier(unit: measurementUnit)
         let heightMultiplier = getHeightMultiplier(unit: measurementUnit)
-
+        
         let bmr = 10 * (weight * weightMultiplier) + 6.25 * (height * heightMultiplier) - 5 * Float(age) + genderMultiplier
-
-        let dailyCalorieConsumtion = Int(bmr * activityMultiplier + goalConstant)
-
-        user?.calorieDistribution.dailyCalorieConsumption = dailyCalorieConsumtion
-
-        saveUserToDataStore(user: user)
+        
+        return Int(bmr * activityMultiplier + goalConstant)
     }
 
     private func getGenderMultiplier(gender: User.Gender) -> Float {

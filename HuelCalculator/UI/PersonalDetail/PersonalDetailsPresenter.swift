@@ -50,7 +50,17 @@ class PersonalDetailsPresenter {
         userManager.saveUserToDataStore(user: user)
         userManager.setUsersDailyCalorieConsumption()
         view?.showErrorMessage(false)
-        let calories = userManager.getSignedInUser()?.calorieDistribution.dailyCalorieConsumption
+        
+        view?.dismissViewController()
+    }
+    
+    func fieldWasUpdated(user: User?) {
+        guard user?.bornYear?.count == 4, user?.weight != nil, user?.height != nil else {
+            view?.showKcalMessage(false, calories: nil)
+            return
+        }
+        
+        let calories = userManager.getDailyCalorieConsumtion(for: user)
         view?.showKcalMessage(true, calories: calories)
     }
 
