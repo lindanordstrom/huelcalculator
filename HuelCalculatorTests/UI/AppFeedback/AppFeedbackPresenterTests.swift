@@ -66,7 +66,7 @@ class AppFeedbackPresenterTests: XCTestCase {
         XCTAssertEqual(ui.mail.subject, "Feedback: Huel Calculator")
         var emailMessage = "<br><i>Enter your feedback here</i><br><br>"
         emailMessage += "-----------------------<br>"
-        emailMessage += "App version: 2.2.0<br>"
+        emailMessage += "App version: 2.3.0<br>"
         emailMessage += "Device: mockedModelName<br>"
         emailMessage += "iOS version: mockedSystemVersion<br>"
         emailMessage += "-----------------------<br>"

@@ -60,6 +60,7 @@ class PersonalDetailsPresenter {
             return
         }
         
+        view?.showErrorMessage(false)
         let calories = userManager.getDailyCalorieConsumtion(for: user)
         view?.showKcalMessage(true, calories: calories)
     }

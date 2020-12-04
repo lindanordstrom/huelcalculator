@@ -161,6 +161,7 @@ class MockedUserManager: UserManager {
     var saveOldCalorieDistributionsIfNeededCalled = false
     var distributeCaloriesCalled = false
     var setUsersDailyCalorieConsumptionCalled = false
+    var getDailyCalorieConsumtionCalled = false
     var user: User?
     var calorieDistribution: CalorieDistribution?
 
@@ -186,6 +187,11 @@ class MockedUserManager: UserManager {
     }
     func setUsersDailyCalorieConsumption() {
         setUsersDailyCalorieConsumptionCalled = true
+    }
+    
+    func getDailyCalorieConsumtion(for user: User?) -> Int? {
+        getDailyCalorieConsumtionCalled = true
+        return 5
     }
 }
 

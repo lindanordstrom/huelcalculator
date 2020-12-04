@@ -105,7 +105,21 @@ class PersonalDetailsPresenterTest: XCTestCase {
         XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, nil)
         XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
         XCTAssertEqual(ui.showErrorMessageFlag, false)
-        XCTAssertEqual(ui.showKcalMessageFlag, true)
+        XCTAssertEqual(ui.dismissViewControllerCalled, true)
+    }
+    
+    /** Given: User enters text in all fields
+     *  When:  Editing any field
+     *  Then:   daily calorie consumption is calculated and shown
+     */
+    func test_didEditField() {
+        let user = User(preferredUnitOfMeasurement: .metric, bornYear: "1980", gender: .male, height: 177, weight: 60, goal: .lose, activityLevel: .moderately)
+        
+        testObject?.fieldWasUpdated(user: user)
+        
+        XCTAssertTrue(userManager.getDailyCalorieConsumtionCalled)
+        XCTAssertEqual(ui.showErrorMessageFlag, false)
+        XCTAssertEqual(ui.showKcalMessageCalled, true)
     }
 
     /** Given: User enters text in all fields
@@ -130,7 +144,7 @@ class PersonalDetailsPresenterTest: XCTestCase {
         XCTAssertEqual(userManager.user?.calorieDistribution.breakfast, 500)
         XCTAssertTrue(userManager.setUsersDailyCalorieConsumptionCalled)
         XCTAssertEqual(ui.showErrorMessageFlag, false)
-        XCTAssertEqual(ui.showKcalMessageFlag, true)
+        XCTAssertEqual(ui.dismissViewControllerCalled, true)
     }
 
     /** Given: User enters text in all but one field

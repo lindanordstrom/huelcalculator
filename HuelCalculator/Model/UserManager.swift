@@ -65,7 +65,7 @@ class HuelUserManager: UserManager {
     func setUsersDailyCalorieConsumption() {
         let user = getSignedInUser()
         
-        let dailyCalorieConsumtion = getDailyCalorieConsumtion(for: user)
+        guard let dailyCalorieConsumtion = getDailyCalorieConsumtion(for: user) else { return }
 
         user?.calorieDistribution.dailyCalorieConsumption = dailyCalorieConsumtion
 

@@ -15,14 +15,13 @@ class LandingPagePresenterTests: XCTestCase {
     private var ui: MockedLandingPageUI!
     private var urlHandler: MockedUrlHandler!
     private var userManager: MockedUserManager!
-    private let infoPopupKey = "TestInfoPopupKeyShown"
 
     override func setUp() {
         super.setUp()
         ui = MockedLandingPageUI()
         urlHandler = MockedUrlHandler()
         userManager = MockedUserManager()
-        testObject = LandingPagePresenter(view: ui, urlManager: UrlManager(urlHandler: urlHandler), userManager: userManager, infoPopupKey: infoPopupKey)
+        testObject = LandingPagePresenter(view: ui, urlManager: UrlManager(urlHandler: urlHandler), userManager: userManager)
     }
 
     override func tearDown() {
