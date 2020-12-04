@@ -23,8 +23,6 @@ struct Constants {
         static let cellIdentifier = "Cell"
         static let noProfileAlertTitle = "No profile added"
         static let noProfileAlertMessage = "You need to enter your personal details to be able to calculate your daily needs"
-        static let infoPopupAlertTitle = "Updated to Huel v.3.0"
-        static let infoPopupAlertMessage = "This app is now updated according to Huel Shake v.3.0 and the new scoop size (200kcal per scoop) and Huel Bar 3.1 (200kcal per bar). Appologies for the delayed update."
         static let getHuelUrl = "https://huel.com/products/huel"
     }
     struct AppFeedbackPage {

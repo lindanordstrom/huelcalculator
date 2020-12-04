@@ -12,15 +12,13 @@ class LandingPagePresenter {
     private weak var view: LandingPageUI?
     private var urlManager: UrlManager
     private var userManager: UserManager
-    private var infoPopupKey: String
 
     private let menuItems: [MenuItem] = [.huelShake, .huelBlackShake, .huelReadyToDrink, .huelHotAndSavoury, .bar, .shop, .appFeedback]
 
-    init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared, infoPopupKey: String = "infoPopupShown") {
+    init(view: LandingPageUI, urlManager: UrlManager = UrlManager.shared, userManager: UserManager = HuelUserManager.shared) {
         self.view = view
         self.urlManager = urlManager
         self.userManager = userManager
-        self.infoPopupKey = infoPopupKey
     }
 
     func numberOfItemsOnLandingPage() -> Int {
@@ -88,14 +86,6 @@ class LandingPagePresenter {
         }
 
         view?.showErrorAndPersonalDetailsPage()
-    }
-    
-    func showInfoPopupAlertIfNeeded() {
-        if !UserDefaults.standard.bool(forKey: infoPopupKey) {
-            UserDefaults.standard.set(true, forKey: infoPopupKey)
-            
-            view?.showInfoPopupAlert()
-        }
     }
 
     private func didPressGetHuel() {

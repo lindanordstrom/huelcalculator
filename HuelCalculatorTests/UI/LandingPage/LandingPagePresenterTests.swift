@@ -64,30 +64,6 @@ class LandingPagePresenterTests: XCTestCase {
 
         XCTAssertTrue(ui.showErrorAndPersonalDetailsPageCalled)
     }
-    
-    /** Given: Info popup has not been shown
-     *  When: Requested to show info popup if needed
-     *  Then: The UI should show an info popup
-     */
-    func test_showInfoPopupIfNeededWhenNotShownBefore() {
-        UserDefaults.standard.set(false, forKey: infoPopupKey)
-        
-        testObject.showInfoPopupAlertIfNeeded()
-        
-        XCTAssertTrue(ui.showInfoPopupAlertCalled)
-    }
-    
-    /** Given: Info popup has been shown before
-     *  When: Requested to show info popup if needed
-     *  Then: The UI should not show an info popup
-     */
-    func test_showInfoPopupIfNeededWhenShownBefore() {
-        UserDefaults.standard.set(true, forKey: infoPopupKey)
-        
-        testObject.showInfoPopupAlertIfNeeded()
-        
-        XCTAssertFalse(ui.showInfoPopupAlertCalled)
-    }
 
     /** Given:
      *  When: Going through the different menu items
